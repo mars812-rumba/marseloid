@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
-import { MotionProvider } from "@/components/motion";
 import Link from "next/link";
 import "./globals.css";
 export const metadata: Metadata = {
@@ -62,21 +61,19 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Перейти к содержимому
         </a>
-        <MotionProvider>
-          <Header />
-          <main id="main">{children}</main>
-          <footer className="footer wrap">
-            <Link className="logo" href="/">
-              marseloid<span className="brand-dot">.</span>
-            </Link>
-            <p>Работаю лично. Создаю под задачу.</p>
-            <div>
-              <a href="https://t.me/marseloid">Telegram ↗</a>
-              <Link href="/privacy/">Конфиденциальность</Link>
-              <span>© {new Date().getFullYear()} Marseloid</span>
-            </div>
-          </footer>
-        </MotionProvider>
+        <Header />
+        <main id="main">{children}</main>
+        <footer className="footer wrap">
+          <Link className="logo" href="/">
+            marseloid<span className="brand-dot">.</span>
+          </Link>
+          <p>Работаю лично. Создаю под задачу.</p>
+          <div>
+            <a href="https://t.me/marseloid">Telegram ↗</a>
+            <Link href="/privacy/">Конфиденциальность</Link>
+            <span>© {new Date().getFullYear()} Marseloid</span>
+          </div>
+        </footer>
       </body>
     </html>
   );
