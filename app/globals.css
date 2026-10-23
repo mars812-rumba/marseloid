@@ -22,8 +22,10 @@
   --ink: #242722;
   --muted: #5c6258;
   --line: #d7d8ce;
-  --accent: #a74020;
-  --accent-hover: #8d3318;
+  --accent: #234bc4;
+  --accent-hover: #193997;
+  --accent-soft: #dce5ff;
+  --focus-on-dark: #b9cbff;
   --dark: #272e29;
   --on-dark: #f0f3e8;
   --dark-muted: #bbc6b5;
@@ -78,7 +80,7 @@ button {
     border-color 0.2s;
 }
 ::selection {
-  background: #efc9af;
+  background: var(--accent-soft);
   color: var(--ink);
 }
 :focus-visible {
@@ -265,6 +267,29 @@ a:hover .round-arrow {
 .button:active {
   filter: brightness(0.9);
 }
+.button > span[aria-hidden],
+.nav-cta > span[aria-hidden],
+.round-arrow,
+.project-card h3 > span {
+  display: inline-block;
+  transition: transform 0.24s ease-out;
+}
+.round-arrow {
+  display: flex;
+}
+.button:is(:hover, :focus-visible) > span[aria-hidden],
+.nav-cta:is(:hover, :focus-visible) > span[aria-hidden],
+.project-card:is(:hover, :focus-visible) h3 > span {
+  transform: translate(3px, -3px);
+}
+.service-row:is(:hover, :focus-visible) .round-arrow {
+  transform: rotate(45deg);
+  background: var(--accent);
+  color: var(--paper);
+}
+.contact-band :focus-visible {
+  outline-color: var(--focus-on-dark);
+}
 .hero-copy .button {
   margin-top: 28px;
 }
@@ -428,7 +453,7 @@ a:hover .round-arrow {
   border-color: #e8eddd;
 }
 .demo :focus-visible {
-  outline-color: #f1d8a4;
+  outline-color: var(--focus-on-dark);
 }
 .demo-total {
   display: flex;
@@ -532,7 +557,8 @@ a:hover .round-arrow {
   border-radius: 50%;
   transition:
     background 0.2s,
-    color 0.2s;
+    color 0.2s,
+    transform 0.24s ease-out;
 }
 .projects {
   display: grid;
@@ -643,7 +669,9 @@ a:hover .round-arrow {
 }
 .project-card h3 > span {
   font-size: 24px;
-  transition: color 0.2s;
+  transition:
+    color 0.2s,
+    transform 0.24s ease-out;
 }
 .project-card:hover h3 > span {
   color: var(--accent);
@@ -772,7 +800,7 @@ a:hover .round-arrow {
   color: var(--ink);
 }
 .button.light:hover {
-  background: #dce5ca;
+  background: var(--accent-soft);
 }
 .footer {
   padding-top: 56px;

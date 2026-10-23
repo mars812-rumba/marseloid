@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Demo } from "@/components/demo";
 import { CTA, Projects, Services } from "@/components/shared";
+import { MotionDiv, MotionLink, MotionSection } from "@/components/motion";
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
           </span>
           <span className="mono hero-index">NEXT.JS / PYTHON</span>
         </div>
-        <div className="hero-grid">
+        <MotionDiv className="hero-grid">
           <h1>
             Конфигураторы
             <br />
@@ -34,21 +35,23 @@ export default function Home() {
               комплектация зависят от десятков параметров. Работаю лично — от
               разбора задачи до запуска.
             </p>
-            <Link className="button" href="/contact/">
+            <MotionLink className="button" href="/contact/">
               Показать задачу <span aria-hidden="true">↗</span>
-            </Link>
+            </MotionLink>
             <a className="text-link" href="#demo">
               Посмотреть, как работает расчёт ↓
             </a>
           </div>
-        </div>
-        <Demo />
+        </MotionDiv>
+        <MotionDiv delay={0.08}>
+          <Demo />
+        </MotionDiv>
         <div className="hero-foot">
           <span>НЕЗАВИСИМЫЙ РАЗРАБОТЧИК</span>
           <span>ПРОДУКЦИЯ / ПРАВИЛА / РЕЗУЛЬТАТ</span>
         </div>
       </section>
-      <section className="section wrap">
+      <MotionSection className="section wrap">
         <div className="section-heading">
           <p className="eyebrow">/01 — Что делаю</p>
           <h2>
@@ -61,8 +64,8 @@ export default function Home() {
           </p>
         </div>
         <Services />
-      </section>
-      <section className="section wrap">
+      </MotionSection>
+      <MotionSection className="section wrap">
         <div className="section-heading">
           <p className="eyebrow">/02 — Избранные проекты</p>
           <h2>
@@ -78,8 +81,8 @@ export default function Home() {
         <p className="caption">
           Визуальные обложки — иллюстрации процессов, не скриншоты интерфейсов.
         </p>
-      </section>
-      <section className="section process-section wrap">
+      </MotionSection>
+      <MotionSection className="section process-section wrap">
         <div>
           <p className="eyebrow">/03 — Как работаем</p>
           <h2>
@@ -123,7 +126,7 @@ export default function Home() {
             </li>
           ))}
         </ol>
-      </section>
+      </MotionSection>
       <CTA />
     </>
   );

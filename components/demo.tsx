@@ -103,14 +103,20 @@ export function Demo() {
                   style={{ transformOrigin: "210px 160px" }}
                   transition={{ duration: reduced ? 0 : 0.22 }}
                 >
-                  <path
+                  <motion.path
                     d="M91 125V231M267 163V265M329 110V210M155 76V178"
                     stroke="#777d79"
                     strokeWidth="7"
+                    initial={false}
+                    whileInView={reduced ? undefined : { pathLength: [0, 1] }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                   />
-                  <path
+                  <motion.path
                     d="M82 112 153 65 342 103 270 155Z"
-                    fill={roof === "poly" ? "#cbd5ca" : "#777d79"}
+                    initial={false}
+                    animate={{ fill: roof === "poly" ? "#cbd5ca" : "#777d79" }}
+                    transition={{ duration: reduced ? 0 : 0.24 }}
                     stroke="#dfe8d9"
                     strokeWidth="2"
                   />
@@ -177,10 +183,12 @@ export function Demo() {
                   ].map(([value, label]) => (
                     <motion.button
                       type="button"
+                      tabIndex={0}
                       key={value}
                       aria-pressed={roof === value}
                       onClick={() => setRoof(value)}
                       whileTap={reduced ? undefined : { scale: 0.97 }}
+                      whileHover={reduced ? undefined : { y: -2 }}
                     >
                       {label}
                     </motion.button>
@@ -192,10 +200,10 @@ export function Demo() {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.strong
                     key={frame + covering}
-                    initial={{ opacity: 0.4 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: reduced ? 0 : 0.1 }}
+                    initial={reduced ? false : { opacity: 0.4, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: reduced ? 1 : 0, y: reduced ? 0 : -6 }}
+                    transition={{ duration: reduced ? 0 : 0.12 }}
                   >
                     {money(frame + covering)} ₽
                   </motion.strong>
