@@ -1,0 +1,10 @@
+.git
+.env*
+.venv
+.next
+node_modules
+__pycache__
+**/__pycache__
+test-results
+docs
+.codex-telegram
