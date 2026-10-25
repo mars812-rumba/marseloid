@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { cases, services } from "@/lib/content";
+import { MotionLink, Reveal } from "@/components/motion";
 export function CTA() {
   return (
-    <section className="contact-band wrap">
+    <Reveal as="section" className="contact-band wrap">
       <p className="eyebrow">Есть задача с ручным расчётом?</p>
       <h2>
         Покажите, как это
@@ -15,18 +16,20 @@ export function CTA() {
           <br />
           Разберёмся, с чего начать.
         </p>
-        <Link className="button light" href="/contact/">
+        <MotionLink className="button light" href="/contact/">
           Обсудить задачу <span aria-hidden="true">↗</span>
-        </Link>
+        </MotionLink>
       </div>
-    </section>
+    </Reveal>
   );
 }
 export function Services() {
   return (
     <div className="service-list">
-      {services.map((s) => (
-        <Link
+      {services.map((s, i) => (
+        <MotionLink
+          reveal
+          delay={i * 0.07}
           className="service-row"
           href={`/services/${s.slug}/`}
           key={s.slug}
@@ -37,7 +40,7 @@ export function Services() {
           <span className="round-arrow" aria-hidden="true">
             ↗
           </span>
-        </Link>
+        </MotionLink>
       ))}
     </div>
   );
@@ -81,8 +84,14 @@ export function ProjectArt({ tone }: { tone: string }) {
 export function Projects() {
   return (
     <div className="projects">
-      {cases.map((c) => (
-        <Link className="project-card" href={`/cases/${c.slug}/`} key={c.slug}>
+      {cases.map((c, i) => (
+        <MotionLink
+          reveal
+          delay={i * 0.1}
+          className="project-card"
+          href={`/cases/${c.slug}/`}
+          key={c.slug}
+        >
           <ProjectArt tone={c.tone} />
           <div className="project-meta">
             <span className="eyebrow">{c.category}</span>
@@ -93,7 +102,7 @@ export function Projects() {
             <span aria-hidden="true">↗</span>
           </h3>
           <p>{c.description}</p>
-        </Link>
+        </MotionLink>
       ))}
     </div>
   );
@@ -108,24 +117,24 @@ export function PageIntro({
   description: string;
 }) {
   return (
-    <div className="page-intro">
+    <Reveal className="page-intro">
       <Link className="breadcrumb" href="/">
         Главная <span aria-hidden="true">/</span>
       </Link>
       <p className="eyebrow">{label}</p>
       <h1>{title}</h1>
       <p className="intro-text">{description}</p>
-    </div>
+    </Reveal>
   );
 }
 export function ArticleSections({ sections }: { sections: string[][] }) {
   return (
     <div className="prose">
       {sections.map(([title, body]) => (
-        <section key={title}>
+        <Reveal as="section" key={title}>
           <h2>{title}</h2>
           <p>{body}</p>
-        </section>
+        </Reveal>
       ))}
     </div>
   );

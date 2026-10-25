@@ -10,5 +10,5 @@ The database recommendations mixed dark-only style with a light palette. Resolve
 - One primary action per section. No fabricated metrics, logos, headshots or testimonials.
 - Spacing: 4/8 px scale, 24 px mobile gutter, 64 px desktop gutter, 1280 px maximum content width.
 - Controls at least 44 px, visible keyboard focus, persistent labels, contrast-tested semantic tokens.
-- Motion: only demo state changes and press feedback, 180–250 ms; MotionConfig reducedMotion=user; no scroll-hiding content or infinite decorative animation.
+- Motion: Framer Motion entrances on hero text, section headings, service rows, project cards, process steps and article sections. One-time 36 px rise + opacity 0.15→1, 650 ms, with 70–120 ms stagger for related items. Hover/press feedback uses a small spring scale. Demo state changes remain 180–250 ms. MotionConfig reducedMotion=user; reduced-motion users get immediate content without entrance or gesture transforms. Server HTML stays visible, with no content waiting hidden for scroll or JavaScript. No infinite decorative animation. Preserve the orange accent and existing composition when adjusting motion.
 - Responsive check: 375, 768, 1440 px; keyboard, reduced motion, enlarged text and landscape.

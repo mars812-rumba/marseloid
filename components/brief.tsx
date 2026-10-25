@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 export function Brief() {
+  const reduced = useReducedMotion();
   const [industry, setIndustry] = useState("");
   const [task, setTask] = useState("");
   const [message, setMessage] = useState("");
@@ -52,9 +54,16 @@ export function Brief() {
           placeholder="Как считаете сейчас и что хотите получить на выходе"
         />
       </label>
-      <button className="button" type="submit">
+      <motion.button
+        className="button"
+        type="submit"
+        tabIndex={0}
+        whileHover={reduced ? undefined : { scale: 1.015 }}
+        whileTap={reduced ? undefined : { scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+      >
         Подготовить и скопировать <span aria-hidden="true">↗</span>
-      </button>
+      </motion.button>
       <p className="brief-help">
         Не отправляйте пароли, ключи доступа или персональные данные клиентов.
       </p>

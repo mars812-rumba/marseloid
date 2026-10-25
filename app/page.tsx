@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Demo } from "@/components/demo";
 import { CTA, Projects, Services } from "@/components/shared";
+import { MotionLink, Reveal } from "@/components/motion";
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
@@ -15,15 +16,15 @@ export default function Home() {
           <span className="mono hero-index">NEXT.JS / PYTHON</span>
         </div>
         <div className="hero-grid">
-          <h1>
+          <Reveal as="h1">
             Конфигураторы
             <br />
             продукции, каталоги
             <br />и <span>автоматизация</span>
             <br />
             расчётов для бизнеса<span className="brand-dot">.</span>
-          </h1>
-          <div className="hero-copy">
+          </Reveal>
+          <Reveal className="hero-copy" delay={0.12}>
             <p>
               Сложный продукт.
               <br />
@@ -34,22 +35,24 @@ export default function Home() {
               комплектация зависят от десятков параметров. Работаю лично — от
               разбора задачи до запуска.
             </p>
-            <Link className="button" href="/contact/">
+            <MotionLink className="button" href="/contact/">
               Показать задачу <span aria-hidden="true">↗</span>
-            </Link>
+            </MotionLink>
             <a className="text-link" href="#demo">
               Посмотреть, как работает расчёт ↓
             </a>
-          </div>
+          </Reveal>
         </div>
-        <Demo />
+        <Reveal>
+          <Demo />
+        </Reveal>
         <div className="hero-foot">
           <span>НЕЗАВИСИМЫЙ РАЗРАБОТЧИК</span>
           <span>ПРОДУКЦИЯ / ПРАВИЛА / РЕЗУЛЬТАТ</span>
         </div>
       </section>
       <section className="section wrap">
-        <div className="section-heading">
+        <Reveal className="section-heading">
           <p className="eyebrow">/01 — Что делаю</p>
           <h2>
             Между вашим прайсом
@@ -59,11 +62,11 @@ export default function Home() {
             Убираю ручные переходы между таблицами, подбором и работой
             менеджера.
           </p>
-        </div>
+        </Reveal>
         <Services />
       </section>
       <section className="section wrap">
-        <div className="section-heading">
+        <Reveal className="section-heading">
           <p className="eyebrow">/02 — Избранные проекты</p>
           <h2>
             Не только интерфейс.
@@ -73,14 +76,14 @@ export default function Home() {
           <Link className="text-link" href="/cases/">
             Все проекты ↗
           </Link>
-        </div>
+        </Reveal>
         <Projects />
         <p className="caption">
           Визуальные обложки — иллюстрации процессов, не скриншоты интерфейсов.
         </p>
       </section>
       <section className="section process-section wrap">
-        <div>
+        <Reveal>
           <p className="eyebrow">/03 — Как работаем</p>
           <h2>
             Сначала разбираюсь.
@@ -94,7 +97,7 @@ export default function Home() {
           <Link className="text-link" href="/about/">
             Подробнее о подходе ↗
           </Link>
-        </div>
+        </Reveal>
         <ol className="process">
           {[
             [
@@ -114,13 +117,13 @@ export default function Home() {
               "Документируем систему и отдельно договариваемся о сопровождении.",
             ],
           ].map(([title, text], i) => (
-            <li key={title}>
+            <Reveal as="li" key={title} delay={i * 0.07}>
               <span className="mono">0{i + 1}</span>
               <div>
                 <h3>{title}</h3>
                 <p>{text}</p>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </section>
