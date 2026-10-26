@@ -1,11 +1,11 @@
 .stage {
-  width: min(100%, 820px);
+  width: min(100%, 1000px);
   min-width: 0;
   margin-inline: auto;
 }
 .scene {
   position: relative;
-  padding: 44px 32px 36px;
+  padding: 32px 24px 200px;
   perspective: 1500px;
   touch-action: pan-y pinch-zoom;
   user-select: none;
@@ -22,15 +22,16 @@
 .rig {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.6;
+  aspect-ratio: 1.5;
   pointer-events: none;
   transform-style: preserve-3d;
 }
 .lid {
+  --thickness: 6px;
   position: absolute;
-  left: 5%;
+  left: 3%;
   top: 0;
-  width: 90%;
+  width: 94%;
   height: 72%;
   transform-origin: 50% 100%;
   transform-style: preserve-3d;
@@ -39,7 +40,7 @@
 .back {
   position: absolute;
   inset: 0;
-  border-radius: 12px 12px 4px 4px;
+  border-radius: 0;
   backface-visibility: hidden;
 }
 .bezel {
@@ -54,8 +55,8 @@
 }
 .lidSide {
   position: absolute;
-  top: 12px;
-  bottom: 0;
+  top: 6px;
+  bottom: 6px;
   width: 6px;
   background: #656d78;
   backface-visibility: hidden;
@@ -71,8 +72,8 @@
 .lidTop {
   position: absolute;
   top: -3px;
-  left: 12px;
-  right: 12px;
+  left: 6px;
+  right: 6px;
   height: 6px;
   background: #727b86;
   transform: rotateX(90deg);
@@ -120,6 +121,8 @@
   );
 }
 .hingeGrip {
+  pointer-events: auto;
+  transform: translateZ(4px);
   position: absolute;
   top: -16px;
   left: 15%;
@@ -129,10 +132,11 @@
   touch-action: none;
 }
 .base {
+  --thickness: 8px;
   position: absolute;
   top: 72%;
-  left: 2%;
-  width: 96%;
+  left: 3%;
+  width: 94%;
   height: 43%;
   transform-origin: 50% 0;
   transform: rotateX(82deg);
@@ -142,12 +146,12 @@
 .underside {
   position: absolute;
   inset: 0;
-  border-radius: 4px 4px 10px 10px;
+  border-radius: 0;
   backface-visibility: hidden;
 }
 .deck {
   pointer-events: auto;
-  background: linear-gradient(130deg, #dce0e5, #a3aab4 70%, #cbd0d6);
+  background: linear-gradient(130deg, #bfc6cf, #a3aab4 70%, #b8c0ca);
   transform: translateZ(4px);
 }
 .underside {
@@ -164,8 +168,11 @@
   border-radius: 4px;
   background-color: #292f38;
   background-image:
-    repeating-linear-gradient(90deg, transparent 0 6.4%, #a8b0bb 6.4% 6.9%),
-    repeating-linear-gradient(0deg, transparent 0 20%, #a8b0bb 20% 25%);
+    linear-gradient(90deg, #a8b0bb 1px, transparent 1px),
+    linear-gradient(0deg, #a8b0bb 1px, transparent 1px);
+  background-size:
+    calc(100% / 14) 100%,
+    100% 25%;
 }
 .trackpad {
   position: absolute;
@@ -179,10 +186,10 @@
 }
 .edge {
   position: absolute;
-  left: 10px;
-  right: 10px;
+  left: 6px;
+  right: 6px;
   height: 8px;
-  background: linear-gradient(#d2d7dd, #69727e);
+  background: linear-gradient(#aeb7c2, #69727e);
   backface-visibility: hidden;
 }
 .frontEdge {
@@ -195,8 +202,8 @@
 }
 .side {
   position: absolute;
-  top: 4px;
-  bottom: 10px;
+  top: 6px;
+  bottom: 6px;
   width: 8px;
   background: #9099a5;
   backface-visibility: hidden;
@@ -211,7 +218,7 @@
 }
 .shadow {
   position: absolute;
-  bottom: 12px;
+  bottom: 112px;
   left: 12%;
   width: 76%;
   height: 34px;
@@ -301,15 +308,64 @@
   cursor: default;
 }
 @media (max-width: 767px) {
-  .scene {
-    padding: 40px 24px 36px;
+  .shadow {
+    bottom: 28px;
   }
-  .lid,
-  .bezel,
-  .back {
-    border-radius: 6px 6px 2px 2px;
+  .scene {
+    padding: 28px 4px 48px;
   }
   .keyboard {
     border-width: 1px;
   }
+}
+
+/* Matching corner cuts and walls form a closed prism at every viewing angle. */
+.bezel,
+.back,
+.deck,
+.underside {
+  clip-path: polygon(
+    6px 0,
+    calc(100% - 6px) 0,
+    100% 6px,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    6px 100%,
+    0 calc(100% - 6px),
+    0 6px
+  );
+}
+.cornerFace {
+  position: absolute;
+  width: var(--thickness);
+  height: 8.7px;
+  background: #858f9d;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+.cut0 {
+  left: 3px;
+  top: 3px;
+}
+.cut1 {
+  left: calc(100% - 3px);
+  top: 3px;
+}
+.cut2 {
+  left: calc(100% - 3px);
+  top: calc(100% - 3px);
+}
+.cut3 {
+  left: 3px;
+  top: calc(100% - 3px);
+}
+.lidBottom {
+  position: absolute;
+  bottom: -3px;
+  left: 6px;
+  right: 6px;
+  height: 6px;
+  background: #727b86;
+  transform: rotateX(-90deg);
+  backface-visibility: hidden;
 }

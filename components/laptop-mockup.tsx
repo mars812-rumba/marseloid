@@ -15,6 +15,20 @@ import styles from "./laptop-mockup.module.css";
 const clamp = (value: number, min: number, max: number) =>
   Math.max(min, Math.min(max, value));
 
+/** Small corner walls close the chamfered perimeter without full-size layers. */
+function CornerFaces() {
+  return [225, 315, 45, 135].map((angle, index) => (
+    <span
+      key={angle}
+      className={`${styles.cornerFace} ${styles[`cut${index}`]}`}
+      aria-hidden="true"
+      style={{
+        transform: `translate(-50%, -50%) rotateZ(${angle}deg) rotateY(90deg)`,
+      }}
+    />
+  ));
+}
+
 export function LaptopMockup({
   src,
   alt,
@@ -43,7 +57,7 @@ export function LaptopMockup({
   const [opening, setOpening] = useState(110);
   const phase = useMotionValue(0);
   const pitch = useMotionValue(-12),
-    yaw = useMotionValue(-16),
+    yaw = useMotionValue(0),
     lid = useMotionValue(12);
   const smoothPitch = useSpring(pitch, { stiffness: 190, damping: 26 });
   const smoothYaw = useSpring(yaw, { stiffness: 190, damping: 26 });
@@ -63,7 +77,7 @@ export function LaptopMockup({
     x: 0,
     y: 0,
     pitch: -12,
-    yaw: -16,
+    yaw: 0,
     opening: 110,
     travel: 200,
   });
@@ -75,7 +89,7 @@ export function LaptopMockup({
   }
   function reset() {
     pitch.set(-12);
-    yaw.set(-16);
+    yaw.set(0);
     changeOpening(110);
   }
   useEffect(() => {
@@ -206,6 +220,7 @@ export function LaptopMockup({
           }}
         >
           <div className={styles.base} aria-hidden="true">
+            <CornerFaces />
             <div className={styles.underside} />
             <div className={styles.deck}>
               <div className={styles.keyboard} />
@@ -221,6 +236,7 @@ export function LaptopMockup({
             data-laptop-lid=""
             style={{ rotateX: reduced ? opening - 98 : smoothLid }}
           >
+            <CornerFaces />
             <div className={styles.back} aria-hidden="true" />
             <div
               className={`${styles.lidSide} ${styles.lidLeft}`}
@@ -231,6 +247,7 @@ export function LaptopMockup({
               aria-hidden="true"
             />
             <div className={styles.lidTop} aria-hidden="true" />
+            <div className={styles.lidBottom} aria-hidden="true" />
             <div className={styles.bezel}>
               <span className={styles.camera} aria-hidden="true" />
               <div
@@ -250,7 +267,7 @@ export function LaptopMockup({
                 <Image
                   src={src}
                   fill
-                  sizes="(max-width: 767px) 85vw, 700px"
+                  sizes="(max-width: 767px) 90vw, 900px"
                   alt={alt}
                   draggable={false}
                   loading="eager"
@@ -259,12 +276,12 @@ export function LaptopMockup({
                   <motion.span style={{ x: reduced ? 0 : reflection }} />
                 </div>
               </div>
-              <div
-                className={styles.hingeGrip}
-                data-laptop-hinge=""
-                aria-hidden="true"
-              />
             </div>
+            <div
+              className={styles.hingeGrip}
+              data-laptop-hinge=""
+              aria-hidden="true"
+            />
           </motion.div>
         </motion.div>
         <button
