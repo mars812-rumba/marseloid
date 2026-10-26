@@ -1701,3 +1701,11 @@ a:hover .round-arrow {
   border-color: var(--ink);
   color: #f7f5ef;
 }
+
+/* The laptop owns its fitted scene and compact controls; phone layout is unchanged. */
+.gallery-stage-laptop {
+  padding: 0;
+}
+.gallery-stage-laptop + .gallery-caption {
+  padding-top: 12px;
+}

@@ -135,7 +135,9 @@ export function CaseGallery() {
             Телефон
           </button>
         </div>
-        <div className="gallery-stage">
+        <div
+          className={`gallery-stage${device === "desktop" ? " gallery-stage-laptop" : ""}`}
+        >
           <div className="gallery-devices">
             {device === "desktop" ? (
               <LaptopMockup
@@ -161,31 +163,34 @@ export function CaseGallery() {
               />
             )}
           </div>
-          <span className="gallery-stage-label" aria-hidden="true">
-            {device === "desktop"
-              ? "ИНТЕРФЕЙС НА КОМПЬЮТЕРЕ"
-              : "МОБИЛЬНЫЙ ИНТЕРФЕЙС"}{" "}
-            / 0{active + 1}
-          </span>
+          {device === "mobile" && (
+            <span className="gallery-stage-label" aria-hidden="true">
+              МОБИЛЬНЫЙ ИНТЕРФЕЙС / 0{active + 1}
+            </span>
+          )}
         </div>
         <div className="gallery-caption">
           <div aria-live="polite">
             <h3>{screen.title}</h3>
             <p>{screen.description}</p>
           </div>
-          <button
-            className="text-link gallery-desktop-link"
-            type="button"
-            onClick={() => enlarge("desktop")}
-            aria-haspopup="dialog"
-          >
-            Экран на компьютере ↗
-          </button>
-          <span className="gallery-hint">
-            Корпус — поворот.
-            <br />
-            Экран — смена снимка.
-          </span>
+          {device === "mobile" && (
+            <>
+              <button
+                className="text-link gallery-desktop-link"
+                type="button"
+                onClick={() => enlarge("desktop")}
+                aria-haspopup="dialog"
+              >
+                Экран на компьютере ↗
+              </button>
+              <span className="gallery-hint">
+                Корпус — поворот.
+                <br />
+                Экран — смена снимка.
+              </span>
+            </>
+          )}
         </div>
       </div>
       <noscript>

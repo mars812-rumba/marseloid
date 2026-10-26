@@ -10,12 +10,13 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { LAPTOP, fitLaptop, laptopCameraDistance } from "@/lib/laptop-geometry";
 import styles from "./laptop-mockup.module.css";
 
-const DEFAULT_OPENING = 155;
-const MIN_OPENING = 60;
-const MAX_OPENING = 165;
-const LID_OFFSET = 98;
+const DEFAULT_OPENING = 140;
+const MIN_OPENING = 0;
+const MAX_OPENING = 160;
+const LID_OFFSET = LAPTOP.lidOffset;
 
 const clamp = (value: number, min: number, max: number) =>
   Math.max(min, Math.min(max, value));
@@ -54,6 +55,8 @@ export function LaptopMockup({
   onEnlarge: () => void;
 }) {
   const hint = useId();
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const viewportWidth = useMotionValue(360);
   const sceneRef = useRef<HTMLDivElement>(null);
   const visible = useInView(sceneRef, { amount: 0.1 });
   const [paused, setPaused] = useState(false);
@@ -61,19 +64,42 @@ export function LaptopMockup({
   const [foreground, setForeground] = useState(true);
   const [opening, setOpening] = useState(DEFAULT_OPENING);
   const phase = useMotionValue(0);
-  const pitch = useMotionValue(-20),
-    yaw = useMotionValue(-12),
+  const pitch = useMotionValue(-24),
+    yaw = useMotionValue(-8),
     lid = useMotionValue(DEFAULT_OPENING - LID_OFFSET);
   const smoothPitch = useSpring(pitch, { stiffness: 190, damping: 26 });
   const smoothYaw = useSpring(yaw, { stiffness: 190, damping: 26 });
   const smoothLid = useSpring(lid, { stiffness: 220, damping: 28 });
-  const rotateX = useTransform(
-    () => smoothPitch.get() + Math.sin(phase.get()) * 2,
+  const rotateX = useTransform(() =>
+    reduced ? -24 : smoothPitch.get() + Math.sin(phase.get()) * 2,
   );
-  const rotateY = useTransform(
-    () => smoothYaw.get() + Math.sin(phase.get()) * 7,
+  const rotateY = useTransform(() =>
+    reduced ? 0 : smoothYaw.get() + Math.sin(phase.get()) * 7,
   );
-  const floatY = useTransform(phase, (value) => Math.sin(value) * 8);
+  const floatY = useTransform(phase, (value) =>
+    reduced ? 0 : Math.sin(value) * 8,
+  );
+  const lidAngle = useTransform(() => (reduced ? lid.get() : smoothLid.get()));
+  const cameraDistance = useTransform(viewportWidth, laptopCameraDistance);
+  const fittedTransform = useTransform(() => {
+    const fitted = fitLaptop(
+      viewportWidth.get(),
+      rotateX.get(),
+      rotateY.get(),
+      lidAngle.get(),
+    );
+    return `translate(${fitted.x}px, ${fitted.y + floatY.get()}px) scale(${fitted.scale})`;
+  });
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    viewportWidth.set(viewport.clientWidth);
+    const observer = new ResizeObserver(([entry]) =>
+      viewportWidth.set(entry.contentRect.width),
+    );
+    observer.observe(viewport);
+    return () => observer.disconnect();
+  }, [viewportWidth]);
   const reflection = useTransform(rotateY, [-65, 65], ["-18%", "18%"]);
   const drag = useRef({
     active: false,
@@ -81,8 +107,8 @@ export function LaptopMockup({
     mode: "body",
     x: 0,
     y: 0,
-    pitch: -20,
-    yaw: -12,
+    pitch: -24,
+    yaw: -8,
     opening: DEFAULT_OPENING,
     travel: 200,
   });
@@ -93,8 +119,8 @@ export function LaptopMockup({
     lid.set(next - LID_OFFSET);
   }
   function reset() {
-    pitch.set(-20);
-    yaw.set(-12);
+    pitch.set(-24);
+    yaw.set(-8);
     changeOpening(DEFAULT_OPENING);
   }
   useEffect(() => {
@@ -140,7 +166,7 @@ export function LaptopMockup({
       pitch: pitch.get(),
       yaw: yaw.get(),
       opening,
-      travel: event.currentTarget.clientWidth * 0.45,
+      travel: event.currentTarget.clientWidth * 0.6,
     };
     setDragging(true);
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -180,153 +206,173 @@ export function LaptopMockup({
       role="group"
       aria-label="Ноутбук с экранами Дымоход Трейд"
     >
-      <div className={styles.presentation}>
+      <div
+        ref={sceneRef}
+        className={styles.scene}
+        data-laptop-scene=""
+        role="group"
+        tabIndex={0}
+        aria-label="Поворот ноутбука"
+        aria-describedby={hint}
+        onPointerDown={start}
+        onPointerMove={move}
+        onPointerUp={(event) => finish(event)}
+        onPointerCancel={(event) => finish(event, true)}
+        onLostPointerCapture={(event) => finish(event, true)}
+        onKeyDown={(event) => {
+          if (event.target !== event.currentTarget) return;
+          if (
+            !reduced &&
+            (event.key === "ArrowLeft" || event.key === "ArrowRight")
+          ) {
+            event.preventDefault();
+            yaw.set(
+              clamp(
+                yaw.get() + (event.key === "ArrowRight" ? 15 : -15),
+                -55,
+                55,
+              ),
+            );
+          }
+          if (event.key === "Home") {
+            event.preventDefault();
+            reset();
+          }
+        }}
+      >
         <div
-          ref={sceneRef}
-          className={styles.scene}
-          data-laptop-scene=""
-          role="group"
-          tabIndex={0}
-          aria-label="Поворот ноутбука"
-          aria-describedby={hint}
-          onPointerDown={start}
-          onPointerMove={move}
-          onPointerUp={(event) => finish(event)}
-          onPointerCancel={(event) => finish(event, true)}
-          onLostPointerCapture={(event) => finish(event, true)}
-          onKeyDown={(event) => {
-            if (event.target !== event.currentTarget) return;
-            if (
-              !reduced &&
-              (event.key === "ArrowLeft" || event.key === "ArrowRight")
-            ) {
-              event.preventDefault();
-              yaw.set(
-                clamp(
-                  yaw.get() + (event.key === "ArrowRight" ? 15 : -15),
-                  -55,
-                  55,
-                ),
-              );
-            }
-            if (event.key === "Home") {
-              event.preventDefault();
-              reset();
-            }
-          }}
+          className={styles.viewport}
+          ref={viewportRef}
+          data-laptop-viewport=""
         >
           <div className={styles.shadow} aria-hidden="true" />
           <motion.div
-            className={styles.rig}
-            data-laptop-rig=""
-            style={{
-              rotateX: reduced ? -20 : rotateX,
-              rotateY: reduced ? 0 : rotateY,
-              y: reduced ? 0 : floatY,
-            }}
+            className={styles.fitted}
+            data-laptop-fitted=""
+            style={{ transform: fittedTransform }}
           >
-            <div className={styles.base} aria-hidden="true">
-              <CornerFaces />
-              <div className={styles.underside} />
-              <div className={styles.deck}>
-                <div className={styles.keyboard} />
-                <div className={styles.trackpad} />
-              </div>
-              <div className={`${styles.edge} ${styles.frontEdge}`} />
-              <div className={`${styles.edge} ${styles.rearEdge}`} />
-              <div className={`${styles.side} ${styles.leftEdge}`} />
-              <div className={`${styles.side} ${styles.rightEdge}`} />
-            </div>
             <motion.div
-              className={styles.lid}
-              data-laptop-lid=""
-              style={{ rotateX: reduced ? opening - LID_OFFSET : smoothLid }}
+              className={styles.projection}
+              style={{ perspective: cameraDistance }}
             >
-              <CornerFaces />
-              <div className={styles.back} aria-hidden="true" />
-              <div
-                className={`${styles.lidSide} ${styles.lidLeft}`}
-                aria-hidden="true"
-              />
-              <div
-                className={`${styles.lidSide} ${styles.lidRight}`}
-                aria-hidden="true"
-              />
-              <div className={styles.lidTop} aria-hidden="true" />
-              <div className={styles.lidBottom} aria-hidden="true" />
-              <div className={styles.bezel}>
-                <span className={styles.camera} aria-hidden="true" />
+              <motion.div
+                className={styles.rig}
+                data-laptop-rig=""
+                style={{
+                  rotateX,
+                  rotateY,
+                }}
+              >
+                <div className={styles.hinge} aria-hidden="true" />
                 <div
-                  className={styles.display}
-                  data-laptop-display=""
-                  role="group"
-                  tabIndex={0}
-                  aria-label={`Экран ноутбука: ${label}`}
-                  onKeyDown={(event) => {
-                    if (
-                      event.key === "ArrowLeft" ||
-                      event.key === "ArrowRight"
-                    ) {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      go(event.key === "ArrowRight" ? 1 : -1);
-                    }
-                  }}
+                  className={styles.base}
+                  data-laptop-base=""
+                  aria-hidden="true"
                 >
-                  <Image
-                    src={src}
-                    fill
-                    sizes="(max-width: 767px) 90vw, 900px"
-                    alt={alt}
-                    draggable={false}
-                    loading="eager"
-                  />
-                  <div className={styles.glass} aria-hidden="true">
-                    <motion.span style={{ x: reduced ? 0 : reflection }} />
+                  <CornerFaces />
+                  <div className={styles.underside} />
+                  <div className={styles.deck}>
+                    <div className={styles.keyboard} />
+                    <div className={styles.trackpad} />
                   </div>
+                  <div className={`${styles.edge} ${styles.frontEdge}`} />
+                  <div className={`${styles.edge} ${styles.rearEdge}`} />
+                  <div className={`${styles.side} ${styles.leftEdge}`} />
+                  <div className={`${styles.side} ${styles.rightEdge}`} />
                 </div>
-              </div>
-              <div
-                className={styles.hingeGrip}
-                data-laptop-hinge=""
-                aria-hidden="true"
-              />
+                <motion.div
+                  className={styles.lid}
+                  data-laptop-lid=""
+                  style={{ rotateX: lidAngle }}
+                >
+                  <CornerFaces />
+                  <div className={styles.back} aria-hidden="true" />
+                  <div
+                    className={`${styles.lidSide} ${styles.lidLeft}`}
+                    aria-hidden="true"
+                  />
+                  <div
+                    className={`${styles.lidSide} ${styles.lidRight}`}
+                    aria-hidden="true"
+                  />
+                  <div className={styles.lidTop} aria-hidden="true" />
+                  <div className={styles.lidBottom} aria-hidden="true" />
+                  <div className={styles.bezel}>
+                    <span className={styles.camera} aria-hidden="true" />
+                    <div
+                      className={styles.display}
+                      data-laptop-display=""
+                      role="group"
+                      tabIndex={opening < 20 ? -1 : 0}
+                      aria-hidden={opening < 20}
+                      aria-label={`Экран ноутбука: ${label}`}
+                      onKeyDown={(event) => {
+                        if (
+                          event.key === "ArrowLeft" ||
+                          event.key === "ArrowRight"
+                        ) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          go(event.key === "ArrowRight" ? 1 : -1);
+                        }
+                      }}
+                    >
+                      <Image
+                        src={src}
+                        fill
+                        sizes="(max-width: 767px) 90vw, 900px"
+                        alt={alt}
+                        draggable={false}
+                        loading="eager"
+                      />
+                      <div className={styles.glass} aria-hidden="true">
+                        <motion.span style={{ x: reduced ? 0 : reflection }} />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className={styles.hingeGrip}
+                    data-laptop-hinge=""
+                    aria-hidden="true"
+                  />
+                </motion.div>
+              </motion.div>
             </motion.div>
           </motion.div>
-          <button
-            className={`${styles.arrow} ${styles.previous}`}
-            type="button"
-            aria-label="Предыдущий экран ноутбука"
-            onClick={() => go(-1)}
-          >
-            ‹
-          </button>
-          <button
-            className={`${styles.arrow} ${styles.next}`}
-            type="button"
-            aria-label="Следующий экран ноутбука"
-            onClick={() => go(1)}
-          >
-            ›
-          </button>
         </div>
-        <label className={styles.slider}>
-          <span>
-            Крышка <output>{opening}°</output>
-          </span>
-          <input
-            type="range"
-            aria-label="Раскрытие крышки ноутбука"
-            aria-orientation="vertical"
-            min={MIN_OPENING}
-            max={MAX_OPENING}
-            step="1"
-            value={opening}
-            onChange={(event) => changeOpening(Number(event.target.value))}
-          />
-        </label>
+        <button
+          className={`${styles.arrow} ${styles.previous}`}
+          type="button"
+          aria-label="Предыдущий экран ноутбука"
+          onClick={() => go(-1)}
+        >
+          ‹
+        </button>
+        <button
+          className={`${styles.arrow} ${styles.next}`}
+          type="button"
+          aria-label="Следующий экран ноутбука"
+          onClick={() => go(1)}
+        >
+          ›
+        </button>
       </div>
-      <p className={styles.hint} id={hint}>
+      <label className={styles.slider}>
+        <span>
+          Раскрытие крышки <output>— {opening}°</output>
+        </span>
+        <input
+          type="range"
+          aria-label="Раскрытие крышки ноутбука"
+          aria-orientation="horizontal"
+          min={MIN_OPENING}
+          max={MAX_OPENING}
+          step="1"
+          value={opening}
+          onChange={(event) => changeOpening(Number(event.target.value))}
+        />
+      </label>
+      <p className="sr-only" id={hint}>
         Тяните корпус — поворот. Свайп по экрану — смена снимка.
         <br />
         Верхняя кромка — наклон крышки.
@@ -348,15 +394,16 @@ export function LaptopMockup({
         <button type="button" onClick={reset}>
           Сбросить ракурс
         </button>
-        <button
-          type="button"
-          onClick={onEnlarge}
-          aria-label={`Увеличить: ${label}, ноутбук`}
-          aria-haspopup="dialog"
-        >
-          Увеличить экран ↗
-        </button>
       </div>
+      <button
+        className={styles.zoom}
+        type="button"
+        onClick={onEnlarge}
+        aria-label={`Увеличить: ${label}, ноутбук`}
+        aria-haspopup="dialog"
+      >
+        Увеличить экран ↗
+      </button>
     </div>
   );
 }
