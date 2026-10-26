@@ -1461,8 +1461,8 @@ a:hover .round-arrow {
 }
 .gallery-stage {
   padding: 24px 32px 48px;
-  background: #fff;
-  border: 1px solid var(--line);
+  background: transparent;
+  border: 0;
   border-radius: 4px;
   position: relative;
 }

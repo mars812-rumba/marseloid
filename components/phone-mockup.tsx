@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useRef, type PointerEvent } from "react";
+import { useEffect, useId, useRef, useState, type PointerEvent } from "react";
 import {
   AnimatePresence,
+  animate,
+  useInView,
+  useTransform,
   motion,
   useMotionValue,
   useSpring,
@@ -34,11 +37,46 @@ export function PhoneMockup({
   onEnlarge: () => void;
 }) {
   const hint = useId();
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const visible = useInView(sceneRef, { amount: 0.1 });
+  const [paused, setPaused] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [foreground, setForeground] = useState(true);
+  const phase = useMotionValue(0);
+  const floatY = useTransform(phase, (value) => Math.sin(value) * 9);
+  const shadowScale = useTransform(
+    phase,
+    (value) => 1 + Math.sin(value) * 0.08,
+  );
+  const floatZ = useTransform(phase, (value) => Math.sin(value) * 1.4);
   const x = useMotionValue(-6);
   const y = useMotionValue(14);
   const swipe = useMotionValue(0);
   const rotateX = useSpring(x, { stiffness: 190, damping: 26 });
   const rotateY = useSpring(y, { stiffness: 190, damping: 26 });
+  const floatingX = useTransform(
+    () => rotateX.get() + Math.sin(phase.get()) * 2.5,
+  );
+  const floatingY = useTransform(
+    () => rotateY.get() + Math.sin(phase.get()) * 9,
+  );
+  const reflectionX = useTransform(floatingY, [-80, 80], ["-25%", "25%"]);
+  useEffect(() => {
+    const update = () => setForeground(!document.hidden);
+    update();
+    document.addEventListener("visibilitychange", update);
+    return () => document.removeEventListener("visibilitychange", update);
+  }, []);
+  useEffect(() => {
+    if (reduced || paused || dragging || !visible || !foreground) return;
+    const from = phase.get();
+    const animation = animate(phase, [from, from + Math.PI * 2], {
+      duration: 9,
+      ease: "linear",
+      repeat: Infinity,
+    });
+    return () => animation.stop();
+  }, [reduced, paused, dragging, visible, foreground, phase]);
   const screenX = useSpring(swipe, { stiffness: 320, damping: 30 });
   const gesture = useRef({
     active: false,
@@ -57,6 +95,7 @@ export function PhoneMockup({
 
   useEffect(() => {
     gesture.current.active = false;
+    setDragging(false);
     swipe.set(0);
     x.set(reduced ? 0 : -6);
     y.set(reduced ? 0 : 14);
@@ -80,6 +119,7 @@ export function PhoneMockup({
       pitch: x.get(),
       yaw: y.get(),
     };
+    setDragging(true);
     event.currentTarget.setPointerCapture(event.pointerId);
   }
 
@@ -100,6 +140,7 @@ export function PhoneMockup({
     const drag = gesture.current;
     if (!drag.active || drag.pointer !== event.pointerId) return;
     drag.active = false;
+    setDragging(false);
     swipe.set(0);
     const dx = event.clientX - drag.startX,
       dy = event.clientY - drag.startY;
@@ -121,6 +162,7 @@ export function PhoneMockup({
       aria-label="Мобильные экраны Дымоход Трейд"
     >
       <div
+        ref={sceneRef}
         className={styles.scene}
         data-phone-scene=""
         role="group"
@@ -145,14 +187,25 @@ export function PhoneMockup({
         }}
       >
         <motion.div
+          className={styles.shadow}
+          aria-hidden="true"
+          style={{ scale: reduced ? 1 : shadowScale }}
+        />
+        <motion.div
           className={styles.rig}
           data-phone-rig=""
           style={{
-            rotateX: reduced ? 0 : rotateX,
-            rotateY: reduced ? 0 : rotateY,
+            rotateX: reduced ? 0 : floatingX,
+            rotateY: reduced ? 0 : floatingY,
+            rotateZ: reduced ? 0 : floatZ,
+            y: reduced ? 0 : floatY,
           }}
         >
-          <PhoneShell>
+          <PhoneShell
+            reflection={
+              <motion.span style={{ x: reduced ? 0 : reflectionX }} />
+            }
+          >
             <div
               className={styles.display}
               data-phone-display=""
@@ -216,7 +269,7 @@ export function PhoneMockup({
         </button>
       </div>
       <p className={styles.hint} id={hint}>
-        Тяните корпус или белое поле — поворот.
+        Тяните корпус или поле вокруг — поворот.
         <br />
         Свайп по экрану — следующий снимок.
         <span className="sr-only">
@@ -225,6 +278,14 @@ export function PhoneMockup({
         </span>
       </p>
       <div className={styles.tools}>
+        <button
+          type="button"
+          disabled={reduced}
+          aria-pressed={paused}
+          onClick={() => setPaused((value) => !value)}
+        >
+          {paused ? "Включить парение" : "Приостановить парение"}
+        </button>
         <button type="button" onClick={reset} disabled={reduced}>
           Сбросить ракурс
         </button>

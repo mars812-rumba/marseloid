@@ -5,7 +5,7 @@
 }
 .scene {
   position: relative;
-  padding: 28px 0 24px;
+  padding: 40px 0 48px;
   perspective: 1600px;
   user-select: none;
   touch-action: pan-y pinch-zoom;
@@ -116,4 +116,19 @@
   color: var(--muted);
   opacity: 0.6;
   cursor: default;
+}
+
+.shadow {
+  position: absolute;
+  bottom: 9px;
+  left: 18%;
+  width: 64%;
+  height: 30px;
+  background: radial-gradient(
+    ellipse,
+    #18202b30,
+    #18202b0a 48%,
+    transparent 72%
+  );
+  pointer-events: none;
 }
