@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { CaseStudy } from "@/lib/case-studies";
+import { CaseImageViewer } from "@/components/case-image-viewer";
 import { CaseModules } from "@/components/case-modules";
 import { Reveal } from "@/components/motion";
 import styles from "./case-study.module.css";
@@ -24,7 +25,10 @@ export function CaseStudyPage({
             Все проекты <span aria-hidden="true">/</span>
           </Link>
           <p className="eyebrow">Коммерческая веб-система / {project.status}</p>
-          <h1>{project.title}</h1>
+          <h1>{study.title ?? project.title}</h1>
+          {study.subtitle && (
+            <p className={styles.heroSubtitle}>{study.subtitle}</p>
+          )}
           <div className={styles.heroGrid}>
             <div>
               <p className={styles.heroSummary}>{study.summary}</p>
@@ -50,6 +54,40 @@ export function CaseStudyPage({
             </aside>
           </div>
         </Reveal>
+        {study.story && (
+          <section aria-labelledby="case-story-heading">
+            <Reveal className={styles.story}>
+              <h2 id="case-story-heading">{study.story.title}</h2>
+              <div className={styles.editorialCopy}>
+                {study.story.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </Reveal>
+          </section>
+        )}
+        {study.photography && (
+          <section aria-labelledby="case-photography-heading">
+            <Reveal className={styles.photography}>
+              <div className={styles.editorialCopy}>
+                <h2 id="case-photography-heading">{study.photography.title}</h2>
+                {study.photography.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              <div className={styles.photoGallery}>
+                {study.photography.images.map((image) => (
+                  <CaseImageViewer
+                    key={image.src}
+                    images={[image]}
+                    title={image.alt}
+                    actionLabel="Рассмотреть фото"
+                  />
+                ))}
+              </div>
+            </Reveal>
+          </section>
+        )}
         {demonstration && (
           <div className={styles.demonstration} id="demonstration">
             {demonstration}

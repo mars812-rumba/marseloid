@@ -8,9 +8,11 @@ import styles from "./case-study.module.css";
 export function CaseImageViewer({
   images,
   title,
+  actionLabel = "Рассмотреть экран",
 }: {
   images: CaseImage[];
   title: string;
+  actionLabel?: string;
 }) {
   const [active, setActive] = useState(0);
   const [expanded, setExpanded] = useState(false);
@@ -73,7 +75,7 @@ export function CaseImageViewer({
             />
           </span>
           <span className={styles.imageAction}>
-            Рассмотреть экран <span aria-hidden="true">↗</span>
+            {actionLabel} <span aria-hidden="true">↗</span>
           </span>
         </button>
         <figcaption>{current.caption}</figcaption>

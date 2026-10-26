@@ -70,6 +70,9 @@ export function CaseModules({ modules }: { modules: CaseModule[] }) {
             </p>
             <h3>{module.title}</h3>
             <p className={styles.moduleDescription}>{module.description}</p>
+            {module.detail && (
+              <p className={styles.moduleDescription}>{module.detail}</p>
+            )}
             <ul className={styles.featureList}>
               {module.features.map((feature) => (
                 <li key={feature}>{feature}</li>
