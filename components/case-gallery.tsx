@@ -10,6 +10,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import { chimneyScreens, screenshotBase } from "@/lib/case-screenshots";
+import { LaptopMockup } from "@/components/laptop-mockup";
 import { PhoneMockup } from "@/components/phone-mockup";
 
 type Device = "desktop" | "mobile";
@@ -24,6 +25,7 @@ const readMotionPreference = () => window.matchMedia(reducedQuery).matches;
 const serverMotionPreference = () => true;
 
 export function CaseGallery() {
+  const [device, setDevice] = useState<Device>("desktop");
   const [active, setActive] = useState(0);
   const [full, setFull] = useState<Device | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -113,21 +115,57 @@ export function CaseGallery() {
         aria-labelledby={`${id}-tab-${active}`}
         tabIndex={0}
       >
+        <div
+          className="gallery-device-switch"
+          role="group"
+          aria-label="Устройство для просмотра"
+        >
+          <button
+            type="button"
+            aria-pressed={device === "desktop"}
+            onClick={() => setDevice("desktop")}
+          >
+            Ноутбук
+          </button>
+          <button
+            type="button"
+            aria-pressed={device === "mobile"}
+            onClick={() => setDevice("mobile")}
+          >
+            Телефон
+          </button>
+        </div>
         <div className="gallery-stage">
           <div className="gallery-devices">
-            <PhoneMockup
-              src={src("mobile")}
-              alt={screen.mobileAlt}
-              label={screen.label}
-              active={active}
-              count={chimneyScreens.length}
-              reduced={reduced}
-              onSelect={setActive}
-              onEnlarge={() => enlarge("mobile")}
-            />
+            {device === "desktop" ? (
+              <LaptopMockup
+                src={src("desktop")}
+                alt={screen.desktopAlt}
+                label={screen.label}
+                active={active}
+                count={chimneyScreens.length}
+                reduced={reduced}
+                onSelect={setActive}
+                onEnlarge={() => enlarge("desktop")}
+              />
+            ) : (
+              <PhoneMockup
+                src={src("mobile")}
+                alt={screen.mobileAlt}
+                label={screen.label}
+                active={active}
+                count={chimneyScreens.length}
+                reduced={reduced}
+                onSelect={setActive}
+                onEnlarge={() => enlarge("mobile")}
+              />
+            )}
           </div>
           <span className="gallery-stage-label" aria-hidden="true">
-            МОБИЛЬНЫЙ ИНТЕРФЕЙС / 0{active + 1}
+            {device === "desktop"
+              ? "ИНТЕРФЕЙС НА КОМПЬЮТЕРЕ"
+              : "МОБИЛЬНЫЙ ИНТЕРФЕЙС"}{" "}
+            / 0{active + 1}
           </span>
         </div>
         <div className="gallery-caption">
