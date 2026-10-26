@@ -1,10 +1,18 @@
 import Link from "next/link";
+import { Code2, Files, SlidersHorizontal, LayoutDashboard } from "lucide-react";
 import type { ReactNode } from "react";
 import type { CaseStudy } from "@/lib/case-studies";
 import { CaseImageViewer } from "@/components/case-image-viewer";
 import { CaseModules } from "@/components/case-modules";
 import { Reveal } from "@/components/motion";
 import styles from "./case-study.module.css";
+
+const capabilityIcons = {
+  code: Code2,
+  files: Files,
+  sliders: SlidersHorizontal,
+  dashboard: LayoutDashboard,
+};
 
 type Project = { title: string; status: string; url: string; category: string };
 
@@ -49,9 +57,19 @@ export function CaseStudyPage({
             <aside className={styles.heroAside}>
               <p>{study.audience}</p>
               <ul>
-                {study.capabilities.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
+                {study.capabilities.map((item) => {
+                  const Icon = item.icon
+                    ? capabilityIcons[item.icon]
+                    : undefined;
+                  return (
+                    <li key={item.label}>
+                      {Icon && (
+                        <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
+                      )}
+                      <span>{item.label}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </aside>
           </div>

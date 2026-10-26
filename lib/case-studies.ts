@@ -25,7 +25,10 @@ export type CaseStudy = {
   photography?: { title: string; paragraphs: string[]; images: CaseImage[] };
   audience: string;
   summary?: string;
-  capabilities: string[];
+  capabilities: {
+    label: string;
+    icon?: "code" | "files" | "sliders" | "dashboard";
+  }[];
   modulesHeading: string;
   modulesIntro: string;
   modules: CaseModule[];
@@ -67,10 +70,10 @@ export const caseStudies: Record<string, CaseStudy> = {
       "Сайт, каталог и система управления для производителя дымоходов и комплектующих.",
     audience: "Полный цикл работы над проектом",
     capabilities: [
-      "Разработка под ключ",
-      "Каталог и контент",
-      "Конфигуратор и сметы",
-      "Административная система",
+      { label: "Разработка под ключ", icon: "code" },
+      { label: "Каталог и контент", icon: "files" },
+      { label: "Конфигуратор и сметы", icon: "sliders" },
+      { label: "Административная система", icon: "dashboard" },
     ],
     story: {
       title: "От устаревшего каталога к полноценной веб-системе.",

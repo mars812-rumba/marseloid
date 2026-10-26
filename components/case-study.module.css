@@ -1,5 +1,5 @@
 .hero {
-  padding: 56px 0 48px;
+  padding: 56px 0 64px;
 }
 .hero > :global(.eyebrow) {
   margin-top: 36px;
@@ -35,7 +35,7 @@
 }
 .heroAside {
   border-left: 1px solid var(--line);
-  padding-left: 28px;
+  padding: 24px 0 24px 28px;
   color: var(--muted);
   font-size: 14px;
 }
@@ -50,7 +50,19 @@
   margin: 20px 0 0;
 }
 .heroAside li {
-  padding: 6px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  line-height: 1.6;
+}
+.heroAside li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.heroAside li svg {
+  flex: 0 0 18px;
+  margin-top: 2px;
 }
 .demonstration {
   margin-top: 24px;
@@ -453,7 +465,8 @@
 }
 @media (max-width: 767px) {
   .hero {
-    padding-block: 32px 40px;
+    min-height: calc(100svh - 88px);
+    padding-block: 32px 64px;
   }
   .hero > :global(.eyebrow) {
     margin-top: 28px;
@@ -471,18 +484,23 @@
     font-size: 17px;
   }
   .heroAside {
-    padding-left: 18px;
+    padding: 24px 0 24px 18px;
   }
   .heroAside > p {
     max-width: none;
     font-size: 14px;
   }
   .heroAside ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 18px;
-    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 20px;
     font-size: 12px;
+  }
+  .heroAside li {
+    padding: 0;
+    flex-direction: column;
+    gap: 8px;
   }
   .heroActions {
     gap: 12px 20px;
