@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { cases, services } from "@/lib/content";
 import { MotionLink, Reveal } from "@/components/motion";
+import { ChimneyCover } from "@/components/chimney-cover";
 export function CTA() {
   return (
     <Reveal as="section" className="contact-band wrap">
@@ -46,38 +47,27 @@ export function Services() {
   );
 }
 export function ProjectArt({ tone }: { tone: string }) {
+  if (tone === "chimney") return <ChimneyCover />;
   return (
     <div className={`project-art ${tone}`} aria-hidden="true">
-      {tone === "chimney" ? (
-        <>
-          <span className="art-caption">ДЫМОХОД ТРЕЙД / ИНТЕРФЕЙС СИСТЕМЫ</span>
-          <div className="pipe pipe-one" />
-          <div className="pipe pipe-two" />
-          <div className="pipe pipe-three" />
-          <div className="art-chip">Подбор → состав → расчёт</div>
-        </>
-      ) : (
-        <>
-          <span className="art-caption">SUNNY RENTALS / В РАЗРАБОТКЕ</span>
-          <div className="sun-shape" />
-          <div className="calendar-art">
-            <span>Доступность автопарка</span>
-            <div>
-              {Array.from({ length: 21 }, (_, i) => (
-                <i
-                  key={i}
-                  className={
-                    (i > 5 && i < 11) || (i > 14 && i < 19) ? "booked" : ""
-                  }
-                >
-                  {i + 1}
-                </i>
-              ))}
-            </div>
-          </div>
-          <div className="art-chip">Каталог → даты → бронирование</div>
-        </>
-      )}
+      <span className="art-caption">SUNNY RENTALS / В РАЗРАБОТКЕ</span>
+      <div className="sun-shape" />
+      <div className="calendar-art">
+        <span>Доступность автопарка</span>
+        <div>
+          {Array.from({ length: 21 }, (_, i) => (
+            <i
+              key={i}
+              className={
+                (i > 5 && i < 11) || (i > 14 && i < 19) ? "booked" : ""
+              }
+            >
+              {i + 1}
+            </i>
+          ))}
+        </div>
+      </div>
+      <div className="art-chip">Каталог → даты → бронирование</div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { cases } from "@/lib/content";
+import { CaseGallery } from "@/components/case-gallery";
 import {
   ArticleSections,
   CTA,
@@ -39,8 +40,16 @@ export default async function Page({
           title={c.title}
           description={c.description}
         />
-        <ProjectArt tone={c.tone} />
-        <p className="caption">Иллюстрация процесса, не снимок интерфейса.</p>
+        {c.slug === "chimneys" ? (
+          <CaseGallery />
+        ) : (
+          <>
+            <ProjectArt tone={c.tone} />
+            <p className="caption">
+              Иллюстрация процесса, не снимок интерфейса.
+            </p>
+          </>
+        )}
         <div className="detail-grid">
           <aside className="detail-aside">
             <span className="eyebrow">{c.category}</span>

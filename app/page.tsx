@@ -79,7 +79,8 @@ export default function Home() {
         </Reveal>
         <Projects />
         <p className="caption">
-          Визуальные обложки — иллюстрации процессов, не скриншоты интерфейсов.
+          Дымоход Трейд — реальные экраны проекта. Sunny Rentals — иллюстрация
+          продукта в разработке.
         </p>
       </section>
       <section className="section process-section wrap">

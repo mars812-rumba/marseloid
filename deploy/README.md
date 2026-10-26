@@ -55,3 +55,13 @@ Project key `marseloid`, root `/home/marseloid`, branch `main`.
 Tests never deploy. Deployment uses this compose project only.
 The user-approved remote is `origin`, git@github.com:mars812-rumba/marseloid.git. Do not force-push or push unrelated projects. The bot's confirmed release workflow runs project checks, scoped commit/push and this compose deployment.
 Editorial schedules of Sunny and Dimohod are not connected to this site.
+
+### Recovery: release contains ignored screenshots
+
+If `git add -A -- ...` fails because its explicit path list contains `screenshots/`, do not force-add the originals or remove their ignore rule. These captures can contain customer information; only the reviewed WebP assets in `public/cases/dimohod-trade/` belong in the release.
+
+The bot captures paths before and after a task. Adding an ignore rule makes existing untracked originals disappear from `git status`, but the saved task list still contains them. Its current `committable_paths` checks whether a path exists, without checking whether it is now ignored. A failed add can still stage the permitted files.
+
+Review `git status --short` and `git diff --cached --stat`. Keep already staged case changes intact. Use a fresh `/ship Дымоход Трейд: реальные экраны кейса` command in the bot with Marseloid selected, then inspect and confirm its new preview. This explicit command reads current allowed changes, including already staged files. The old task button retains the stale list; a new task button may cover only the repair task and omit the earlier staged changes.
+
+Neither `screenshots/` nor `docs/SESSION_HANDOFF.md` should appear in the fresh release preview. Preparing and confirming that release remains the owner's action; agents must not commit, push, deploy or restart production services as part of this recovery.

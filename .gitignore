@@ -10,3 +10,7 @@ backend/data/
 .codex-telegram/
 test-results/
 *.tsbuildinfo
+# Original captures may contain customer information; use reviewed public assets.
+/screenshots/
+# Local agent handoff is not a release artifact.
+/docs/SESSION_HANDOFF.md
