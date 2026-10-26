@@ -282,7 +282,13 @@ export function CaseGallery() {
               <Image
                 src={src(full)}
                 width={full === "desktop" ? 975 : 576}
-                height={full === "desktop" ? 416 : 1280}
+                height={
+                  full === "desktop"
+                    ? 416
+                    : screen.id === "catalog"
+                      ? 1070
+                      : 1154
+                }
                 alt={full === "desktop" ? screen.desktopAlt : screen.mobileAlt}
                 unoptimized
               />

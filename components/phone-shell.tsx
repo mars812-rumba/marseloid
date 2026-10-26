@@ -46,10 +46,6 @@ export function PhoneShell({
       />
       <div className={`${styles.face} ${styles.front}`}>
         <div className={styles.screen}>
-          <div className={styles.status} aria-hidden="true">
-            <span className={styles.signal}>▂▄▆</span>
-            <span className={styles.battery} />
-          </div>
           <div className={styles.content}>{children}</div>
         </div>
         <div className={styles.notch} aria-hidden="true" />

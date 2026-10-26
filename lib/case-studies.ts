@@ -73,7 +73,7 @@ const mobileScreen = (
   name: string,
   alt: string,
   caption: string,
-  height = 1280,
+  height = 1154,
 ): CaseImageSource => ({
   src: `${base}/${name}-mobile.webp`,
   width: 576,
@@ -217,7 +217,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             label: "PDF-смета",
             src: `${base}/quote-mobile.webp`,
             width: 576,
-            height: 1280,
+            height: 1154,
             alt: "Реальный PDF на телефоне: позиции, количество и суммы",
             caption:
               "Пример PDF-сметы с перечнем позиций. Стоимость относится к изделиям, не к разработке сайта.",
@@ -247,7 +247,7 @@ export const caseStudies: Record<string, CaseStudy> = {
                 "catalog",
                 "Мобильная админка каталога: категория сэндвич-отводов",
                 "Управление каталогом на телефоне: категория сэндвич-отводов и её обложка.",
-                1280,
+                1070,
               ),
             ),
             label: "Каталог",
@@ -261,7 +261,7 @@ export const caseStudies: Record<string, CaseStudy> = {
               {
                 src: `${base}/catalog-faq-mobile.webp`,
                 width: 576,
-                height: 1280,
+                height: 1154,
                 alt: "Мобильная админка: фотографии семейства изделий и FAQ",
                 caption:
                   "Мобильный редактор: общая фотография семейства и инструменты работы с FAQ.",
@@ -298,7 +298,7 @@ export const caseStudies: Record<string, CaseStudy> = {
               "estimate-editor",
               "Мобильный редактор состава комплекта: добавление из каталога, ручная позиция и количество изделий",
               "Состав комплекта на телефоне: добавление из каталога, ручные позиции и редактирование изделий.",
-              1280,
+              1154,
             ),
           ),
         ],
@@ -327,7 +327,7 @@ export const caseStudies: Record<string, CaseStudy> = {
                 "catalog-seo",
                 "Мобильный SEO-редактор: описание, title, meta description, переменные и предпросмотр",
                 "SEO-редактор на телефоне: описание, метаданные с подстановками параметров и предпросмотр результата.",
-                1280,
+                1070,
               ),
             ),
             label: "SEO-редактор",
@@ -336,7 +336,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             label: "FAQ",
             src: `${base}/catalog-faq-mobile.webp`,
             width: 576,
-            height: 1280,
+            height: 1154,
             alt: "Мобильный редактор FAQ с сохранением черновика и публикацией",
             caption:
               "У FAQ отдельные действия для подготовки, сохранения черновика и публикации.",
