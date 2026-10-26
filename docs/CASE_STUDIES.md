@@ -1,0 +1,32 @@
+# Структура содержательного кейса
+
+`lib/case-studies.ts` хранит данные презентации, `components/case-study.tsx` — универсальную серверную страницу. В `lib/content.ts` остаются общие данные карточек проектов и метаданные маршрутов. Страница `/cases/[slug]` выбирает расширенную презентацию по slug; отсутствие данных сохраняет прежний вариант страницы. Sunny остаётся в разработке, без новых неподтверждённых материалов. Food Market не добавлен в публичный список без фактов и изображений.
+
+## Следующий проект
+
+1. Добавить подтверждённые базовые данные проекта в `cases` в `lib/content.ts`.
+2. Добавить запись `CaseStudy` в `caseStudies`, используя тот же slug. Количество модулей произвольное; идентификаторы уникальны в проекте.
+3. Для каждого модуля задать задачу, возможности и реальные проверенные изображения с исходными размерами, alt и подписью. `label` задаёт короткое название переключателя нескольких изображений.
+4. Заполнить подтверждённые технологии, инженерные особенности, качественные результаты и контактный блок. Заголовки и пояснения разделов находятся в данных.
+5. При необходимости передать отдельную интерактивную демонстрацию через `demonstration`. Универсальные компоненты не знают тематику или slug проекта. Текущая `CaseGallery` подключается маршрутом и не менялась.
+
+`CaseModules` — переключаемые модули с клавиатурной навигацией; все тексты присутствуют в серверном HTML. Без JavaScript модули открыты последовательно, доступны ссылки на изображения. `CaseImageViewer` — общий просмотрщик с нативным dialog, Escape, восстановлением фокуса, режимом оригинального размера и прокруткой широких изображений на мобильном.
+
+## Основания для «Дымоход Трейд»
+
+Исходники `/home/dimohod-trade` прочитаны только для проверки фактов; код, сервисы, хранилища клиентов и расписания не изменялись. Старый README описывает ранний MVP; возможности проверены по текущим модулям.
+
+| Утверждение | Подтверждение в исходном проекте |
+| --- | --- |
+| Публичные карточки, параметры SKU, canonical и JSON-LD | `apps/web/app/product/[slug]/page.tsx`, `apps/web/lib/productUrls.ts` |
+| Пошаговый подбор и правила | `apps/web/components/ChimneyConfigurator.tsx`, `apps/web/lib/configuratorEngineeringRules.ts` |
+| SVG и PDF | `apps/web/components/QuickEstimateScheme.tsx`, `apps/web/lib/chimneyEstimatePdf.ts`, зависимость `pdfmake` |
+| Категории → Product-семейства → SKU | `backend/app/modules/catalog/models.py`, `backend/app/modules/products/models.py`, `apps/web/components/AdminCatalogManager.tsx` |
+| Клиенты и история расчётов | `backend/app/modules/leads/customer_router.py`, `backend/app/modules/leads/customers.py`, `apps/web/components/AdminCustomerManager.tsx` |
+| Правки состава, редакции, смета и спецификация | `apps/web/components/ManagerEstimateCard.tsx`, `backend/app/modules/leads/router.py`, `apps/web/lib/chimneySpecificationPdf.ts` |
+| SEO-редактор и FAQ: черновик/публикация | `backend/app/modules/admin/service.py`, `apps/web/components/AdminCatalogManager.tsx` |
+| WebP и миниатюры | `backend/app/media/`, `docs/IMAGE_OPTIMIZATION.md` |
+| Redis-кеш каталога | `backend/app/core/catalog_cache.py`, `backend/app/modules/catalog/router.py` |
+| Next.js/TS, FastAPI/Python, PostgreSQL/SQLAlchemy/Alembic | `apps/web/package.json`, `backend/pyproject.toml`, модели и миграции |
+
+Скриншоты клиентов и персональных карточек не включены в публичные ассеты. Модуль работы с клиентами иллюстрирует безопасный снимок редактора состава; сведения о клиентах/редакциях подтверждены кодом, а не вымышленным интерфейсом. SEO-модуль описывает редактор и подготовку текста из данных; автоматическая публикация статей и результаты продвижения не заявлены. Числовые результаты и эффективность для бизнеса не выдумываются.

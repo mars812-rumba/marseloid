@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { caseStudies } from "@/lib/case-studies";
+import { CaseStudyPage } from "@/components/case-study";
 import { cases } from "@/lib/content";
 import { CaseGallery } from "@/components/case-gallery";
 import {
@@ -32,6 +34,17 @@ export default async function Page({
   const { slug } = await params;
   const c = cases.find((c) => c.slug === slug);
   if (!c) notFound();
+  const study = caseStudies[c.slug];
+  if (study) {
+    return (
+      <CaseStudyPage
+        project={c}
+        study={study}
+        demonstration={c.slug === "chimneys" ? <CaseGallery /> : undefined}
+      />
+    );
+  }
+
   return (
     <>
       <article className="wrap">
