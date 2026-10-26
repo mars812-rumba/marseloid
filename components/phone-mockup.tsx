@@ -39,7 +39,6 @@ export function PhoneMockup({
   const hint = useId();
   const sceneRef = useRef<HTMLDivElement>(null);
   const visible = useInView(sceneRef, { amount: 0.1 });
-  const [paused, setPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [foreground, setForeground] = useState(true);
   const phase = useMotionValue(0);
@@ -68,7 +67,7 @@ export function PhoneMockup({
     return () => document.removeEventListener("visibilitychange", update);
   }, []);
   useEffect(() => {
-    if (reduced || paused || dragging || !visible || !foreground) return;
+    if (reduced || dragging || !visible || !foreground) return;
     const from = phase.get();
     const animation = animate(phase, [from, from + Math.PI * 2], {
       duration: 9,
@@ -76,7 +75,7 @@ export function PhoneMockup({
       repeat: Infinity,
     });
     return () => animation.stop();
-  }, [reduced, paused, dragging, visible, foreground, phase]);
+  }, [reduced, dragging, visible, foreground, phase]);
   const screenX = useSpring(swipe, { stiffness: 320, damping: 30 });
   const gesture = useRef({
     active: false,
@@ -278,17 +277,6 @@ export function PhoneMockup({
         </span>
       </p>
       <div className={styles.tools}>
-        <button
-          type="button"
-          disabled={reduced}
-          aria-pressed={paused}
-          onClick={() => setPaused((value) => !value)}
-        >
-          {paused ? "Включить парение" : "Приостановить парение"}
-        </button>
-        <button type="button" onClick={reset} disabled={reduced}>
-          Сбросить ракурс
-        </button>
         <button
           type="button"
           onClick={onEnlarge}

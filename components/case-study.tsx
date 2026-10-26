@@ -38,9 +38,6 @@ export function CaseStudyPage({
                   Смотреть сайт <span aria-hidden="true">↗</span>
                   <span className="sr-only"> (в новой вкладке)</span>
                 </a>
-                <a className="text-link" href="#system-modules">
-                  Возможности системы ↓
-                </a>
               </div>
             </div>
             <aside className={styles.heroAside}>
@@ -62,15 +59,8 @@ export function CaseStudyPage({
           <section
             className={styles.modules}
             id="system-modules"
-            aria-labelledby="system-modules-heading"
+            aria-label="Модули проекта"
           >
-            <Reveal className={styles.sectionHeading}>
-              <div>
-                <p className="eyebrow">Возможности системы</p>
-                <h2 id="system-modules-heading">{study.modulesHeading}</h2>
-              </div>
-              <p>{study.modulesIntro}</p>
-            </Reveal>
             <CaseModules modules={study.modules} />
           </section>
         )}

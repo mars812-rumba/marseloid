@@ -59,7 +59,6 @@ export function LaptopMockup({
   const viewportWidth = useMotionValue(360);
   const sceneRef = useRef<HTMLDivElement>(null);
   const visible = useInView(sceneRef, { amount: 0.1 });
-  const [paused, setPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [foreground, setForeground] = useState(true);
   const [opening, setOpening] = useState(DEFAULT_OPENING);
@@ -130,7 +129,7 @@ export function LaptopMockup({
     return () => document.removeEventListener("visibilitychange", update);
   }, []);
   useEffect(() => {
-    if (reduced || paused || dragging || !visible || !foreground) return;
+    if (reduced || dragging || !visible || !foreground) return;
     const from = phase.get();
     const animation = animate(phase, [from, from + Math.PI * 2], {
       duration: 10,
@@ -138,7 +137,7 @@ export function LaptopMockup({
       repeat: Infinity,
     });
     return () => animation.stop();
-  }, [reduced, paused, dragging, visible, foreground, phase]);
+  }, [reduced, dragging, visible, foreground, phase]);
   useEffect(() => {
     drag.current.active = false;
     setDragging(false);
@@ -382,19 +381,6 @@ export function LaptopMockup({
           переключают снимки.
         </span>
       </p>
-      <div className={styles.tools}>
-        <button
-          type="button"
-          disabled={reduced}
-          aria-pressed={paused}
-          onClick={() => setPaused((value) => !value)}
-        >
-          {paused ? "Включить парение" : "Приостановить парение"}
-        </button>
-        <button type="button" onClick={reset}>
-          Сбросить ракурс
-        </button>
-      </div>
       <button
         className={styles.zoom}
         type="button"

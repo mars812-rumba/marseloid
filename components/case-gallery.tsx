@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useInView } from "framer-motion";
 import {
   useEffect,
   useId,
@@ -28,6 +29,11 @@ export function CaseGallery() {
   const [device, setDevice] = useState<Device>("desktop");
   const [active, setActive] = useState(0);
   const [full, setFull] = useState<Device | null>(null);
+  const gallery = useRef<HTMLElement>(null);
+  const visible = useInView(gallery, { amount: 0.1 });
+  const [foreground, setForeground] = useState(true);
+  const [interacting, setInteracting] = useState(false);
+  const [focused, setFocused] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const id = useId();
@@ -49,6 +55,31 @@ export function CaseGallery() {
     };
   }, [full]);
 
+  useEffect(() => {
+    const update = () => setForeground(!document.hidden);
+    update();
+    document.addEventListener("visibilitychange", update);
+    return () => document.removeEventListener("visibilitychange", update);
+  }, []);
+
+  useEffect(() => {
+    if (reduced || !visible || !foreground || full || interacting || focused)
+      return;
+    const timer = window.setTimeout(() => {
+      setActive((current) => (current + 1) % chimneyScreens.length);
+    }, 3000);
+    return () => window.clearTimeout(timer);
+  }, [
+    active,
+    device,
+    reduced,
+    visible,
+    foreground,
+    full,
+    interacting,
+    focused,
+  ]);
+
   function enlarge(device: Device) {
     setFull(device);
     dialog.current?.showModal();
@@ -68,7 +99,23 @@ export function CaseGallery() {
   }
 
   return (
-    <section className="case-gallery" aria-labelledby={`${id}-heading`}>
+    <section
+      ref={gallery}
+      className="case-gallery"
+      aria-labelledby={`${id}-heading`}
+      onPointerDownCapture={() => setInteracting(true)}
+      onPointerUpCapture={() => setInteracting(false)}
+      onPointerCancelCapture={() => setInteracting(false)}
+      onLostPointerCapture={() => setInteracting(false)}
+      onKeyDownCapture={() => setFocused(true)}
+      onFocusCapture={(event) => {
+        setFocused(event.target.matches(":focus-visible"));
+      }}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget))
+          setFocused(false);
+      }}
+    >
       <div className="gallery-heading">
         <div>
           <p className="eyebrow">Внутри проекта / реальные экраны</p>
@@ -170,7 +217,7 @@ export function CaseGallery() {
           )}
         </div>
         <div className="gallery-caption">
-          <div aria-live="polite">
+          <div>
             <h3>{screen.title}</h3>
             <p>{screen.description}</p>
           </div>
