@@ -24,7 +24,7 @@ export type CaseStudy = {
   story?: { title: string; paragraphs: string[] };
   photography?: { title: string; paragraphs: string[]; images: CaseImage[] };
   audience: string;
-  summary: string;
+  summary?: string;
   capabilities: string[];
   modulesHeading: string;
   modulesIntro: string;
@@ -66,8 +66,6 @@ export const caseStudies: Record<string, CaseStudy> = {
     subtitle:
       "Сайт, каталог и система управления для производителя дымоходов и комплектующих.",
     audience: "Полный цикл работы над проектом",
-    summary:
-      "Полная переработка существующего сайта: от новой структуры каталога, фотографий и карточек продукции до онлайн-подбора комплектующих, автоматических смет и рабочих инструментов для сотрудников.",
     capabilities: [
       "Разработка под ключ",
       "Каталог и контент",

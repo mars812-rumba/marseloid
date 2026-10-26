@@ -31,7 +31,9 @@ export function CaseStudyPage({
           )}
           <div className={styles.heroGrid}>
             <div>
-              <p className={styles.heroSummary}>{study.summary}</p>
+              {study.summary && (
+                <p className={styles.heroSummary}>{study.summary}</p>
+              )}
               <div className={styles.heroActions}>
                 <a
                   className="button"
