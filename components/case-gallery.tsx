@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useInView } from "framer-motion";
+import { Smartphone, Laptop, Maximize2 } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 import {
   useEffect,
   useId,
@@ -163,26 +164,6 @@ export function CaseGallery() {
         tabIndex={0}
       >
         <div
-          className="gallery-device-switch"
-          role="group"
-          aria-label="Устройство для просмотра"
-        >
-          <button
-            type="button"
-            aria-pressed={device === "mobile"}
-            onClick={() => setDevice("mobile")}
-          >
-            Телефон
-          </button>
-          <button
-            type="button"
-            aria-pressed={device === "desktop"}
-            onClick={() => setDevice("desktop")}
-          >
-            Ноутбук
-          </button>
-        </div>
-        <div
           className={`gallery-stage${device === "desktop" ? " gallery-stage-laptop" : ""}`}
         >
           <div className="gallery-devices">
@@ -195,7 +176,6 @@ export function CaseGallery() {
                 count={chimneyScreens.length}
                 reduced={reduced}
                 onSelect={setActive}
-                onEnlarge={() => enlarge("desktop")}
               />
             ) : (
               <PhoneMockup
@@ -206,7 +186,6 @@ export function CaseGallery() {
                 count={chimneyScreens.length}
                 reduced={reduced}
                 onSelect={setActive}
-                onEnlarge={() => enlarge("mobile")}
               />
             )}
           </div>
@@ -216,28 +195,48 @@ export function CaseGallery() {
             </span>
           )}
         </div>
+        <div className="gallery-controls">
+          <div
+            className="gallery-device-switch"
+            role="group"
+            aria-label="Устройство для просмотра"
+          >
+            <motion.button
+              type="button"
+              aria-pressed={device === "mobile"}
+              onClick={() => setDevice("mobile")}
+              whileTap={reduced ? undefined : { scale: 0.96 }}
+            >
+              <Smartphone size={18} strokeWidth={1.6} aria-hidden="true" />
+              <span>Телефон</span>
+            </motion.button>
+            <motion.button
+              type="button"
+              aria-pressed={device === "desktop"}
+              onClick={() => setDevice("desktop")}
+              whileTap={reduced ? undefined : { scale: 0.96 }}
+            >
+              <Laptop size={18} strokeWidth={1.6} aria-hidden="true" />
+              <span>Ноутбук</span>
+            </motion.button>
+          </div>
+          <motion.button
+            className="gallery-zoom-icon"
+            type="button"
+            onClick={() => enlarge(device)}
+            aria-label={`Увеличить: ${screen.label}, ${device === "mobile" ? "телефон" : "ноутбук"}`}
+            title="Увеличить экран"
+            aria-haspopup="dialog"
+            whileTap={reduced ? undefined : { scale: 0.96 }}
+          >
+            <Maximize2 size={19} strokeWidth={1.6} aria-hidden="true" />
+          </motion.button>
+        </div>
         <div className="gallery-caption">
           <div>
             <h3>{screen.title}</h3>
             <p>{screen.description}</p>
           </div>
-          {device === "mobile" && (
-            <>
-              <button
-                className="text-link gallery-desktop-link"
-                type="button"
-                onClick={() => enlarge("desktop")}
-                aria-haspopup="dialog"
-              >
-                Экран на компьютере ↗
-              </button>
-              <span className="gallery-hint">
-                Корпус — поворот.
-                <br />
-                Экран — смена снимка.
-              </span>
-            </>
-          )}
         </div>
       </div>
       <noscript>

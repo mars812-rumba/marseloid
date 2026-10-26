@@ -1680,32 +1680,65 @@ a:hover .round-arrow {
   }
 }
 
-.gallery-device-switch {
+.gallery-controls {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-block: 8px 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+.gallery-device-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
 }
 .gallery-device-switch button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   min-height: 44px;
-  padding: 10px 20px;
+  padding: 10px 16px;
   background: transparent;
   color: var(--muted);
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 999px;
   font-size: 13px;
   cursor: pointer;
+  transition: background-color 180ms, color 180ms;
 }
 .gallery-device-switch button[aria-pressed="true"] {
   background: var(--ink);
-  border-color: var(--ink);
-  color: #f7f5ef;
+  color: var(--paper);
 }
+.gallery-zoom-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.gallery-zoom-icon:hover { background: var(--surface); color: var(--accent); }
+.gallery-device-switch svg,
+.gallery-zoom-icon svg { flex-shrink: 0; }
 
 /* The laptop owns its fitted scene and compact controls; phone layout is unchanged. */
 .gallery-stage-laptop {
   padding: 0;
 }
-.gallery-stage-laptop + .gallery-caption {
-  padding-top: 12px;
+.gallery-controls + .gallery-caption {
+  padding-top: 0;
+}
+
+@media (max-width: 360px) {
+  .gallery-controls { gap: 8px; }
+  .gallery-device-switch button { padding-inline: 10px; gap: 6px; }
 }

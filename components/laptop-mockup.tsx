@@ -43,7 +43,6 @@ export function LaptopMockup({
   count,
   reduced,
   onSelect,
-  onEnlarge,
 }: {
   src: string;
   alt: string;
@@ -52,7 +51,6 @@ export function LaptopMockup({
   count: number;
   reduced: boolean;
   onSelect: (index: number) => void;
-  onEnlarge: () => void;
 }) {
   const hint = useId();
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -381,15 +379,6 @@ export function LaptopMockup({
           переключают снимки.
         </span>
       </p>
-      <button
-        className={styles.zoom}
-        type="button"
-        onClick={onEnlarge}
-        aria-label={`Увеличить: ${label}, ноутбук`}
-        aria-haspopup="dialog"
-      >
-        Увеличить экран ↗
-      </button>
     </div>
   );
 }

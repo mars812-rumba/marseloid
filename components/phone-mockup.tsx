@@ -25,7 +25,6 @@ export function PhoneMockup({
   count,
   reduced,
   onSelect,
-  onEnlarge,
 }: {
   src: string;
   alt: string;
@@ -34,7 +33,6 @@ export function PhoneMockup({
   count: number;
   reduced: boolean;
   onSelect: (index: number) => void;
-  onEnlarge: () => void;
 }) {
   const hint = useId();
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -276,16 +274,6 @@ export function PhoneMockup({
           Клавиатура: стрелки поворачивают корпус, Home возвращает ракурс.
         </span>
       </p>
-      <div className={styles.tools}>
-        <button
-          type="button"
-          onClick={onEnlarge}
-          aria-label={`Увеличить: ${label}, телефон`}
-          aria-haspopup="dialog"
-        >
-          Увеличить экран ↗
-        </button>
-      </div>
     </div>
   );
 }
