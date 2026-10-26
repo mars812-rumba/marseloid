@@ -161,6 +161,23 @@ export function CaseStudyPage({
             </div>
             <p>{study.outcomesIntro}</p>
           </Reveal>
+          {study.outcomeComparison && (
+            <Reveal className={styles.comparison}>
+              {study.outcomeComparison.map((process) => (
+                <div key={process.label}>
+                  <h3>{process.label}</h3>
+                  <ol>
+                    {process.steps.map((step, index) => (
+                      <li key={step}>
+                        {index > 0 && <span aria-hidden="true">→</span>}
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </Reveal>
+          )}
           <div className={styles.outcomeGrid}>
             {study.outcomes.map((outcome, index) => (
               <Reveal key={outcome.title} delay={index * 0.06}>
@@ -172,6 +189,9 @@ export function CaseStudyPage({
               </Reveal>
             ))}
           </div>
+          {study.outcomesNote && (
+            <p className={styles.outcomesNote}>{study.outcomesNote}</p>
+          )}
         </section>
       </article>
       <Reveal as="section" className={`${styles.collaboration} wrap`}>
