@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import styles from "./phone-shell.module.css";
 
 /** Device geometry adapted from Dimohod Trade's PhoneMockup3D. */
@@ -12,14 +12,33 @@ export function PhoneShell({
   return (
     <div className={styles.phone}>
       <div className={`${styles.face} ${styles.back}`} aria-hidden="true" />
-      {Array.from({ length: 13 }, (_, index) => (
+      {/* Extrude only the perimeter, rather than stacking full phone-sized planes. */}
+      {[180, 270, 0, 90].map((startAngle, corner) => (
         <div
-          key={index}
-          className={styles.rim}
+          key={corner}
+          className={`${styles.corner} ${styles[`corner${corner}`]}`}
           aria-hidden="true"
-          style={{ "--slice": `${index * 2 - 12}px` } as CSSProperties}
-        />
+        >
+          {Array.from({ length: 5 }, (_, segment) => {
+            const angle = startAngle + segment * 18 + 9;
+            const radians = (angle * Math.PI) / 180;
+            const radius = 50 * Math.cos(Math.PI / 20);
+            return (
+              <span
+                key={segment}
+                className={styles.facet}
+                style={{
+                  left: `${50 + radius * Math.cos(radians)}%`,
+                  top: `${50 + radius * Math.sin(radians)}%`,
+                  transform: `translate(-50%, -50%) rotateZ(${angle}deg) rotateY(90deg)`,
+                }}
+              />
+            );
+          })}
+        </div>
       ))}
+      <div className={`${styles.cap} ${styles.topCap}`} aria-hidden="true" />
+      <div className={`${styles.cap} ${styles.bottomCap}`} aria-hidden="true" />
       <div className={`${styles.rail} ${styles.leftRail}`} aria-hidden="true" />
       <div
         className={`${styles.rail} ${styles.rightRail}`}
