@@ -73,7 +73,7 @@ const mobileScreen = (
   name: string,
   alt: string,
   caption: string,
-  height = 1154,
+  height = 1280,
 ): CaseImageSource => ({
   src: `${base}/${name}-mobile.webp`,
   width: 576,
@@ -217,7 +217,7 @@ export const caseStudies: Record<string, CaseStudy> = {
             label: "PDF-смета",
             src: `${base}/quote-mobile.webp`,
             width: 576,
-            height: 1154,
+            height: 1280,
             alt: "Реальный PDF на телефоне: позиции, количество и суммы",
             caption:
               "Пример PDF-сметы с перечнем позиций. Стоимость относится к изделиям, не к разработке сайта.",
@@ -247,7 +247,7 @@ export const caseStudies: Record<string, CaseStudy> = {
                 "catalog",
                 "Мобильная админка каталога: категория сэндвич-отводов",
                 "Управление каталогом на телефоне: категория сэндвич-отводов и её обложка.",
-                1070,
+                1280,
               ),
             ),
             label: "Каталог",

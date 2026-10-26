@@ -26,7 +26,7 @@ const readMotionPreference = () => window.matchMedia(reducedQuery).matches;
 const serverMotionPreference = () => true;
 
 export function CaseGallery() {
-  const [device, setDevice] = useState<Device>("desktop");
+  const [device, setDevice] = useState<Device>("mobile");
   const [active, setActive] = useState(0);
   const [full, setFull] = useState<Device | null>(null);
   const gallery = useRef<HTMLElement>(null);
@@ -169,17 +169,17 @@ export function CaseGallery() {
         >
           <button
             type="button"
-            aria-pressed={device === "desktop"}
-            onClick={() => setDevice("desktop")}
-          >
-            Ноутбук
-          </button>
-          <button
-            type="button"
             aria-pressed={device === "mobile"}
             onClick={() => setDevice("mobile")}
           >
             Телефон
+          </button>
+          <button
+            type="button"
+            aria-pressed={device === "desktop"}
+            onClick={() => setDevice("desktop")}
+          >
+            Ноутбук
           </button>
         </div>
         <div
@@ -282,13 +282,7 @@ export function CaseGallery() {
               <Image
                 src={src(full)}
                 width={full === "desktop" ? 975 : 576}
-                height={
-                  full === "desktop"
-                    ? 416
-                    : screen.id === "catalog"
-                      ? 1070
-                      : 1154
-                }
+                height={full === "desktop" ? 416 : 1280}
                 alt={full === "desktop" ? screen.desktopAlt : screen.mobileAlt}
                 unoptimized
               />
