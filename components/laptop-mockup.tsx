@@ -12,6 +12,11 @@ import {
 } from "framer-motion";
 import styles from "./laptop-mockup.module.css";
 
+const DEFAULT_OPENING = 155;
+const MIN_OPENING = 60;
+const MAX_OPENING = 165;
+const LID_OFFSET = 98;
+
 const clamp = (value: number, min: number, max: number) =>
   Math.max(min, Math.min(max, value));
 
@@ -54,11 +59,11 @@ export function LaptopMockup({
   const [paused, setPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [foreground, setForeground] = useState(true);
-  const [opening, setOpening] = useState(110);
+  const [opening, setOpening] = useState(DEFAULT_OPENING);
   const phase = useMotionValue(0);
-  const pitch = useMotionValue(-12),
-    yaw = useMotionValue(0),
-    lid = useMotionValue(12);
+  const pitch = useMotionValue(-20),
+    yaw = useMotionValue(-12),
+    lid = useMotionValue(DEFAULT_OPENING - LID_OFFSET);
   const smoothPitch = useSpring(pitch, { stiffness: 190, damping: 26 });
   const smoothYaw = useSpring(yaw, { stiffness: 190, damping: 26 });
   const smoothLid = useSpring(lid, { stiffness: 220, damping: 28 });
@@ -76,21 +81,21 @@ export function LaptopMockup({
     mode: "body",
     x: 0,
     y: 0,
-    pitch: -12,
-    yaw: 0,
-    opening: 110,
+    pitch: -20,
+    yaw: -12,
+    opening: DEFAULT_OPENING,
     travel: 200,
   });
   const go = (offset: number) => onSelect((active + offset + count) % count);
   function changeOpening(value: number) {
-    const next = Math.round(clamp(value, 60, 120));
+    const next = Math.round(clamp(value, MIN_OPENING, MAX_OPENING));
     setOpening(next);
-    lid.set(next - 98);
+    lid.set(next - LID_OFFSET);
   }
   function reset() {
-    pitch.set(-12);
-    yaw.set(0);
-    changeOpening(110);
+    pitch.set(-20);
+    yaw.set(-12);
+    changeOpening(DEFAULT_OPENING);
   }
   useEffect(() => {
     const update = () => setForeground(!document.hidden);
@@ -175,131 +180,151 @@ export function LaptopMockup({
       role="group"
       aria-label="Ноутбук с экранами Дымоход Трейд"
     >
-      <div
-        ref={sceneRef}
-        className={styles.scene}
-        data-laptop-scene=""
-        role="group"
-        tabIndex={0}
-        aria-label="Поворот ноутбука"
-        aria-describedby={hint}
-        onPointerDown={start}
-        onPointerMove={move}
-        onPointerUp={(event) => finish(event)}
-        onPointerCancel={(event) => finish(event, true)}
-        onLostPointerCapture={(event) => finish(event, true)}
-        onKeyDown={(event) => {
-          if (event.target !== event.currentTarget) return;
-          if (
-            !reduced &&
-            (event.key === "ArrowLeft" || event.key === "ArrowRight")
-          ) {
-            event.preventDefault();
-            yaw.set(
-              clamp(
-                yaw.get() + (event.key === "ArrowRight" ? 15 : -15),
-                -55,
-                55,
-              ),
-            );
-          }
-          if (event.key === "Home") {
-            event.preventDefault();
-            reset();
-          }
-        }}
-      >
-        <div className={styles.shadow} aria-hidden="true" />
-        <motion.div
-          className={styles.rig}
-          data-laptop-rig=""
-          style={{
-            rotateX: reduced ? -12 : rotateX,
-            rotateY: reduced ? 0 : rotateY,
-            y: reduced ? 0 : floatY,
+      <div className={styles.presentation}>
+        <div
+          ref={sceneRef}
+          className={styles.scene}
+          data-laptop-scene=""
+          role="group"
+          tabIndex={0}
+          aria-label="Поворот ноутбука"
+          aria-describedby={hint}
+          onPointerDown={start}
+          onPointerMove={move}
+          onPointerUp={(event) => finish(event)}
+          onPointerCancel={(event) => finish(event, true)}
+          onLostPointerCapture={(event) => finish(event, true)}
+          onKeyDown={(event) => {
+            if (event.target !== event.currentTarget) return;
+            if (
+              !reduced &&
+              (event.key === "ArrowLeft" || event.key === "ArrowRight")
+            ) {
+              event.preventDefault();
+              yaw.set(
+                clamp(
+                  yaw.get() + (event.key === "ArrowRight" ? 15 : -15),
+                  -55,
+                  55,
+                ),
+              );
+            }
+            if (event.key === "Home") {
+              event.preventDefault();
+              reset();
+            }
           }}
         >
-          <div className={styles.base} aria-hidden="true">
-            <CornerFaces />
-            <div className={styles.underside} />
-            <div className={styles.deck}>
-              <div className={styles.keyboard} />
-              <div className={styles.trackpad} />
-            </div>
-            <div className={`${styles.edge} ${styles.frontEdge}`} />
-            <div className={`${styles.edge} ${styles.rearEdge}`} />
-            <div className={`${styles.side} ${styles.leftEdge}`} />
-            <div className={`${styles.side} ${styles.rightEdge}`} />
-          </div>
+          <div className={styles.shadow} aria-hidden="true" />
           <motion.div
-            className={styles.lid}
-            data-laptop-lid=""
-            style={{ rotateX: reduced ? opening - 98 : smoothLid }}
+            className={styles.rig}
+            data-laptop-rig=""
+            style={{
+              rotateX: reduced ? -20 : rotateX,
+              rotateY: reduced ? 0 : rotateY,
+              y: reduced ? 0 : floatY,
+            }}
           >
-            <CornerFaces />
-            <div className={styles.back} aria-hidden="true" />
-            <div
-              className={`${styles.lidSide} ${styles.lidLeft}`}
-              aria-hidden="true"
-            />
-            <div
-              className={`${styles.lidSide} ${styles.lidRight}`}
-              aria-hidden="true"
-            />
-            <div className={styles.lidTop} aria-hidden="true" />
-            <div className={styles.lidBottom} aria-hidden="true" />
-            <div className={styles.bezel}>
-              <span className={styles.camera} aria-hidden="true" />
+            <div className={styles.base} aria-hidden="true">
+              <CornerFaces />
+              <div className={styles.underside} />
+              <div className={styles.deck}>
+                <div className={styles.keyboard} />
+                <div className={styles.trackpad} />
+              </div>
+              <div className={`${styles.edge} ${styles.frontEdge}`} />
+              <div className={`${styles.edge} ${styles.rearEdge}`} />
+              <div className={`${styles.side} ${styles.leftEdge}`} />
+              <div className={`${styles.side} ${styles.rightEdge}`} />
+            </div>
+            <motion.div
+              className={styles.lid}
+              data-laptop-lid=""
+              style={{ rotateX: reduced ? opening - LID_OFFSET : smoothLid }}
+            >
+              <CornerFaces />
+              <div className={styles.back} aria-hidden="true" />
               <div
-                className={styles.display}
-                data-laptop-display=""
-                role="group"
-                tabIndex={0}
-                aria-label={`Экран ноутбука: ${label}`}
-                onKeyDown={(event) => {
-                  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    go(event.key === "ArrowRight" ? 1 : -1);
-                  }
-                }}
-              >
-                <Image
-                  src={src}
-                  fill
-                  sizes="(max-width: 767px) 90vw, 900px"
-                  alt={alt}
-                  draggable={false}
-                  loading="eager"
-                />
-                <div className={styles.glass} aria-hidden="true">
-                  <motion.span style={{ x: reduced ? 0 : reflection }} />
+                className={`${styles.lidSide} ${styles.lidLeft}`}
+                aria-hidden="true"
+              />
+              <div
+                className={`${styles.lidSide} ${styles.lidRight}`}
+                aria-hidden="true"
+              />
+              <div className={styles.lidTop} aria-hidden="true" />
+              <div className={styles.lidBottom} aria-hidden="true" />
+              <div className={styles.bezel}>
+                <span className={styles.camera} aria-hidden="true" />
+                <div
+                  className={styles.display}
+                  data-laptop-display=""
+                  role="group"
+                  tabIndex={0}
+                  aria-label={`Экран ноутбука: ${label}`}
+                  onKeyDown={(event) => {
+                    if (
+                      event.key === "ArrowLeft" ||
+                      event.key === "ArrowRight"
+                    ) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      go(event.key === "ArrowRight" ? 1 : -1);
+                    }
+                  }}
+                >
+                  <Image
+                    src={src}
+                    fill
+                    sizes="(max-width: 767px) 90vw, 900px"
+                    alt={alt}
+                    draggable={false}
+                    loading="eager"
+                  />
+                  <div className={styles.glass} aria-hidden="true">
+                    <motion.span style={{ x: reduced ? 0 : reflection }} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className={styles.hingeGrip}
-              data-laptop-hinge=""
-              aria-hidden="true"
-            />
+              <div
+                className={styles.hingeGrip}
+                data-laptop-hinge=""
+                aria-hidden="true"
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
-        <button
-          className={`${styles.arrow} ${styles.previous}`}
-          type="button"
-          aria-label="Предыдущий экран ноутбука"
-          onClick={() => go(-1)}
-        >
-          ‹
-        </button>
-        <button
-          className={`${styles.arrow} ${styles.next}`}
-          type="button"
-          aria-label="Следующий экран ноутбука"
-          onClick={() => go(1)}
-        >
-          ›
-        </button>
+          <button
+            className={`${styles.arrow} ${styles.previous}`}
+            type="button"
+            aria-label="Предыдущий экран ноутбука"
+            onClick={() => go(-1)}
+          >
+            ‹
+          </button>
+          <button
+            className={`${styles.arrow} ${styles.next}`}
+            type="button"
+            aria-label="Следующий экран ноутбука"
+            onClick={() => go(1)}
+          >
+            ›
+          </button>
+        </div>
+        <label className={styles.slider}>
+          <span>
+            Крышка <output>{opening}°</output>
+          </span>
+          <input
+            type="range"
+            aria-label="Раскрытие крышки ноутбука"
+            aria-orientation="vertical"
+            min={MIN_OPENING}
+            max={MAX_OPENING}
+            step="1"
+            value={opening}
+            onChange={(event) => changeOpening(Number(event.target.value))}
+          />
+        </label>
       </div>
       <p className={styles.hint} id={hint}>
         Тяните корпус — поворот. Свайп по экрану — смена снимка.
@@ -311,20 +336,6 @@ export function LaptopMockup({
           переключают снимки.
         </span>
       </p>
-      <label className={styles.slider}>
-        <span>
-          Раскрытие крышки <output>{opening}°</output>
-        </span>
-        <input
-          type="range"
-          aria-label="Раскрытие крышки ноутбука"
-          min="60"
-          max="120"
-          step="1"
-          value={opening}
-          onChange={(event) => changeOpening(Number(event.target.value))}
-        />
-      </label>
       <div className={styles.tools}>
         <button
           type="button"
