@@ -267,7 +267,7 @@ export function PhoneMockup({
           <span aria-hidden="true">›</span>
         </button>
       </div>
-      <p className={styles.hint} id={hint}>
+      <p className="sr-only" id={hint}>
         Тяните корпус или поле вокруг — поворот.
         <br />
         Свайп по экрану — следующий снимок.

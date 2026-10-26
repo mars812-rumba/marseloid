@@ -84,13 +84,6 @@
 .next {
   right: 0;
 }
-.hint {
-  margin: 12px 0 0;
-  color: var(--muted);
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.6;
-}
 .tools {
   display: flex;
   flex-wrap: wrap;
