@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { Code2, Files, SlidersHorizontal, LayoutDashboard } from "lucide-react";
+import {
+  Code2,
+  Files,
+  SlidersHorizontal,
+  LayoutDashboard,
+  MessagesSquare,
+} from "lucide-react";
 import type { ReactNode } from "react";
 import type { CaseStudy } from "@/lib/case-studies";
 import { CaseImageViewer } from "@/components/case-image-viewer";
@@ -12,6 +18,7 @@ const capabilityIcons = {
   files: Files,
   sliders: SlidersHorizontal,
   dashboard: LayoutDashboard,
+  messages: MessagesSquare,
 };
 
 type Project = { title: string; status: string; url: string; category: string };
@@ -194,6 +201,22 @@ export function CaseStudyPage({
           )}
         </section>
       </article>
+      {study.nextProject && (
+        <section
+          className={`${styles.nextProject} wrap`}
+          aria-labelledby="next-project-heading"
+        >
+          <Reveal>
+            <h2 id="next-project-heading">{study.nextProject.title}</h2>
+            <p>{study.nextProject.description}</p>
+            {study.nextProject.href && (
+              <Link className="text-link" href={study.nextProject.href}>
+                Смотреть следующий кейс ↗
+              </Link>
+            )}
+          </Reveal>
+        </section>
+      )}
       <Reveal as="section" className={`${styles.collaboration} wrap`}>
         <p className="eyebrow">Для бизнеса и агентств</p>
         <h2>{study.collaboration.title}</h2>

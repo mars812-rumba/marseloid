@@ -25,6 +25,7 @@ export function PhoneMockup({
   count,
   reduced,
   onSelect,
+  projectName = "Дымоход Трейд",
 }: {
   src: string;
   alt: string;
@@ -33,6 +34,7 @@ export function PhoneMockup({
   count: number;
   reduced: boolean;
   onSelect: (index: number) => void;
+  projectName?: string;
 }) {
   const hint = useId();
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -156,7 +158,7 @@ export function PhoneMockup({
     <div
       className={styles.stage}
       role="group"
-      aria-label="Мобильные экраны Дымоход Трейд"
+      aria-label={`Мобильные экраны ${projectName}`}
     >
       <div
         ref={sceneRef}

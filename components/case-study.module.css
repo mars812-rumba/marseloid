@@ -731,3 +731,50 @@
     gap: 24px;
   }
 }
+
+.screenFrame picture {
+  display: block;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .screenFrame.adaptive {
+    display: block;
+    padding: 0;
+  }
+  .adaptive img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+  }
+}
+.portrait picture img {
+  margin-inline: auto;
+}
+.photoGallery .screenFrame picture {
+  height: 100%;
+}
+
+.modulePanel > .imageViewer {
+  margin-bottom: 28px;
+}
+
+.nextProject {
+  padding-block: 36px 56px;
+  border-top: 1px solid var(--line);
+}
+.nextProject h2 {
+  font-size: clamp(26px, 3vw, 38px);
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.nextProject p {
+  max-width: 720px;
+  margin-top: 20px;
+  color: var(--muted);
+}
+.nextProject a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+}

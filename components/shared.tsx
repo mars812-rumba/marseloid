@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cases, services } from "@/lib/content";
 import { MotionLink, Reveal } from "@/components/motion";
 import { ChimneyCover } from "@/components/chimney-cover";
@@ -50,27 +51,17 @@ export function ProjectArt({ tone }: { tone: string }) {
   if (tone === "chimney") return <ChimneyCover />;
   return (
     <div className={`project-art ${tone}`} aria-hidden="true">
-      <span className="art-caption">SUNNY RENTALS / В РАЗРАБОТКЕ</span>
-      <div className="sun-shape" />
-      <div className="calendar-art">
-        <span>Доступность автопарка</span>
-        <div>
-          {Array.from({ length: 21 }, (_, i) => (
-            <i
-              key={i}
-              className={
-                (i > 5 && i < 11) || (i > 14 && i < 19) ? "booked" : ""
-              }
-            >
-              {i + 1}
-            </i>
-          ))}
-        </div>
-      </div>
-      <div className="art-chip">Каталог → даты → бронирование</div>
+      <Image
+        src="/cases/sunny-rentals/home-desktop.webp"
+        alt=""
+        fill
+        sizes="(max-width: 767px) 90vw, 50vw"
+        style={{ objectFit: "cover", objectPosition: "top" }}
+      />
     </div>
   );
 }
+
 export function Projects() {
   return (
     <div className="projects">

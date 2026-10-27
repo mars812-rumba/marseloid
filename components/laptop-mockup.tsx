@@ -43,6 +43,7 @@ export function LaptopMockup({
   count,
   reduced,
   onSelect,
+  projectName = "Дымоход Трейд",
 }: {
   src: string;
   alt: string;
@@ -51,6 +52,7 @@ export function LaptopMockup({
   count: number;
   reduced: boolean;
   onSelect: (index: number) => void;
+  projectName?: string;
 }) {
   const hint = useId();
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -201,7 +203,7 @@ export function LaptopMockup({
     <div
       className={styles.stage}
       role="group"
-      aria-label="Ноутбук с экранами Дымоход Трейд"
+      aria-label={`Ноутбук с экранами ${projectName}`}
     >
       <div
         ref={sceneRef}

@@ -10,8 +10,10 @@ import {
   useState,
   useSyncExternalStore,
   type KeyboardEvent,
+  type CSSProperties,
 } from "react";
-import { chimneyScreens, screenshotBase } from "@/lib/case-screenshots";
+import { chimneyDemo } from "@/lib/case-screenshots";
+import type { CaseDemo } from "@/lib/case-demo";
 import { LaptopMockup } from "@/components/laptop-mockup";
 import { PhoneMockup } from "@/components/phone-mockup";
 
@@ -26,8 +28,10 @@ function subscribeMotionPreference(notify: () => void) {
 const readMotionPreference = () => window.matchMedia(reducedQuery).matches;
 const serverMotionPreference = () => true;
 
-export function CaseGallery() {
-  const [device, setDevice] = useState<Device>("mobile");
+export function CaseGallery({ demo = chimneyDemo }: { demo?: CaseDemo }) {
+  const [device, setDevice] = useState<Device>(() =>
+    demo.screens.some((item) => item.mobile) ? "mobile" : "desktop",
+  );
   const [active, setActive] = useState(0);
   const [full, setFull] = useState<Device | null>(null);
   const gallery = useRef<HTMLElement>(null);
@@ -43,9 +47,22 @@ export function CaseGallery() {
     readMotionPreference,
     serverMotionPreference,
   );
-  const screen = chimneyScreens[active];
-  const src = (device: Device) =>
-    `${screenshotBase}/${screen.id}-${device}.webp`;
+  const screens = demo.screens.filter((item) => Boolean(item[device]));
+  const screen = screens[active] ?? screens[0];
+  const displayed = screen[full ?? device]!;
+  const src = (target: Device) => screen[target]!.src;
+
+  function changeDevice(next: Device) {
+    const available = demo.screens.filter((item) => Boolean(item[next]));
+    if (!available.length) return;
+    setActive(
+      Math.max(
+        0,
+        available.findIndex((item) => item.id === screen.id),
+      ),
+    );
+    setDevice(next);
+  }
 
   useEffect(() => {
     if (!full) return;
@@ -67,11 +84,12 @@ export function CaseGallery() {
     if (reduced || !visible || !foreground || full || interacting || focused)
       return;
     const timer = window.setTimeout(() => {
-      setActive((current) => (current + 1) % chimneyScreens.length);
+      setActive((current) => (current + 1) % screens.length);
     }, 3000);
     return () => window.clearTimeout(timer);
   }, [
     active,
+    screens.length,
     device,
     reduced,
     visible,
@@ -88,11 +106,11 @@ export function CaseGallery() {
 
   function navigate(event: KeyboardEvent<HTMLButtonElement>) {
     let next = active;
-    if (event.key === "ArrowRight") next = (active + 1) % chimneyScreens.length;
+    if (event.key === "ArrowRight") next = (active + 1) % screens.length;
     else if (event.key === "ArrowLeft")
-      next = (active + chimneyScreens.length - 1) % chimneyScreens.length;
+      next = (active + screens.length - 1) % screens.length;
     else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = chimneyScreens.length - 1;
+    else if (event.key === "End") next = screens.length - 1;
     else return;
     event.preventDefault();
     setActive(next);
@@ -120,24 +138,25 @@ export function CaseGallery() {
       <div className="gallery-heading">
         <div>
           <p className="eyebrow">Внутри проекта / реальные экраны</p>
-          <h2 id={`${id}-heading`}>
-            От выбора изделия
-            <br />
-            до готовой сметы.
+          <h2 id={`${id}-heading`} style={{ whiteSpace: "pre-line" }}>
+            {demo.title}
           </h2>
         </div>
-        <p>
-          Публичный каталог, онлайн-расчёт и рабочие инструменты объединены в
-          одной системе. Ниже — реальные экраны проекта на телефоне и
-          компьютере.
-        </p>
+        <p>{demo.description}</p>
       </div>
       <div
         className="gallery-tabs"
+        style={
+          {
+            "--gallery-screen-count": screens.length,
+            "--gallery-mobile-columns":
+              screens.length % 3 === 0 ? 3 : Math.min(2, screens.length),
+          } as CSSProperties
+        }
         role="tablist"
-        aria-label="Экраны Дымоход Трейд"
+        aria-label={`Экраны ${demo.project}`}
       >
-        {chimneyScreens.map((item, index) => (
+        {screens.map((item, index) => (
           <button
             key={item.id}
             type="button"
@@ -170,22 +189,24 @@ export function CaseGallery() {
             {device === "desktop" ? (
               <LaptopMockup
                 src={src("desktop")}
-                alt={screen.desktopAlt}
+                alt={screen.desktop!.alt}
                 label={screen.label}
                 active={active}
-                count={chimneyScreens.length}
+                count={screens.length}
                 reduced={reduced}
                 onSelect={setActive}
+                projectName={demo.project}
               />
             ) : (
               <PhoneMockup
                 src={src("mobile")}
-                alt={screen.mobileAlt}
+                alt={screen.mobile!.alt}
                 label={screen.label}
                 active={active}
-                count={chimneyScreens.length}
+                count={screens.length}
                 reduced={reduced}
                 onSelect={setActive}
+                projectName={demo.project}
               />
             )}
           </div>
@@ -204,7 +225,7 @@ export function CaseGallery() {
             <motion.button
               type="button"
               aria-pressed={device === "mobile"}
-              onClick={() => setDevice("mobile")}
+              onClick={() => changeDevice("mobile")}
               whileTap={reduced ? undefined : { scale: 0.96 }}
             >
               <Smartphone size={18} strokeWidth={1.6} aria-hidden="true" />
@@ -213,7 +234,7 @@ export function CaseGallery() {
             <motion.button
               type="button"
               aria-pressed={device === "desktop"}
-              onClick={() => setDevice("desktop")}
+              onClick={() => changeDevice("desktop")}
               whileTap={reduced ? undefined : { scale: 0.96 }}
             >
               <Laptop size={18} strokeWidth={1.6} aria-hidden="true" />
@@ -242,11 +263,11 @@ export function CaseGallery() {
       <noscript>
         <p>
           Для просмотра всех экранов:{" "}
-          {chimneyScreens.map((item) => (
+          {demo.screens.map((item) => (
             <a
               key={item.id}
               className="text-link"
-              href={`${screenshotBase}/${item.id}-desktop.webp`}
+              href={(item.desktop ?? item.mobile)!.src}
             >
               {item.label} ↗{" "}
             </a>
@@ -280,22 +301,16 @@ export function CaseGallery() {
             >
               <Image
                 src={src(full)}
-                width={full === "desktop" ? 975 : 576}
-                height={
-                  full === "desktop"
-                    ? 416
-                    : screen.id === "catalog"
-                      ? 1070
-                      : 1154
-                }
-                alt={full === "desktop" ? screen.desktopAlt : screen.mobileAlt}
+                width={displayed.width}
+                height={displayed.height}
+                alt={displayed.alt}
                 unoptimized
               />
             </div>
           )}
           <a
             className="text-link"
-            href={src(full || "desktop")}
+            href={displayed.src}
             target="_blank"
             rel="noopener noreferrer"
           >

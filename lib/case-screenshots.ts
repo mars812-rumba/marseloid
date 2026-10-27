@@ -62,3 +62,30 @@ export const chimneyScreens = [
     mobileAlt: "Мобильная админка: категория сэндвич-отводов и её обложка",
   },
 ] as const;
+
+export const chimneyDemo: import("@/lib/case-demo").CaseDemo = {
+  project: "Дымоход Трейд",
+  title: "От выбора изделия\nдо готовой сметы.",
+  description:
+    "Публичный каталог, онлайн-расчёт и рабочие инструменты объединены в одной системе. Ниже — реальные экраны проекта на телефоне и компьютере.",
+  screens: chimneyScreens.map((screen) => ({
+    id: screen.id,
+    label: screen.label,
+    title: screen.title,
+    description: screen.description,
+    desktop: {
+      src: `${screenshotBase}/${screen.id}-desktop.webp`,
+      width: 975,
+      height: 416,
+      alt: screen.desktopAlt,
+      caption: screen.description,
+    },
+    mobile: {
+      src: `${screenshotBase}/${screen.id}-mobile.webp`,
+      width: 576,
+      height: screen.id === "catalog" ? 1070 : 1154,
+      alt: screen.mobileAlt,
+      caption: screen.description,
+    },
+  })),
+};

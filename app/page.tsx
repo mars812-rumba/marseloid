@@ -79,8 +79,7 @@ export default function Home() {
         </Reveal>
         <Projects />
         <p className="caption">
-          Дымоход Трейд — реальные экраны проекта. Sunny Rentals — иллюстрация
-          продукта в разработке.
+          Дымоход Трейд и Sunny Rentals — реальные экраны проектов.
         </p>
       </section>
       <section className="section process-section wrap">

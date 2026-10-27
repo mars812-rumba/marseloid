@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { sunnyDemo } from "@/lib/sunny-case";
 import { caseStudies } from "@/lib/case-studies";
 import { CaseStudyPage } from "@/components/case-study";
 import { cases } from "@/lib/content";
@@ -40,7 +41,13 @@ export default async function Page({
       <CaseStudyPage
         project={c}
         study={study}
-        demonstration={c.slug === "chimneys" ? <CaseGallery /> : undefined}
+        demonstration={
+          c.slug === "chimneys" ? (
+            <CaseGallery key={c.slug} />
+          ) : c.slug === "sunny-rentals" ? (
+            <CaseGallery key={c.slug} demo={sunnyDemo} />
+          ) : undefined
+        }
       />
     );
   }
@@ -54,7 +61,7 @@ export default async function Page({
           description={c.description}
         />
         {c.slug === "chimneys" ? (
-          <CaseGallery />
+          <CaseGallery key={c.slug} />
         ) : (
           <>
             <ProjectArt tone={c.tone} />
