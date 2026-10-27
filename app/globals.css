@@ -501,12 +501,7 @@ a:hover .round-arrow {
   margin-top: 112px;
 }
 .hero + .section {
-  margin-top: 64px;
-}
-@media (max-width: 767px) {
-  .hero + .section {
-    margin-top: 48px;
-  }
+  margin-top: 96px;
 }
 .section-heading {
   display: grid;
