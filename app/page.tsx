@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { CTA, Projects, Services } from "@/components/shared";
 import { MotionLink, Reveal } from "@/components/motion";
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -23,24 +24,42 @@ export default function Home() {
             <br />
             расчётов для бизнеса<span className="brand-dot">.</span>
           </Reveal>
-          <Reveal className="hero-copy" delay={0.12}>
-            <p>
-              Сложный продукт.
-              <br />
-              <strong>Понятный выбор.</strong>
-            </p>
-            <p>
-              Разрабатываю веб-системы для компаний, где стоимость и
-              комплектация зависят от десятков параметров. Работаю лично — от
-              разбора задачи до запуска.
-            </p>
+          <Reveal className="developer-card" delay={0.12}>
+            <div className="developer-identity">
+              <Image
+                className="developer-photo"
+                src="/images/mars-profile.webp"
+                alt="Фотография Марса"
+                width={80}
+                height={80}
+                sizes="80px"
+              />
+              <div className="developer-details">
+                <h2>Марс</h2>
+                <p className="developer-role">Независимый веб-разработчик</p>
+                <p className="developer-status">
+                  <span aria-hidden="true" />
+                  Открыт к сотрудничеству
+                </p>
+              </div>
+            </div>
+            <div className="developer-description">
+              <p>
+                Разрабатываю сайты и веб-приложения для бизнеса — от небольших
+                доработок и лендингов до каталогов, конфигураторов, CRM и
+                автоматизации.
+              </p>
+              <p>
+                Работаю напрямую с заказчиками и подключаюсь к проектам
+                веб-студий и агентств.
+              </p>
+            </div>
             <MotionLink className="button" href="/contact/">
               Показать задачу <span aria-hidden="true">↗</span>
             </MotionLink>
           </Reveal>
         </div>
         <div className="hero-foot">
-          <span>НЕЗАВИСИМЫЙ РАЗРАБОТЧИК</span>
           <span>ПРОДУКЦИЯ / ПРАВИЛА / РЕЗУЛЬТАТ</span>
         </div>
       </section>

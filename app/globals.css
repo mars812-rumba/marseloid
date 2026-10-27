@@ -230,6 +230,78 @@ a:hover .round-arrow {
   max-width: 365px;
   padding-bottom: 4px;
 }
+.developer-card {
+  min-width: 0;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.developer-identity {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+}
+.developer-photo {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.developer-details h2 {
+  font-size: 26px;
+  line-height: 1.2;
+}
+.developer-role {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.developer-status {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.developer-status > span {
+  flex: 0 0 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #367447;
+}
+.developer-description {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.developer-card .button {
+  margin-top: 20px;
+  max-width: 100%;
+  gap: 24px;
+}
+@media (max-width: 767px) {
+  .developer-card {
+    max-width: 100%;
+    padding: 16px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1000px) {
+  .hero .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .developer-card {
+    max-width: 560px;
+  }
+}
 .hero-copy > p:first-child {
   font-size: 24px;
   line-height: 1.4;
