@@ -5,12 +5,14 @@ import styles from "./phone-shell.module.css";
 export function PhoneShell({
   children,
   reflection,
+  cameraInRim = false,
 }: {
   children: ReactNode;
   reflection?: ReactNode;
+  cameraInRim?: boolean;
 }) {
   return (
-    <div className={styles.phone}>
+    <div className={`${styles.phone} ${cameraInRim ? styles.cameraInRim : ""}`}>
       <div className={`${styles.face} ${styles.back}`} aria-hidden="true" />
       {/* Extrude only the perimeter, rather than stacking full phone-sized planes. */}
       {[180, 270, 0, 90].map((startAngle, corner) => (

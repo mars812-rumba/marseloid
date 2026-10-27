@@ -10,6 +10,7 @@ export type CaseDemoScreen = {
 };
 export type CaseDemo = {
   project: string;
+  fitPhoneToImage?: boolean;
   title: string;
   description: string;
   screens: CaseDemoScreen[];

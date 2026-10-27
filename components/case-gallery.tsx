@@ -207,6 +207,7 @@ export function CaseGallery({ demo = chimneyDemo }: { demo?: CaseDemo }) {
                 reduced={reduced}
                 onSelect={setActive}
                 projectName={demo.project}
+                screenSize={demo.fitPhoneToImage ? screen.mobile : undefined}
               />
             )}
           </div>

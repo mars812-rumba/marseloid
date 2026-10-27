@@ -26,6 +26,7 @@ export function PhoneMockup({
   reduced,
   onSelect,
   projectName = "Дымоход Трейд",
+  screenSize,
 }: {
   src: string;
   alt: string;
@@ -35,6 +36,7 @@ export function PhoneMockup({
   reduced: boolean;
   onSelect: (index: number) => void;
   projectName?: string;
+  screenSize?: { width: number; height: number };
 }) {
   const hint = useId();
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -190,66 +192,74 @@ export function PhoneMockup({
           aria-hidden="true"
           style={{ scale: reduced ? 1 : shadowScale }}
         />
-        <motion.div
-          className={styles.rig}
-          data-phone-rig=""
-          style={{
-            rotateX: reduced ? 0 : floatingX,
-            rotateY: reduced ? 0 : floatingY,
-            rotateZ: reduced ? 0 : floatZ,
-            y: reduced ? 0 : floatY,
-          }}
-        >
-          <PhoneShell
-            reflection={
-              <motion.span style={{ x: reduced ? 0 : reflectionX }} />
-            }
+        <div className={screenSize ? styles.fittedSlot : undefined}>
+          <motion.div
+            className={styles.rig}
+            data-phone-rig=""
+            style={{
+              // Front padding is 4.67% of body width on all four sides.
+              // Size the body so its usable screen matches the real capture.
+              aspectRatio: screenSize
+                ? 1 / (0.0934 + (0.9066 * screenSize.height) / screenSize.width)
+                : undefined,
+              rotateX: reduced ? 0 : floatingX,
+              rotateY: reduced ? 0 : floatingY,
+              rotateZ: reduced ? 0 : floatZ,
+              y: reduced ? 0 : floatY,
+            }}
           >
-            <div
-              className={styles.display}
-              data-phone-display=""
-              role="group"
-              tabIndex={0}
-              aria-label={`Мобильный экран: ${label}`}
-              onKeyDown={(event) => {
-                if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  go(event.key === "ArrowRight" ? 1 : -1);
-                }
-              }}
+            <PhoneShell
+              cameraInRim={Boolean(screenSize)}
+              reflection={
+                <motion.span style={{ x: reduced ? 0 : reflectionX }} />
+              }
             >
-              <motion.div
-                className={styles.track}
-                style={{ x: reduced ? 0 : screenX }}
+              <div
+                className={styles.display}
+                data-phone-display=""
+                role="group"
+                tabIndex={0}
+                aria-label={`Мобильный экран: ${label}`}
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    go(event.key === "ArrowRight" ? 1 : -1);
+                  }
+                }}
               >
-                <AnimatePresence
-                  key={reduced ? "still" : "animated"}
-                  mode="wait"
-                  initial={false}
+                <motion.div
+                  className={styles.track}
+                  style={{ x: reduced ? 0 : screenX }}
                 >
-                  <motion.span
-                    className={styles.slide}
-                    key={src}
-                    initial={reduced ? false : { opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: reduced ? 1 : 0 }}
-                    transition={{ duration: reduced ? 0 : 0.18 }}
+                  <AnimatePresence
+                    key={reduced ? "still" : "animated"}
+                    mode="wait"
+                    initial={false}
                   >
-                    <Image
-                      src={src}
-                      fill
-                      alt={alt}
-                      sizes="(max-width: 767px) 280px, 320px"
-                      loading="eager"
-                      draggable={false}
-                    />
-                  </motion.span>
-                </AnimatePresence>
-              </motion.div>
-            </div>
-          </PhoneShell>
-        </motion.div>
+                    <motion.span
+                      className={styles.slide}
+                      key={src}
+                      initial={reduced ? false : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: reduced ? 1 : 0 }}
+                      transition={{ duration: reduced ? 0 : 0.18 }}
+                    >
+                      <Image
+                        src={src}
+                        fill
+                        alt={alt}
+                        sizes="(max-width: 767px) 280px, 320px"
+                        loading="eager"
+                        draggable={false}
+                      />
+                    </motion.span>
+                  </AnimatePresence>
+                </motion.div>
+              </div>
+            </PhoneShell>
+          </motion.div>
+        </div>
         <button
           className={`${styles.arrow} ${styles.previous}`}
           type="button"

@@ -12,6 +12,7 @@ const shot = (
   alt,
   caption,
   ...(label ? { label } : {}),
+  ...(key.endsWith("-mobile") ? { mobileFullWidth: true } : {}),
 });
 const platformMobile = shot(
   "platform-mobile",
@@ -118,11 +119,14 @@ const requestDetail = {
     "Менеджер проверяет условия и подтверждает либо отменяет заявку. Имя и контакт клиента размыты.",
   ),
 };
-const handovers = shot(
-  "handovers-mobile",
-  "Календарь выдач и возвратов Sunny Booking с разными цветами событий",
-  "Зелёные события — выдачи, оранжевые — возвраты. Из дня можно перейти к запланированным операциям.",
-);
+const handovers: CaseImage = {
+  ...shot(
+    "handovers-mobile",
+    "Календарь выдач и возвратов Sunny Booking с разными цветами событий",
+    "Зелёные события — выдачи, оранжевые — возвраты. Из дня можно перейти к запланированным операциям.",
+  ),
+  mobileFullWidth: true,
+};
 
 export const bookingStudy: CaseStudy = {
   title: "Sunny Booking",
@@ -337,6 +341,7 @@ export const bookingStudy: CaseStudy = {
 
 export const bookingDemo: CaseDemo = {
   project: "Sunny Booking",
+  fitPhoneToImage: true,
   title: "От создания проката\nдо управления бронированиями.",
   description:
     "Реальные экраны публичной и административной частей платформы. Для устройств подобраны отдельные снимки: обзор автопарка есть на компьютере, редактор тарифов — на телефоне.",
