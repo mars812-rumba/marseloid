@@ -49,9 +49,15 @@ export default function Home() {
               Обсудить задачу <span aria-hidden="true">↗</span>
             </MotionLink>
           </Reveal>
+          <nav className="hero-navigation" aria-label="Навигация первого экрана">
+            <span>01 / 04 — ЗНАКОМСТВО</span>
+            <a href="#services">
+              Листайте вниз <span aria-hidden="true">↓</span>
+            </a>
+          </nav>
         </div>
       </section>
-      <section className="section wrap">
+      <section className="section wrap" id="services" tabIndex={-1}>
         <Reveal className="section-heading">
           <p className="eyebrow">/01 — Что делаю</p>
           <h2>
