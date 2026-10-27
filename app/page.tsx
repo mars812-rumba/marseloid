@@ -17,12 +17,11 @@ export default function Home() {
         </div>
         <div className="hero-grid">
           <Reveal as="h1">
-            Конфигураторы
+            Разрабатываю
             <br />
-            продукции, каталоги
-            <br />и <span>автоматизация</span>
+            сайты и <span>веб-системы</span>
             <br />
-            расчётов для бизнеса<span className="brand-dot">.</span>
+            для бизнеса<span className="brand-dot">.</span>
           </Reveal>
           <Reveal className="developer-card" delay={0.12}>
             <div className="developer-identity">
@@ -45,17 +44,12 @@ export default function Home() {
             </div>
             <div className="developer-description">
               <p>
-                Разрабатываю сайты и веб-приложения для бизнеса — от небольших
-                доработок и лендингов до каталогов, конфигураторов, CRM и
-                автоматизации.
-              </p>
-              <p>
-                Работаю напрямую с заказчиками и подключаюсь к проектам
-                веб-студий и агентств.
+                От лендингов и доработок до каталогов, CRM и автоматизации.
+                Работаю напрямую и с веб-студиями.
               </p>
             </div>
             <MotionLink className="button" href="/contact/">
-              Показать задачу <span aria-hidden="true">↗</span>
+              Обсудить задачу <span aria-hidden="true">↗</span>
             </MotionLink>
           </Reveal>
         </div>

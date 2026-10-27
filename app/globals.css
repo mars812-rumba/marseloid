@@ -278,12 +278,12 @@ a:hover .round-arrow {
 .developer-description {
   display: grid;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 12px;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 .developer-card .button {
-  margin-top: 20px;
+  margin-top: 16px;
   max-width: 100%;
   gap: 24px;
 }
