@@ -286,6 +286,8 @@ export const sunnyStudy: CaseStudy = {
   ],
   nextProject: {
     title: "Следующий этап — Sunny Booking.",
+    href: "/cases/sunny-booking/",
+    linkLabel: "Перейти к кейсу Sunny Booking ↗",
     description:
       "Опыт Sunny Rentals стал основой для отдельной мультипарковой платформы: независимые прокаты могут создавать свои витрины и управлять бронированиями. Эта платформа развивается как самостоятельный продукт.",
   },
