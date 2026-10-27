@@ -503,6 +503,11 @@ a:hover .round-arrow {
 .hero + .section {
   margin-top: 96px;
 }
+@media (max-width: 767px) {
+  .hero + .section {
+    margin-top: 128px;
+  }
+}
 .section-heading {
   display: grid;
   grid-template-columns: 1fr 1fr;
