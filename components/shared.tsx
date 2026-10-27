@@ -52,7 +52,11 @@ export function ProjectArt({ tone }: { tone: string }) {
   return (
     <div className={`project-art ${tone}`} aria-hidden="true">
       <Image
-        src="/cases/sunny-rentals/home-desktop.webp"
+        src={
+          tone === "booking"
+            ? "/cases/sunny-booking/fleet-desktop.webp"
+            : "/cases/sunny-rentals/home-desktop.webp"
+        }
         alt=""
         fill
         sizes="(max-width: 767px) 90vw, 50vw"

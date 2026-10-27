@@ -56,7 +56,8 @@ export function CaseStudyPage({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Смотреть сайт <span aria-hidden="true">↗</span>
+                  {study.siteLabel ?? "Смотреть сайт"}{" "}
+                  <span aria-hidden="true">↗</span>
                   <span className="sr-only"> (в новой вкладке)</span>
                 </a>
               </div>
@@ -211,7 +212,7 @@ export function CaseStudyPage({
             <p>{study.nextProject.description}</p>
             {study.nextProject.href && (
               <Link className="text-link" href={study.nextProject.href}>
-                Смотреть следующий кейс ↗
+                {study.nextProject.linkLabel ?? "Смотреть следующий кейс ↗"}
               </Link>
             )}
           </Reveal>

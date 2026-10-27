@@ -116,6 +116,18 @@ export const cases = [
       ],
     ],
   },
+  {
+    slug: "sunny-booking",
+    number: "03",
+    title: "Sunny Booking",
+    category: "Мультитенантность · бронирование",
+    status: "Тестирование и подключение парков",
+    tone: "booking",
+    url: "https://sunny-rentals.online/p/ar-rentals",
+    description:
+      "Собственная мультипарковая платформа: независимые прокаты со своими витринами, транспортом, тарифами, заявками и календарями.",
+    sections: [],
+  },
 ];
 export const posts = [
   {

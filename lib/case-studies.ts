@@ -1,4 +1,5 @@
 import { sunnyStudy } from "@/lib/sunny-case";
+import { bookingStudy } from "@/lib/booking-case";
 
 export type CaseImageSource = {
   src: string;
@@ -29,6 +30,7 @@ export type CaseStudy = {
   photography?: { title: string; paragraphs: string[]; images: CaseImage[] };
   audience: string;
   summary?: string;
+  siteLabel?: string;
   capabilities: {
     label: string;
     icon?: "code" | "files" | "sliders" | "dashboard" | "messages";
@@ -47,7 +49,12 @@ export type CaseStudy = {
   outcomeComparison?: { label: string; steps: string[] }[];
   outcomesNote?: string;
   outcomes: { title: string; description: string }[];
-  nextProject?: { title: string; description: string; href?: string };
+  nextProject?: {
+    title: string;
+    description: string;
+    href?: string;
+    linkLabel?: string;
+  };
   collaboration: {
     title: string;
     description: string;
@@ -86,6 +93,7 @@ const mobileScreen = (
 });
 
 export const caseStudies: Record<string, CaseStudy> = {
+  "sunny-booking": bookingStudy,
   "sunny-rentals": sunnyStudy,
   chimneys: {
     title: "Дымоход-Трейд",
