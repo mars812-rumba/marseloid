@@ -19,9 +19,11 @@ export default function Home() {
           <Reveal as="h1">
             Разрабатываю
             <br />
-            сайты и <span>веб-системы</span>
+            сайты и <span>веб-системы,</span>
             <br />
-            для бизнеса<span className="brand-dot">.</span>
+            которые решают
+            <br />
+            задачи бизнеса<span className="brand-dot">.</span>
           </Reveal>
           <Reveal className="developer-card" delay={0.12}>
             <div className="developer-identity">
@@ -44,8 +46,8 @@ export default function Home() {
             </div>
             <div className="developer-description">
               <p>
-                От лендингов и доработок до каталогов, CRM и автоматизации.
-                Работаю напрямую и с веб-студиями.
+                От небольших доработок и лендингов до конфигураторов, CRM и
+                автоматизации. Работаю напрямую и с веб-студиями.
               </p>
             </div>
             <MotionLink className="button" href="/contact/">

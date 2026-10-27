@@ -211,7 +211,7 @@ a:hover .round-arrow {
   grid-template-columns: 1.65fr 1fr;
   gap: 70px;
   margin-top: 40px;
-  margin-bottom: 56px;
+  margin-bottom: 32px;
   align-items: end;
 }
 .hero h1 {
@@ -233,9 +233,6 @@ a:hover .round-arrow {
 .developer-card {
   min-width: 0;
   max-width: 400px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
 }
 .developer-identity {
   display: grid;
@@ -279,7 +276,7 @@ a:hover .round-arrow {
   display: grid;
   gap: 12px;
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
 }
 .developer-card .button {
@@ -290,7 +287,12 @@ a:hover .round-arrow {
 @media (max-width: 767px) {
   .developer-card {
     max-width: 100%;
-    padding: 16px;
+  }
+  .hero .hero-grid {
+    margin-bottom: 0;
+  }
+  .hero .hero-foot {
+    display: none;
   }
 }
 @media (min-width: 768px) and (max-width: 1000px) {
@@ -300,6 +302,11 @@ a:hover .round-arrow {
   }
   .developer-card {
     max-width: 560px;
+  }
+}
+@media (max-width: 374px) {
+  .hero .hero-grid h1 {
+    font-size: 31px;
   }
 }
 .hero-copy > p:first-child {
@@ -550,6 +557,14 @@ a:hover .round-arrow {
 }
 .section {
   margin-top: 112px;
+}
+.hero + .section {
+  margin-top: 64px;
+}
+@media (max-width: 767px) {
+  .hero + .section {
+    margin-top: 48px;
+  }
 }
 .section-heading {
   display: grid;
