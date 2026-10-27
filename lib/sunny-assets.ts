@@ -1,5 +1,20 @@
 // Reviewed screenshots from screenshots/sunny-rentals/*/old only.
 export const sunnyAssets = {
+  "home-mobile": {
+    src: "/cases/sunny-rentals/home-mobile.webp",
+    width: 576,
+    height: 1072,
+  },
+  "catalog-mobile": {
+    src: "/cases/sunny-rentals/catalog-mobile.webp",
+    width: 576,
+    height: 1072,
+  },
+  "dates-mobile": {
+    src: "/cases/sunny-rentals/dates-mobile.webp",
+    width: 576,
+    height: 1072,
+  },
   "home-desktop": {
     src: "/cases/sunny-rentals/home-desktop.webp",
     width: 1280,
