@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Demo } from "@/components/demo";
 import { CTA, Projects, Services } from "@/components/shared";
 import { MotionLink, Reveal } from "@/components/motion";
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -38,14 +37,8 @@ export default function Home() {
             <MotionLink className="button" href="/contact/">
               Показать задачу <span aria-hidden="true">↗</span>
             </MotionLink>
-            <a className="text-link" href="#demo">
-              Посмотреть, как работает расчёт ↓
-            </a>
           </Reveal>
         </div>
-        <Reveal>
-          <Demo />
-        </Reveal>
         <div className="hero-foot">
           <span>НЕЗАВИСИМЫЙ РАЗРАБОТЧИК</span>
           <span>ПРОДУКЦИЯ / ПРАВИЛА / РЕЗУЛЬТАТ</span>
@@ -77,7 +70,7 @@ export default function Home() {
             Все проекты ↗
           </Link>
         </Reveal>
-        <Projects />
+        <Projects covers />
         <p className="caption">
           Дымоход Трейд, Sunny Rentals и Sunny Booking — реальные экраны
           проектов.

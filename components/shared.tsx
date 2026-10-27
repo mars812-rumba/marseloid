@@ -68,7 +68,14 @@ export function ProjectArt({ tone }: { tone: string }) {
   );
 }
 
-export function Projects() {
+const projectCovers: Record<string, string> = {
+  chimneys: "/projects/chimneys-cover.webp",
+  "sunny-rentals": "/projects/sunny-rentals-cover.webp",
+  "sunny-booking": "/projects/sunny-booking-cover.webp",
+  "food-market": "/projects/food-market-cover.webp",
+};
+
+export function Projects({ covers = false }: { covers?: boolean }) {
   return (
     <div className="projects">
       {cases.map((c, i) => (
@@ -79,7 +86,19 @@ export function Projects() {
           href={`/cases/${c.slug}/`}
           key={c.slug}
         >
-          <ProjectArt tone={c.tone} />
+          {covers && projectCovers[c.slug] ? (
+            <div className="project-art home-project-cover" aria-hidden="true">
+              <Image
+                src={projectCovers[c.slug]}
+                alt=""
+                fill
+                sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1408px) 50vw, 680px"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          ) : (
+            <ProjectArt tone={c.tone} />
+          )}
           <div className="project-meta">
             <span className="eyebrow">{c.category}</span>
             <span className="project-status">{c.status}</span>

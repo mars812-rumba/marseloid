@@ -545,6 +545,11 @@ a:hover .round-arrow {
   position: relative;
   overflow: hidden;
 }
+.project-art.home-project-cover {
+  height: auto;
+  aspect-ratio: 1280 / 853;
+  background: #000;
+}
 .sunny {
   background: #e7e4d4;
 }
