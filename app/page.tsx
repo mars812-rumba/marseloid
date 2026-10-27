@@ -8,22 +8,16 @@ export default function Home() {
   return (
     <>
       <section className="hero wrap">
-        <div className="hero-line">
-          <span className="eyebrow">
-            <i className="small-cross" /> Marseloid / цифровые инструменты для
-            бизнеса
-          </span>
-          <span className="mono hero-index">NEXT.JS / PYTHON</span>
-        </div>
-        <div className="hero-grid">
+        <div className="hero-content">
+          <div className="hero-line">
+            <span className="eyebrow">
+              <i className="small-cross" /> Marseloid / цифровые инструменты для
+              бизнеса
+            </span>
+          </div>
           <Reveal as="h1">
-            Разрабатываю
-            <br />
-            сайты и <span>веб-системы,</span>
-            <br />
-            которые решают
-            <br />
-            задачи бизнеса<span className="brand-dot">.</span>
+            Конфигураторы продукции, каталоги и&nbsp;<span>автоматизация</span>{" "}
+            расчётов для бизнеса<span className="brand-dot">.</span>
           </Reveal>
           <Reveal className="developer-card" delay={0.12}>
             <div className="developer-identity">
@@ -31,9 +25,9 @@ export default function Home() {
                 className="developer-photo"
                 src="/images/mars-profile.webp"
                 alt="Фотография Марса"
-                width={80}
-                height={80}
-                sizes="80px"
+                width={72}
+                height={72}
+                sizes="72px"
               />
               <div className="developer-details">
                 <h2>Марс</h2>
@@ -46,17 +40,15 @@ export default function Home() {
             </div>
             <div className="developer-description">
               <p>
-                От небольших доработок и лендингов до конфигураторов, CRM и
-                автоматизации. Работаю напрямую и с веб-студиями.
+                Разрабатываю сайты и веб-приложения — от лендингов и небольших
+                доработок до CRM и автоматизации. Работаю с бизнесом и
+                веб-студиями.
               </p>
             </div>
+            <MotionLink className="button" href="/contact/">
+              Обсудить задачу <span aria-hidden="true">↗</span>
+            </MotionLink>
           </Reveal>
-        </div>
-        <div className="hero-foot">
-          <span>ПРОДУКЦИЯ / ПРАВИЛА / РЕЗУЛЬТАТ</span>
-          <MotionLink className="button" href="/contact/">
-            Обсудить задачу <span aria-hidden="true">↗</span>
-          </MotionLink>
         </div>
       </section>
       <section className="section wrap">
