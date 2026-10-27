@@ -53,9 +53,11 @@ export function ProjectArt({ tone }: { tone: string }) {
     <div className={`project-art ${tone}`} aria-hidden="true">
       <Image
         src={
-          tone === "booking"
-            ? "/cases/sunny-booking/fleet-desktop.webp"
-            : "/cases/sunny-rentals/home-desktop.webp"
+          tone === "food"
+            ? "/cases/food-market/menu-desktop.webp"
+            : tone === "booking"
+              ? "/cases/sunny-booking/fleet-desktop.webp"
+              : "/cases/sunny-rentals/home-desktop.webp"
         }
         alt=""
         fill

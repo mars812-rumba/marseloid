@@ -127,7 +127,7 @@ export function CaseStudyPage({
             id="system-modules"
             aria-label="Модули проекта"
           >
-            <CaseModules modules={study.modules} />
+            <CaseModules key={project.title} modules={study.modules} />
           </section>
         )}
         <section
@@ -202,6 +202,24 @@ export function CaseStudyPage({
           )}
         </section>
       </article>
+      {study.relatedProjects && (
+        <section
+          className={`${styles.nextProject} wrap`}
+          aria-labelledby="related-projects-heading"
+        >
+          <Reveal>
+            <h2 id="related-projects-heading">{study.relatedProjects.title}</h2>
+            <p>{study.relatedProjects.description}</p>
+            <nav className={styles.heroActions} aria-label="Другие кейсы">
+              {study.relatedProjects.links.map((link) => (
+                <Link className="text-link" key={link.href} href={link.href}>
+                  {link.label} <span aria-hidden="true">↗</span>
+                </Link>
+              ))}
+            </nav>
+          </Reveal>
+        </section>
+      )}
       {study.nextProject && (
         <section
           className={`${styles.nextProject} wrap`}

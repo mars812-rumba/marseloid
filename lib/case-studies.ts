@@ -1,5 +1,6 @@
 import { sunnyStudy } from "@/lib/sunny-case";
 import { bookingStudy } from "@/lib/booking-case";
+import { foodStudy } from "@/lib/food-case";
 
 export type CaseImageSource = {
   src: string;
@@ -53,6 +54,11 @@ export type CaseStudy = {
   outcomeComparison?: { label: string; steps: string[] }[];
   outcomesNote?: string;
   outcomes: { title: string; description: string }[];
+  relatedProjects?: {
+    title: string;
+    description: string;
+    links: { label: string; href: string }[];
+  };
   nextProject?: {
     title: string;
     description: string;
@@ -97,6 +103,7 @@ const mobileScreen = (
 });
 
 export const caseStudies: Record<string, CaseStudy> = {
+  "food-market": foodStudy,
   "sunny-booking": bookingStudy,
   "sunny-rentals": sunnyStudy,
   chimneys: {

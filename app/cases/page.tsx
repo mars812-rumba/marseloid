@@ -2,7 +2,7 @@ import { CTA, PageIntro, Projects } from "@/components/shared";
 export const metadata = {
   title: "Проекты",
   description:
-    "Дымоход Трейд — каталог и конфигуратор. Sunny Rentals — система собственного проката. Sunny Booking — мультипарковая платформа на этапе тестирования.",
+    "Дымоход-Трейд, Sunny Rentals, Sunny Booking и Food Market: реальные интерфейсы каталогов, расчётов, бронирования и ресторанных заказов.",
   alternates: { canonical: "/cases" },
 };
 export default function Page() {
@@ -12,7 +12,7 @@ export default function Page() {
         <PageIntro
           label="Проекты"
           title="Разные задачи. Системный подход."
-          description="Подбор инженерной продукции, работа собственного проката и платформа для независимых автопарков. От выбора клиента до внутренних процессов бизнеса."
+          description="Подбор инженерной продукции, аренда транспорта и ресторанные заказы. От выбора клиента до внутренних процессов бизнеса."
         />
         <Projects />
         <p className="caption">
