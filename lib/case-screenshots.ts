@@ -65,6 +65,7 @@ export const chimneyScreens = [
 
 export const chimneyDemo: import("@/lib/case-demo").CaseDemo = {
   project: "Дымоход Трейд",
+  fitPhoneToImage: true,
   title: "От выбора изделия\nдо готовой сметы.",
   description:
     "Публичный каталог, онлайн-расчёт и рабочие инструменты объединены в одной системе. Ниже — реальные экраны проекта на телефоне и компьютере.",

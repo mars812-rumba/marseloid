@@ -300,6 +300,7 @@ export const sunnyStudy: CaseStudy = {
 
 export const sunnyDemo: CaseDemo = {
   project: "Sunny Rentals",
+  fitPhoneToImage: true,
   title: "От выбора автомобиля\nдо управления бронированием.",
   description:
     "Клиентская витрина и внутренние инструменты проката работают в единой системе. Здесь — реальные экраны на телефоне и компьютере. На телефоне — календарь, автопарк, CRM и AI-диалог; на компьютере — витрина и рабочие экраны.",
