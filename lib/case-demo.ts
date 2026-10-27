@@ -10,6 +10,7 @@ export type CaseDemoScreen = {
 };
 export type CaseDemo = {
   project: string;
+  /** Fit to the first mobile capture, keeping shell size stable across slides. */
   fitPhoneToImage?: boolean;
   title: string;
   description: string;

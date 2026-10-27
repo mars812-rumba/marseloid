@@ -51,6 +51,10 @@ export function CaseGallery({ demo = chimneyDemo }: { demo?: CaseDemo }) {
   const screen = screens[active] ?? screens[0];
   const displayed = screen[full ?? device]!;
   const src = (target: Device) => screen[target]!.src;
+  // One reference capture defines the shell for the whole case, not each slide.
+  const phoneScreenSize = demo.fitPhoneToImage
+    ? demo.screens.find((item) => item.mobile)?.mobile
+    : undefined;
 
   function changeDevice(next: Device) {
     const available = demo.screens.filter((item) => Boolean(item[next]));
@@ -207,7 +211,7 @@ export function CaseGallery({ demo = chimneyDemo }: { demo?: CaseDemo }) {
                 reduced={reduced}
                 onSelect={setActive}
                 projectName={demo.project}
-                screenSize={demo.fitPhoneToImage ? screen.mobile : undefined}
+                screenSize={phoneScreenSize}
               />
             )}
           </div>

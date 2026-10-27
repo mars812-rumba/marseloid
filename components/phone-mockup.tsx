@@ -198,7 +198,8 @@ export function PhoneMockup({
             data-phone-rig=""
             style={{
               // Front padding is 4.67% of body width on all four sides.
-              // Size the body so its usable screen matches the real capture.
+              // Fit the body to the case's stable reference capture.
+              // Other captures stay contained inside the same screen geometry.
               aspectRatio: screenSize
                 ? 1 / (0.0934 + (0.9066 * screenSize.height) / screenSize.width)
                 : undefined,
