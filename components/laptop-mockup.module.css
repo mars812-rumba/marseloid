@@ -4,6 +4,11 @@
   margin-inline: auto;
   flex: 0 0 auto;
 }
+@media (min-width: 1024px) {
+  .stage {
+    width: min(80%, 800px);
+  }
+}
 .scene {
   position: relative;
   padding-bottom: 44px;
