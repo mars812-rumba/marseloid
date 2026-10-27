@@ -737,11 +737,16 @@
   width: 100%;
 }
 @media (max-width: 767px) {
-  .screenFrame.adaptive {
+  .imagePicker button[data-desktop-only] {
+    display: none;
+  }
+  .screenFrame.adaptive,
+  .screenFrame.mobileFullWidth {
     display: block;
     padding: 0;
   }
-  .adaptive img {
+  .adaptive img,
+  .mobileFullWidth img {
     width: 100%;
     height: auto;
     max-height: none;

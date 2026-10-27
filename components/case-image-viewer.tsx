@@ -1,9 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useRef, useState } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import type { CaseImage } from "@/lib/case-studies";
 import styles from "./case-study.module.css";
+
+const mobileQuery = "(max-width: 767px)";
+function subscribeViewport(notify: () => void) {
+  const query = window.matchMedia(mobileQuery);
+  query.addEventListener("change", notify);
+  return () => query.removeEventListener("change", notify);
+}
+const readMobileViewport = () => window.matchMedia(mobileQuery).matches;
+const serverViewport = () => false;
 
 export function CaseImageViewer({
   images,
@@ -19,7 +34,18 @@ export function CaseImageViewer({
   const [originalSize, setOriginalSize] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const id = useId();
-  const current = images[active];
+  const mobile = useSyncExternalStore(
+    subscribeViewport,
+    readMobileViewport,
+    serverViewport,
+  );
+  const visibleImages = mobile
+    ? images.filter((item) => !item.desktopOnly)
+    : images;
+  const image = visibleImages.includes(images[active])
+    ? images[active]
+    : visibleImages[0];
+  const current = mobile && image?.mobile ? image.mobile : image;
   useEffect(() => {
     if (!expanded) return;
     const previous = document.body.style.overflow;
@@ -36,21 +62,24 @@ export function CaseImageViewer({
   }
   return (
     <div className={styles.imageViewer} data-case-image-viewer="">
-      {images.length > 1 && (
+      {visibleImages.length > 1 && (
         <div
           className={styles.imagePicker}
           role="group"
           aria-label={`Изображения: ${title}`}
         >
-          {images.map((item, index) => (
+          {visibleImages.map((item, index) => (
             <button
               key={item.src}
               type="button"
-              aria-pressed={active === index}
-              onClick={() => setActive(index)}
+              aria-pressed={image === item}
+              data-desktop-only={item.desktopOnly || undefined}
+              onClick={() => setActive(images.indexOf(item))}
             >
               <span aria-hidden="true">0{index + 1}</span>{" "}
-              {item.label || `Экран ${index + 1}`}
+              {(mobile && item.mobile?.label) ||
+                item.label ||
+                `Экран ${index + 1}`}
             </button>
           ))}
         </div>
@@ -64,15 +93,26 @@ export function CaseImageViewer({
           aria-haspopup="dialog"
         >
           <span
-            className={`${styles.screenFrame} ${current.height > current.width ? styles.portrait : ""}`}
+            className={`${styles.screenFrame} ${current.height > current.width ? styles.portrait : ""} ${image.mobile ? styles.adaptive : ""} ${current.mobileFullWidth ? styles.mobileFullWidth : ""}`}
           >
-            <Image
-              src={current.src}
-              width={current.width}
-              height={current.height}
-              alt={current.alt}
-              sizes="(max-width: 767px) 90vw, (max-width: 1100px) 65vw, 850px"
-            />
+            <picture>
+              {image.mobile && (
+                <source
+                  media={mobileQuery}
+                  srcSet={image.mobile.src}
+                  width={image.mobile.width}
+                  height={image.mobile.height}
+                />
+              )}
+              <Image
+                src={image.src}
+                width={image.width}
+                height={image.height}
+                alt={current.alt}
+                sizes="(max-width: 767px) 90vw, (max-width: 1100px) 65vw, 850px"
+                unoptimized={Boolean(image.mobile)}
+              />
+            </picture>
           </span>
           <span className={styles.imageAction}>
             {actionLabel} <span aria-hidden="true">↗</span>

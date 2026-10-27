@@ -12,6 +12,7 @@ const shot = (
   alt,
   caption,
   ...(label ? { label } : {}),
+  ...(key.endsWith("-mobile") ? { mobileFullWidth: true } : {}),
 });
 const home = shot(
   "home-desktop",

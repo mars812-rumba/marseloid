@@ -190,7 +190,7 @@ export const bookingStudy: CaseStudy = {
         "Депозит и условия выдачи",
         "Отправка заявки",
       ],
-      images: [storefront, dates, booking],
+      images: [storefront, { ...dates, desktopOnly: true }, booking],
     },
     {
       id: "fleet",
@@ -208,7 +208,10 @@ export const bookingStudy: CaseStudy = {
         "Сезонные тарифы и депозит",
         "Показ и скрытие транспорта на витрине",
       ],
-      images: [fleet, tariffs],
+      images: [
+        { ...fleet, mobile: tariffs },
+        { ...tariffs, desktopOnly: true },
+      ],
     },
     {
       id: "calendar",

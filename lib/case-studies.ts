@@ -8,9 +8,13 @@ export type CaseImageSource = {
   alt: string;
   caption: string;
   label?: string;
+  mobileFullWidth?: boolean;
 };
 
-export type CaseImage = CaseImageSource & { mobile?: CaseImageSource };
+export type CaseImage = CaseImageSource & {
+  mobile?: CaseImageSource;
+  desktopOnly?: boolean;
+};
 
 export type CaseModule = {
   id: string;
