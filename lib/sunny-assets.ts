@@ -16,7 +16,7 @@ export const sunnyAssets = {
     height: 550,
   },
   "crm-desktop": {
-    src: "/cases/sunny-rentals/crm-desktop.webp",
+    src: "/cases/sunny-rentals/crm-desktop-blurred.webp",
     width: 1280,
     height: 566,
   },
@@ -26,12 +26,12 @@ export const sunnyAssets = {
     height: 606,
   },
   "crm-mobile": {
-    src: "/cases/sunny-rentals/crm-mobile.webp",
+    src: "/cases/sunny-rentals/crm-mobile-blurred.webp",
     width: 576,
     height: 1154,
   },
   "ai-mobile": {
-    src: "/cases/sunny-rentals/ai-mobile.webp",
+    src: "/cases/sunny-rentals/ai-mobile-blurred.webp",
     width: 576,
     height: 1154,
   },
