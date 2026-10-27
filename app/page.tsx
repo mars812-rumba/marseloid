@@ -50,13 +50,13 @@ export default function Home() {
                 автоматизации. Работаю напрямую и с веб-студиями.
               </p>
             </div>
-            <MotionLink className="button" href="/contact/">
-              Обсудить задачу <span aria-hidden="true">↗</span>
-            </MotionLink>
           </Reveal>
         </div>
         <div className="hero-foot">
           <span>ПРОДУКЦИЯ / ПРАВИЛА / РЕЗУЛЬТАТ</span>
+          <MotionLink className="button" href="/contact/">
+            Обсудить задачу <span aria-hidden="true">↗</span>
+          </MotionLink>
         </div>
       </section>
       <section className="section wrap">
