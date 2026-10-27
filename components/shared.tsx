@@ -69,10 +69,10 @@ export function ProjectArt({ tone }: { tone: string }) {
 }
 
 const projectCovers: Record<string, string> = {
-  chimneys: "/projects/chimneys-cover.webp",
-  "sunny-rentals": "/projects/sunny-rentals-cover.webp",
-  "sunny-booking": "/projects/sunny-booking-cover.webp",
-  "food-market": "/projects/food-market-cover.webp",
+  chimneys: "/projects/chimneys-cutout.webp",
+  "sunny-rentals": "/projects/sunny-rentals-cutout.webp",
+  "sunny-booking": "/projects/sunny-booking-cutout.webp",
+  "food-market": "/projects/food-market-cutout.webp",
 };
 
 export function Projects({ covers = false }: { covers?: boolean }) {
@@ -82,7 +82,7 @@ export function Projects({ covers = false }: { covers?: boolean }) {
         <MotionLink
           reveal
           delay={i * 0.1}
-          className="project-card"
+          className={`project-card${covers ? " home-project-card" : ""}`}
           href={`/cases/${c.slug}/`}
           key={c.slug}
         >

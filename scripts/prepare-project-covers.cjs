@@ -26,5 +26,13 @@ const sources = [
       image = image.composite([{ input: blurred, left: region.left, top: region.top }]);
     }
     await image.webp({ quality: 88 }).toFile(path.join(output, `${slug}-cover.webp`));
+    // Retain original screen pixels; use only the reviewed imagegen silhouette.
+    const mask = await sharp(path.join(root, "assets/project-cover-masks", `${slug}.png`))
+      .extractChannel(0).raw().toBuffer();
+    const { data, info } = await sharp(path.join(output, `${slug}-cover.webp`))
+      .raw().toBuffer({ resolveWithObject: true });
+    await sharp(data, { raw: info })
+      .joinChannel(mask, { raw: { width: info.width, height: info.height, channels: 1 } })
+      .webp({ quality: 90 }).toFile(path.join(output, `${slug}-cutout.webp`));
   }
 })().catch((error) => { console.error(error); process.exitCode = 1; });

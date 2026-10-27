@@ -548,7 +548,15 @@ a:hover .round-arrow {
 .project-art.home-project-cover {
   height: auto;
   aspect-ratio: 1280 / 853;
-  background: #000;
+  background: transparent;
+}
+.home-project-card {
+  display: block;
+  min-width: 0;
+  padding: clamp(16px, 2vw, 24px);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffdf8;
 }
 .sunny {
   background: #e7e4d4;
