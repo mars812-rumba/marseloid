@@ -1461,6 +1461,11 @@ a:hover .round-arrow {
   justify-content: center;
   align-items: center;
 }
+.gallery-stage-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
 .gallery-desktop {
   flex: 1;
   min-width: 0;

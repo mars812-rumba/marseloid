@@ -189,6 +189,19 @@ export function CaseGallery({ demo = chimneyDemo }: { demo?: CaseDemo }) {
         <div
           className={`gallery-stage${device === "desktop" ? " gallery-stage-laptop" : ""}`}
         >
+          <div className="gallery-stage-tools">
+            <motion.button
+              className="gallery-zoom-icon"
+              type="button"
+              onClick={() => enlarge(device)}
+              aria-label={`Увеличить: ${screen.label}, ${device === "mobile" ? "телефон" : "ноутбук"}`}
+              title="Увеличить экран"
+              aria-haspopup="dialog"
+              whileTap={reduced ? undefined : { scale: 0.96 }}
+            >
+              <Maximize2 size={19} strokeWidth={1.6} aria-hidden="true" />
+            </motion.button>
+          </div>
           <div className="gallery-devices">
             {device === "desktop" ? (
               <LaptopMockup
@@ -246,17 +259,6 @@ export function CaseGallery({ demo = chimneyDemo }: { demo?: CaseDemo }) {
               <span>Ноутбук</span>
             </motion.button>
           </div>
-          <motion.button
-            className="gallery-zoom-icon"
-            type="button"
-            onClick={() => enlarge(device)}
-            aria-label={`Увеличить: ${screen.label}, ${device === "mobile" ? "телефон" : "ноутбук"}`}
-            title="Увеличить экран"
-            aria-haspopup="dialog"
-            whileTap={reduced ? undefined : { scale: 0.96 }}
-          >
-            <Maximize2 size={19} strokeWidth={1.6} aria-hidden="true" />
-          </motion.button>
         </div>
         <div className="gallery-caption">
           <div>
