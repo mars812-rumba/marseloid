@@ -33,3 +33,16 @@ uses connected paths, agency collaboration has a dark surface. PricingDetails an
 WorkProcess are shared with the new websites-and-improvements service. Pricing
 values remain in their original configuration. LoftFire's static device cover is
 rendered with real screenshots and the original device components.
+
+Hero messenger contacts: MessengerLinks appears directly beneath the main CTA,
+with 48 px dark-green controls for WhatsApp, Telegram and MAX. Icons are inline
+currentColor SVG; Framer Motion provides one-time entrance and hover/tap feedback,
+respecting reduced motion. No new dependencies or changes to other sections.
+Owner-provided contacts live in lib/messenger-contacts.ts. WhatsApp and Telegram
+use direct external links. Pending a real shared MAX profile URL, its button reveals
+the supplied phone number and a clipboard action; no guessed max.ru/phone URL is
+published. Escape closes the disclosure and restores button focus. Clipboard errors
+leave the selectable number and a manual-copy instruction available.
+Verified at 360/390/430/768/1440 px: icon size/order/color, spacing below CTA,
+no horizontal overflow, links, MAX number copying and Escape focus return.
+Axe WCAG A/AA, normal-motion hover, build, TypeScript and four backend tests pass.

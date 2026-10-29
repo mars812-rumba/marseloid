@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { MessengerLinks } from "@/components/messenger-links";
 import { Projects } from "@/components/shared";
 import { MotionLink, Reveal } from "@/components/motion";
 import { home, homeProjectSummaries } from "@/lib/home-content";
@@ -103,6 +104,7 @@ export default function Home() {
             <MotionLink className="button" href="#contact">
               Обсудить задачу <span aria-hidden="true">↗</span>
             </MotionLink>
+            <MessengerLinks />
           </Reveal>
         </div>
         <nav

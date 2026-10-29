@@ -1,0 +1,70 @@
+.messengers {
+  margin-top: 16px;
+  max-width: 100%;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--dark);
+  color: var(--on-dark);
+  cursor: pointer;
+  text-decoration: none;
+}
+.icon svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+.icon:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+@media (hover: hover) {
+  .icon:hover {
+    background: #39473b;
+  }
+}
+.maxContact {
+  margin-top: 16px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+.maxContact[hidden] {
+  display: none;
+}
+.number {
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+  color: var(--dark);
+  margin-top: 8px;
+  user-select: all;
+}
+.copy {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0;
+  background: none;
+  color: var(--dark);
+  font: inherit;
+  min-height: 44px;
+  cursor: pointer;
+}
+.status {
+  font-size: 12px;
+  margin-top: 4px;
+}
+.status:empty {
+  display: none;
+}
