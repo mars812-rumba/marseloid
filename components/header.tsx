@@ -16,10 +16,10 @@ export function Header() {
       <Link
         className="logo"
         href="/"
-        aria-label="Марсель — на главную"
+        aria-label="Marseloid — на главную"
         onClick={() => setOpen(false)}
       >
-        Марсель<span className="brand-dot">.</span>
+        marseloid<span className="brand-dot">.</span>
         <span className="logo-caption">независимый разработчик</span>
       </Link>
       <button

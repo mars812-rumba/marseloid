@@ -4,7 +4,7 @@ import { Brief } from "@/components/brief";
 export const metadata = {
   title: "Обсудить задачу",
   description:
-    "Напишите Марселю в Telegram: покажите текущий расчёт или опишите задачу, чтобы обсудить первую версию системы.",
+    "Напишите Marseloid в Telegram: покажите текущий расчёт или опишите задачу, чтобы обсудить первую версию системы.",
   alternates: { canonical: "/contact" },
 };
 export default function Page() {

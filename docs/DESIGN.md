@@ -47,8 +47,7 @@ The database recommendations mixed dark-only style with a light palette. Resolve
 
 - Owner-approved hero messenger wave: 14 px dark-green marks without circular backgrounds, aligned right 24 px below the CTA, inside transparent 44 px touch targets. A shared Framer Motion clock scales WhatsApp, Telegram and MAX sequentially to 1.28 over three seconds. Continuous motion is explicitly requested for these icons; pause on hover, keyboard focus, touch interaction, offscreen and hidden tabs, and disable for reduced motion. Keep the supplied direct contact links.
 
-- Public name: «Марсель» in header/footer wordmarks, personal copy, page titles,
-  social metadata and existing WebSite/Person names. Preserve the terracotta dot
-  and existing typography. The repository name, domain marseloid.online, canonical
-  URLs and Telegram @marseloid stay unchanged. public/og.svg is the source of the
-  matching public/og.png social image; no new visual identity or layout is added.
+- Public brand remains Marseloid (lowercase marseloid in wordmarks). Do not
+  rename the site when updating personal copy. The about-page introduction reads
+  «Я — Марсель», and the existing hero identity/photo still use the developer's
+  name. Keep brand metadata, social preview, domain and Telegram contact intact.

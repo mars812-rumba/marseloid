@@ -3,7 +3,7 @@ import { PageIntro } from "@/components/shared";
 export const metadata = {
   title: "Конфиденциальность",
   description:
-    "Какие данные использует сайт Марселя и как работает подготовка сообщения для Telegram.",
+    "Какие данные использует сайт Marseloid и как работает подготовка сообщения для Telegram.",
   alternates: { canonical: "/privacy" },
 };
 export default function Page() {
