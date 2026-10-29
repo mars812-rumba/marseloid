@@ -400,3 +400,27 @@
 .home .heading > p:last-child:not(:first-child) {
   font-size: 15px;
 }
+
+.demoFollowup {
+  max-width: 760px;
+}
+.demoFollowup .demoDisclaimer {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+.demoFollowup h3 {
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.demoFollowup > p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-top: 16px;
+}
+.demoFollowup :global(.button) {
+  margin-top: 24px;
+  max-width: 100%;
+}

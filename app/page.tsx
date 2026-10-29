@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { CanopyDemo } from "@/components/canopy-demo";
 import { MessengerLinks } from "@/components/messenger-links";
 import { Projects } from "@/components/shared";
 import { MotionLink, Reveal } from "@/components/motion";
@@ -167,11 +168,32 @@ export default function Home() {
 
       <section
         className={`section wrap ${styles.section}`}
+        aria-labelledby="interactive-title"
+      >
+        <Heading
+          id="interactive-title"
+          label="04 / ПОПРОБУЙТЕ САМИ"
+          title={home.interactive.title}
+          description={home.interactive.description}
+        />
+        <CanopyDemo />
+        <div className={styles.demoFollowup}>
+          <p className={styles.demoDisclaimer}>{home.interactive.disclaimer}</p>
+          <h3>{home.interactive.followupTitle}</h3>
+          <p>{home.interactive.followupDescription}</p>
+          <MotionLink className="button" href="#contact">
+            Обсудить задачу <span aria-hidden="true">↗</span>
+          </MotionLink>
+        </div>
+      </section>
+
+      <section
+        className={`section wrap ${styles.section}`}
         aria-labelledby="services-title"
       >
         <Heading
           id="services-title"
-          label="/04 — Что я разрабатываю"
+          label="/05 — Что я разрабатываю"
           {...home.services}
         />
         <div className={styles.serviceGrid}>
@@ -200,7 +222,7 @@ export default function Home() {
       >
         <Heading
           id="comparison-title"
-          label="/05 — Было / Стало · Дымоход-Трейд"
+          label="/06 — Было / Стало · Дымоход-Трейд"
           title={home.comparison.title}
           description={home.comparison.description}
         />
@@ -240,7 +262,7 @@ export default function Home() {
       >
         <Heading
           id="pricing-title"
-          label="/06 — Стоимость разработки"
+          label="/07 — Стоимость разработки"
           {...home.pricing}
         />
         <PricingDetails href="#contact" />
@@ -252,7 +274,7 @@ export default function Home() {
       >
         <Heading
           id="agencies-title"
-          label="/07 — Для веб-студий и агентств"
+          label="/08 — Для веб-студий и агентств"
           title={home.agencies.title}
           description={home.agencies.description}
         />
@@ -278,7 +300,7 @@ export default function Home() {
         aria-labelledby="process-title"
       >
         <Reveal>
-          <p className="eyebrow">/08 — Как я работаю</p>
+          <p className="eyebrow">/09 — Как я работаю</p>
           <h2 id="process-title">{home.process.title}</h2>
         </Reveal>
         <WorkProcess />
@@ -291,7 +313,7 @@ export default function Home() {
         aria-labelledby="contact-title"
       >
         <Reveal>
-          <p className="eyebrow">/09 — Напрямую с разработчиком</p>
+          <p className="eyebrow">/10 — Напрямую с разработчиком</p>
           <h2 id="contact-title">{home.contact.title}</h2>
           <div className={`contact-bottom ${styles.contactBottom}`}>
             <p>{home.contact.description}</p>

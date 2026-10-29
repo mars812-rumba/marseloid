@@ -145,3 +145,21 @@ git diff --check. Local Chromium at 360/390/430/768/1440 px checked diagram layo
 result callout, all four CRM screenshots and zoom, links and horizontal overflow.
 Axe WCAG A/AA and JavaScript error checks passed. Mobile/desktop screenshots reviewed.
 No deployment performed.
+
+## Homepage calculator demonstration
+
+The homepage reuses the existing lazy `CanopyDemo` immediately after projects and
+before services. `lib/home-content.ts` stores its heading, explanation, illustrative
+price disclaimer and follow-up CTA copy. The CTA uses the existing #contact target.
+Subsequent section labels now run from 05 to 10. The service calculator remains.
+No formulas, input limits or API contract changed. On successful verification the
+shared calculator clears its temporary status text; aborted stale responses cannot
+replace the current status. Network failures and the existing six-second timeout
+still explain that a local illustrative calculation is shown.
+
+Validation: build, typecheck, backend tests (4), diff whitespace check. Chromium at
+360/390/430/768/1440 px verified lazy mounting (no calculator/request before approach),
+section order, diagram updates, 52,800 / 153,000 illustrative totals, formula details,
+contact CTA and no horizontal overflow. Verified the retained service calculator,
+API success, network failure and timeout; Axe WCAG A/AA and JavaScript checks passed.
+Mobile/desktop screenshots reviewed. No publication performed.
