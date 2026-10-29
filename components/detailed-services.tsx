@@ -280,6 +280,14 @@ function AutomationService() {
           aria-labelledby="chimney-crm"
         >
           <Copy story={data.chimneyCrm} id="chimney-crm">
+            <aside
+              className={styles.businessResult}
+              aria-label="Результат для менеджера"
+            >
+              <span>Меньше ручной работы</span>
+              <h3>{data.chimneyCrm.result.title}</h3>
+              <p>{data.chimneyCrm.result.description}</p>
+            </aside>
             <ol className={styles.crmFlow} aria-label="От клиента к документу">
               {data.chimneyCrm.steps.map((step) => (
                 <li key={step}>{step}</li>
@@ -331,6 +339,26 @@ function AutomationService() {
               <CaseLink slug="sunny-booking" label="Посмотреть Sunny Booking" />
             </Copy>
           </div>
+          <ol
+            className={styles.tenantFlow}
+            aria-label="Как устроена мультипарковая платформа"
+          >
+            <li>
+              <strong>{data.bookingFlow.platform}</strong>
+              <span>Sunny Booking</span>
+            </li>
+            <li>
+              <strong>{data.bookingFlow.companies}</strong>
+            </li>
+            <li>
+              <strong>{data.bookingFlow.ownership}</strong>
+              <ul>
+                {data.bookingFlow.resources.map((resource) => (
+                  <li key={resource}>{resource}</li>
+                ))}
+              </ul>
+            </li>
+          </ol>
           <Gallery
             title="Sunny Booking: независимые прокаты"
             images={evidence.booking}

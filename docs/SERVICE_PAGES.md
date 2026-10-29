@@ -110,3 +110,38 @@ all four service screenshots and all three case-module screenshots load and zoom
 Both normal and full-size views use the same blurred public files. Escape closes
 image dialogs; case/contact link targets are preserved. Axe WCAG A/AA passed for
 both affected routes, with no JavaScript errors. No deployment was performed.
+
+## Arched canopy illustration
+
+The existing calculator now uses components/canopy-illustration.tsx: a projected
+arched roof with transverse ribs, four corner posts and dimension lines anchored
+to the same footprint. Width/depth alter that shared geometry; roof material changes
+surface opacity/color. No raster/generated image or 3D dependency is used. Existing
+Framer Motion transitions respect reduced motion. The compact service wrapper gives
+the diagram more room on phones. Price formulas, inputs and API logic are unchanged.
+
+Validation: build, TypeScript, four backend tests; Chromium at 360/390/430/768/1440
+px. All 32 width/depth/material combinations checked at 390 px: unchanged totals,
+four posts, all diagram paths and labels inside the SVG viewport. Extreme dimensions
+also checked at the other widths. Normal/reduced-motion rendering and Axe WCAG A/AA
+passed. Mobile and desktop screenshots reviewed. No deployment performed.
+
+## Automation page: clearer outcomes and platform model
+
+Only `/services/quote-automation/` changed: shorter problem/Chimneys copy and
+smaller headings in those two sections. A separate restrained result callout
+emphasizes preparing an estimate and commercial proposal from a saved calculation,
+including on a phone. No measured time savings are claimed. Sunny Booking now has
+a responsive three-step diagram: platform → independent companies → each company's
+vehicles, tariffs, requests and storefront. The testing/onboarding status remains
+visible; the diagram does not invent customers or adoption counts.
+
+Content lives in `lib/service-pages.ts`; presentation/styles in
+`components/detailed-services.tsx` and `components/detailed-services.module.css`.
+Other service routes, case content, screenshots and 3D components are unchanged.
+
+Validation: npm run build, npm run typecheck, npm run test:backend (4 tests),
+git diff --check. Local Chromium at 360/390/430/768/1440 px checked diagram layout,
+result callout, all four CRM screenshots and zoom, links and horizontal overflow.
+Axe WCAG A/AA and JavaScript error checks passed. Mobile/desktop screenshots reviewed.
+No deployment performed.
