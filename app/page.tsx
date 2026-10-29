@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     url: "/",
     type: "website",
     locale: "ru_RU",
-    siteName: "Marseloid",
+    siteName: "Марсель",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Marseloid — сайты и веб-системы для бизнеса",
+        alt: "Марсель — сайты и веб-системы для бизнеса",
       },
     ],
   },
@@ -73,9 +73,7 @@ export default function Home() {
         aria-label="Знакомство с разработчиком"
       >
         <div className="hero-content">
-          <p className="eyebrow">
-            Marseloid / цифровые инструменты для бизнеса
-          </p>
+          <p className="eyebrow">Марсель / цифровые инструменты для бизнеса</p>
           <Reveal as="h1" className={styles.title}>
             {home.hero.before} <span>{home.hero.accent}</span> {home.hero.after}
             <span className="brand-dot">.</span>

@@ -35,7 +35,7 @@ export default async function Page({
           description={p.description}
         />
         <ArticleSections sections={p.sections} />
-        <p className="caption">Автор: Marseloid · Независимый разработчик</p>
+        <p className="caption">Автор: Марсель · Независимый разработчик</p>
       </article>
       <CTA />
     </>

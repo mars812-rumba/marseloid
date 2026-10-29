@@ -34,13 +34,13 @@ export async function generateMetadata({
             url: canonical,
             type: "website",
             locale: "ru_RU",
-            siteName: "Marseloid",
+            siteName: "Марсель",
             images: [
               {
                 url: "/og.png",
                 width: 1200,
                 height: 630,
-                alt: "Marseloid — сайты и веб-системы для бизнеса",
+                alt: "Марсель — сайты и веб-системы для бизнеса",
               },
             ],
           },

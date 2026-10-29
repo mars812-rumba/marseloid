@@ -6,21 +6,21 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://marseloid.online"),
   title: {
-    default: "Marseloid — конфигураторы, каталоги и автоматизация расчётов",
-    template: "%s · Marseloid",
+    default: "Марсель — конфигураторы, каталоги и автоматизация расчётов",
+    template: "%s · Марсель",
   },
   description:
     "Разрабатываю конфигураторы продукции, каталоги и системы расчёта стоимости для бизнеса. Работаю лично — от разбора задачи до запуска.",
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    siteName: "Marseloid",
+    siteName: "Марсель",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Marseloid — сложный продукт, понятный выбор",
+        alt: "Марсель — сложный продукт, понятный выбор",
       },
     ],
   },
@@ -44,13 +44,13 @@ export default function RootLayout({
                 {
                   "@type": "WebSite",
                   "@id": "https://marseloid.online/#website",
-                  name: "Marseloid",
+                  name: "Марсель",
                   url: "https://marseloid.online/",
                   inLanguage: "ru",
                 },
                 {
                   "@type": "Person",
-                  name: "Marseloid",
+                  name: "Марсель",
                   url: "https://marseloid.online/about",
                   sameAs: ["https://t.me/marseloid"],
                   jobTitle: "Независимый веб-разработчик",
@@ -67,13 +67,13 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <footer className="footer wrap">
             <Link className="logo" href="/">
-              marseloid<span className="brand-dot">.</span>
+              Марсель<span className="brand-dot">.</span>
             </Link>
             <p>Работаю лично. Создаю под задачу.</p>
             <div>
               <a href="https://t.me/marseloid">Telegram ↗</a>
               <Link href="/privacy/">Конфиденциальность</Link>
-              <span>© {new Date().getFullYear()} Marseloid</span>
+              <span>© {new Date().getFullYear()} Марсель</span>
             </div>
           </footer>
         </MotionProvider>
