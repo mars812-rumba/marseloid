@@ -34,15 +34,15 @@ WorkProcess are shared with the new websites-and-improvements service. Pricing
 values remain in their original configuration. LoftFire's static device cover is
 rendered with real screenshots and the original device components.
 
-Hero messenger contacts: MessengerLinks appears directly beneath the main CTA,
-with 48 px dark-green controls for WhatsApp, Telegram and MAX. Icons are inline
-currentColor SVG; Framer Motion provides one-time entrance and hover/tap feedback,
-respecting reduced motion. No new dependencies or changes to other sections.
-Owner-provided contacts live in lib/messenger-contacts.ts. WhatsApp and Telegram
-use direct external links. Pending a real shared MAX profile URL, its button reveals
-the supplied phone number and a clipboard action; no guessed max.ru/phone URL is
-published. Escape closes the disclosure and restores button focus. Clipboard errors
-leave the selectable number and a manual-copy instruction available.
-Verified at 360/390/430/768/1440 px: icon size/order/color, spacing below CTA,
-no horizontal overflow, links, MAX number copying and Escape focus return.
-Axe WCAG A/AA, normal-motion hover, build, TypeScript and four backend tests pass.
+Hero messenger contacts: three 14 px dark-green vector marks without circles or
+backgrounds, right-aligned 24 px beneath the main CTA. Transparent 44×44 px links
+preserve touch targets. The owner-approved Framer Motion wave scales the marks
+sequentially from 1 to 1.28 and back over one shared three-second cycle, without
+layout updates or React renders per frame. It pauses in place on hover, focus,
+pointer interaction, offscreen and background tabs. Reduced motion keeps it static.
+Contacts remain in lib/messenger-contacts.ts, including the actual MAX profile URL.
+No new dependencies or changes to other sections.
+Verified at 360/390/430/768/1440 px: 14 px marks, transparent backgrounds, 44 px
+hit targets, right alignment, spacing, links and static reduced-motion mode.
+The full wave, hover pause/resume, focus pause and offscreen pause passed browser
+checks. Axe WCAG A/AA, build, TypeScript and four backend tests also passed.
