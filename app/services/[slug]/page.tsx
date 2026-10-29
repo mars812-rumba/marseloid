@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
 import { services } from "@/lib/content";
-import { CTA, PageIntro } from "@/components/shared";
-import Link from "next/link";
 import { WebsitesService } from "@/components/websites-service";
-import { CanopyDemo } from "@/components/canopy-demo";
+import { DetailedService } from "@/components/detailed-services";
+import { servicePages, type DetailedServiceSlug } from "@/lib/service-pages";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return services.map(({ slug }) => ({ slug }));
@@ -14,11 +13,45 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const item = services.find((s) => s.slug === slug);
+  const item = services.find((service) => service.slug === slug);
+  if (!item) notFound();
+  const detail =
+    slug in servicePages
+      ? servicePages[slug as DetailedServiceSlug]
+      : undefined;
+  const title = detail?.title ?? item.title;
+  const description = detail?.description ?? item.description;
+  const canonical = `/services/${slug}`;
   return {
-    title: item?.title,
-    description: item?.description,
-    alternates: { canonical: `/services/${slug}` },
+    title,
+    description,
+    alternates: { canonical },
+    ...(detail
+      ? {
+          openGraph: {
+            title,
+            description,
+            url: canonical,
+            type: "website",
+            locale: "ru_RU",
+            siteName: "Marseloid",
+            images: [
+              {
+                url: "/og.png",
+                width: 1200,
+                height: 630,
+                alt: "Marseloid — сайты и веб-системы для бизнеса",
+              },
+            ],
+          },
+          twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: ["/og.png"],
+          },
+        }
+      : {}),
   };
 }
 export default async function Page({
@@ -27,57 +60,9 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const s = services.find((s) => s.slug === slug);
-  if (!s) notFound();
+  if (!services.some((service) => service.slug === slug)) notFound();
   if (slug === "websites-and-improvements") return <WebsitesService />;
-  return (
-    <>
-      <div className="wrap">
-        <PageIntro
-          label={`Услуга / ${s.number}`}
-          title={s.title}
-          description={s.short}
-        />
-        {slug === "product-configurators" && <CanopyDemo />}
-        <div className="detail-grid">
-          <aside className="detail-aside">
-            <span className="eyebrow">От ручной работы — к системе</span>
-            <p>
-              Параметры
-              <br />↓<br />
-              Правила
-              <br />↓<br />
-              Проверенный результат
-            </p>
-            <Link className="text-link" href="/cases/chimneys/">
-              Пример: Дымоход Трейд ↗
-            </Link>
-          </aside>
-          <div className="prose">
-            <section>
-              <h2>Знакомая ситуация?</h2>
-              <p>{s.problem}</p>
-            </section>
-            <section>
-              <h2>Что меняется</h2>
-              <p>{s.result}</p>
-            </section>
-            <section>
-              <h2>Что делаем в первую очередь</h2>
-              <ol>
-                {s.steps.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-            </section>
-            <section>
-              <h2>Важный нюанс</h2>
-              <p>{s.detail}</p>
-            </section>
-          </div>
-        </div>
-      </div>
-      <CTA />
-    </>
-  );
+  if (slug in servicePages)
+    return <DetailedService slug={slug as DetailedServiceSlug} />;
+  notFound();
 }

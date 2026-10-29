@@ -1,0 +1,467 @@
+.page {
+  padding-bottom: 24px;
+}
+.page :global(.page-intro) {
+  padding-bottom: 24px;
+}
+.page :global(.page-intro h1) {
+  max-width: 1040px;
+  font-size: clamp(38px, 5vw, 66px);
+  text-wrap: balance;
+}
+.page h2 {
+  font-size: clamp(30px, 3.1vw, 44px);
+  line-height: 1.15;
+  max-width: 840px;
+  text-wrap: balance;
+}
+.page h3 {
+  font-size: 23px;
+  line-height: 1.3;
+}
+.intro {
+  max-width: 760px;
+}
+.intro > p:first-child {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 65ch;
+}
+.intro .audience {
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 16px;
+  color: var(--muted);
+}
+.section {
+  margin-top: 88px;
+  min-width: 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.15fr);
+  gap: 48px;
+  align-items: start;
+}
+.copy {
+  min-width: 0;
+  max-width: 780px;
+}
+.copy h2 {
+  margin-bottom: 24px;
+}
+.copy > p {
+  font-size: 16px;
+  line-height: 1.75;
+  margin-top: 16px;
+  max-width: 65ch;
+}
+.copy :global(.text-link) {
+  margin-top: 16px;
+}
+.evidence {
+  min-width: 0;
+}
+.evidence :global(figure) {
+  margin: 0;
+}
+.features {
+  display: grid;
+  gap: 24px;
+  margin-top: 32px;
+}
+.features > div {
+  min-width: 0;
+}
+.features svg {
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.features h3 {
+  margin-bottom: 12px;
+}
+.features p {
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 43ch;
+}
+.panels {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.panels > div {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffdf8;
+}
+.catalogExample {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: 48px;
+}
+.connection {
+  background: var(--surface);
+  padding: 40px;
+  border-radius: 6px;
+}
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 20px;
+}
+.flow li {
+  position: relative;
+  padding: 20px 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.flow li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+}
+.manualCalculation {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: 64px;
+  align-items: end;
+}
+.callout {
+  padding-block: 24px;
+  border-block: 1px solid var(--line);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--dark);
+  max-width: 30ch;
+}
+.demoSection {
+  padding-block: 32px;
+  border-block: 1px solid var(--line);
+}
+.demoSection > div:first-child {
+  margin-bottom: 28px;
+}
+.demoNotice {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 14px;
+  margin-top: 20px;
+}
+.demoSection > div:nth-child(2) {
+  margin-bottom: 24px;
+}
+.demoExplanation {
+  max-width: 760px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.wideExample > .copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 48px;
+  max-width: none;
+}
+.wideExample > .copy h2 {
+  grid-row: span 3;
+  margin-bottom: 0;
+}
+.wideExample > .copy p {
+  grid-column: 2;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.wideExample > .copy :global(.text-link) {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 0;
+}
+.wideExample > .evidence {
+  margin-top: 32px;
+}
+.loftExample {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.lead {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 65ch;
+  margin-top: 24px;
+}
+.calculations {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+.calculations > div {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.automationProblem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 80px;
+  align-items: center;
+}
+.processLabels {
+  display: grid;
+  gap: 12px;
+}
+.processLabels span {
+  border-bottom: 1px solid var(--line);
+  padding-block: 14px;
+  font-size: 22px;
+  color: var(--muted);
+}
+.processLabels span:last-child {
+  color: var(--accent);
+}
+.aiSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
+  gap: 80px;
+  align-items: center;
+  padding: 40px;
+  background: var(--surface);
+  border-radius: 6px;
+}
+.aiSection > .evidence {
+  max-width: 360px;
+  width: 100%;
+  justify-self: center;
+}
+.copy .smallNote {
+  font-size: 13px;
+  color: var(--muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.bookingSection {
+  border-top: 1px solid var(--line);
+  padding-top: 40px;
+}
+.bookingSection > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+  gap: 48px;
+}
+.status {
+  font-size: 12px;
+  color: var(--accent);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.bookingSection > .evidence {
+  margin-top: 32px;
+}
+.automation {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 48px;
+}
+.automation > div {
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.estimateLink {
+  display: flex;
+  align-items: start;
+  gap: 48px;
+  justify-content: space-between;
+  background: var(--surface);
+  padding: 28px;
+  margin-top: 32px;
+  border-radius: 4px;
+}
+.estimateLink p {
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+.estimateLink :global(.text-link) {
+  flex-shrink: 0;
+}
+.contact h2 {
+  max-width: 900px;
+}
+.contact :global(.contact-bottom) {
+  align-items: start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.contact :global(.contact-bottom) > p {
+  max-width: 640px;
+}
+.contact :global(.button) {
+  max-width: 100%;
+}
+@media (max-width: 1100px) {
+  .split,
+  .catalogExample,
+  .loftExample,
+  .manualCalculation {
+    gap: 32px;
+  }
+  .automationProblem {
+    gap: 40px;
+    grid-template-columns: minmax(0, 1fr) 180px;
+  }
+  .aiSection {
+    gap: 32px;
+    padding: 32px;
+  }
+  .calculations {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .estimateLink {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+@media (max-width: 767px) {
+  .page :global(.page-intro) {
+    padding-top: 32px;
+  }
+  .page :global(.page-intro h1) {
+    font-size: 38px;
+  }
+  .catalogPage :global(.page-intro h1) {
+    font-size: clamp(34px, 9.2vw, 38px);
+    text-wrap: pretty;
+  }
+  .page :global(.intro-text) {
+    font-size: 16px;
+    margin-top: 24px;
+  }
+  .intro > :global(.button) {
+    max-width: 100%;
+  }
+  .section {
+    margin-top: 64px;
+  }
+  .split,
+  .catalogExample,
+  .loftExample,
+  .manualCalculation,
+  .automationProblem,
+  .aiSection {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .copy > p {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .copy h2 {
+    margin-bottom: 20px;
+  }
+  .panels {
+    grid-template-columns: 1fr;
+  }
+  .panels > div {
+    padding: 24px;
+  }
+  .features {
+    gap: 20px;
+  }
+  .features h3 {
+    font-size: 22px;
+  }
+  .connection {
+    padding: 24px;
+  }
+  .flow {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .flow li {
+    padding: 16px;
+  }
+  .flow li:not(:last-child)::after {
+    content: "↓";
+    right: auto;
+    left: 20px;
+    top: auto;
+    bottom: -24px;
+    transform: none;
+  }
+  .callout {
+    font-size: 18px;
+    max-width: none;
+    padding-block: 16px;
+  }
+  .demoSection {
+    padding-block: 24px;
+  }
+  .wideExample > .copy {
+    display: block;
+  }
+  .wideExample > .copy h2 {
+    margin-bottom: 24px;
+  }
+  .wideExample > .evidence {
+    margin-top: 28px;
+  }
+  .loftExample {
+    padding-top: 32px;
+  }
+  .calculations,
+  .automation {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .calculations > div,
+  .automation > div {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 0 16px;
+  }
+  .calculations svg,
+  .automation svg {
+    grid-row: span 2;
+    margin: 4px 0 0;
+  }
+  .processLabels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 24px;
+  }
+  .processLabels span {
+    font-size: 19px;
+  }
+  .aiSection {
+    padding: 24px;
+  }
+  .bookingSection {
+    padding-top: 32px;
+  }
+  .bookingSection > div:first-child {
+    display: block;
+  }
+  .estimateLink {
+    padding: 24px;
+  }
+  .estimateLink :global(.text-link) {
+    flex-shrink: 1;
+  }
+  .contact {
+    padding-block: 32px;
+  }
+  .contact h2 {
+    font-size: 34px;
+  }
+  .contact :global(.contact-bottom) {
+    gap: 24px;
+  }
+}

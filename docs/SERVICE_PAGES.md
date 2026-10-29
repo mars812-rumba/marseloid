@@ -1,0 +1,78 @@
+# Three service pages
+
+Existing routes are preserved:
+- `/services/manufacturer-catalogs/`: product choices, variants, catalog maintenance,
+  real Chimneys product/admin screenshots, and a short catalog-to-estimate flow.
+- `/services/product-configurators/`: manual-calculation scenario, the existing
+  interactive canopy demo, Chimneys configuration/scheme/PDF, and LoftFire sets.
+- `/services/quote-automation/`: CRM/calendar/booking in Sunny Rentals, its reviewed
+  AI controls, Sunny Booking onboarding and Food Market menu/order operations.
+
+## Editing and reuse
+
+`lib/service-pages.ts` owns the page copy, metadata and selection of screenshots.
+It reuses reviewed CaseStudy image objects without changing the original cases.
+`components/detailed-services.tsx` gives each page its own composition and shares
+small helpers for headings, capabilities, galleries, internal links and contact CTA.
+`components/detailed-services.module.css` is scoped to these pages.
+
+The route still renders WebsitesService for websites-and-improvements, unchanged.
+Other service index titles/short descriptions are updated in `lib/content.ts` to
+match the broader service names. Homepage content is not modified.
+
+Reused components: PageIntro, Reveal, MotionLink, CaseImageViewer (adaptive image
+pairs, screenshot selection, native zoom and original-size view), and CanopyDemo.
+No 3D models, images, libraries, calculator formulas or backend code were added or
+changed. Text is from the independent developer's perspective.
+
+## Evidence and limits
+
+All images come from the existing public case assets. CRM names/IDs are already
+irreversibly blurred. No raw uploads or customer records are published. Existing
+captions distinguish different real mobile and desktop captures of the same task.
+The pipe card on desktop corresponds to a deflector card on mobile; the copy and
+alt text retain this distinction. Catalog/admin and photography controls are shown
+as separate captures, not fabricated new product screens.
+
+Sunny Rentals calendars and AI controls have real mobile captures; those portrait
+screens are also available on desktop, rather than replaced by invented wide UI.
+Sunny Booking's fleet module uses tariff editing on mobile and fleet cards on
+desktop, with original captions. Its status is testing/onboarding. Food Market is
+explicitly a demo product, with no payment-processing or adoption claims added.
+
+The canopy demo remains an illustrative calculation (not a commercial quotation):
+width 3–6, depth 2–5; area × (3200 + 1200/1900). Local updates and server-verification
+fallback remain intact. In Chimneys, technical decisions stay subject to a
+specialist's review. No new sales metrics, reviews, SEO guarantees or clients.
+
+Metadata is unique per service: title, description, canonical, Open Graph and
+Twitter fields. No ratings or offer structured data were introduced.
+
+## Changed files
+
+- `app/services/[slug]/page.tsx`
+- `components/detailed-services.tsx`
+- `components/detailed-services.module.css`
+- `lib/service-pages.ts`
+- `lib/content.ts` (two service names and their short descriptions only)
+- `docs/SERVICE_PAGES.md`
+
+## Validation
+
+- `npm run build`, `npm run typecheck`, `npm run test:backend`: passed; four backend
+  tests include all supported canopy parameter combinations and invalid inputs.
+- Chromium at 360/390/430/768/1440 px: all three service pages, readable layout,
+  one H1 each and no horizontal overflow. Inspected mobile and desktop screenshots.
+- All screenshot selectors and native zoom dialogs at 390 and 1440 px: images
+  load, captions/alt remain present, Escape closes the viewer. Internal case/contact
+  links and public image links return success.
+- Unique page titles/descriptions, canonical URLs and matching og:url: passed.
+- Canopy demo: one instance only; 52,800 default, 153,000 at 6×5/metal, 76,500 at
+  3×5/metal. Parameters and visualization update; forced API failure preserves
+  the local calculation. The illustrative-price notice is visible.
+- Axe WCAG 2 A/AA: no violations on the three pages at 390 px. No browser JavaScript
+  errors detected. `git diff --check`: clean.
+
+Browser checks used desktop Chromium with responsive viewports. Physical Safari/
+iPhone behavior and actual contact submission were not exercised. No messages,
+commits, pushes, deployments or production service restarts were performed.
