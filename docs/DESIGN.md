@@ -51,3 +51,10 @@ The database recommendations mixed dark-only style with a light palette. Resolve
   rename the site when updating personal copy. The about-page introduction reads
   «Я — Марсель», and the existing hero identity/photo still use the developer's
   name. Keep brand metadata, social preview, domain and Telegram contact intact.
+
+- Homepage before/after estimate flow: retain the existing two process columns
+  (stacked on phones), with one 22 px decorative Lucide icon per step. «Было» uses
+  the terracotta outline/heading/arrows; «Стало» uses a restrained green #356b49
+  outline/heading/arrows and pale #f3f8f3 fill. Text stays dark and both headings
+  remain explicit, so the distinction does not rely on color alone. Only connector
+  arrows are omitted after the last step; the final step's icon stays visible.

@@ -162,17 +162,20 @@
 }
 .before,
 .after {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--process-color);
   padding-top: 20px;
 }
+.before {
+  --process-color: var(--accent);
+}
 .after {
-  border-color: var(--accent);
+  --process-color: #356b49;
 }
 .comparison h3 {
   font-size: 24px;
 }
-.after h3 {
-  color: var(--accent);
+.comparison h3 {
+  color: var(--process-color);
 }
 .comparison ol {
   display: grid;
@@ -190,23 +193,26 @@
   line-height: 1.5;
 }
 .comparison li > span {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
   padding: 14px 18px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--process-color);
   border-radius: 4px;
   width: 100%;
   background: var(--paper);
 }
 .after li > span {
-  border-color: var(--accent);
-  background: #fffdf8;
+  background: #f3f8f3;
 }
-.comparison li svg {
-  margin: 0 0 12px 20px;
-  color: var(--muted);
+.stepIcon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--process-color);
 }
-.comparison li:last-child svg {
-  display: none;
+.flowArrow {
+  margin: 0 0 12px 29px;
+  color: var(--process-color);
 }
 .comparisonNotes {
   display: grid;

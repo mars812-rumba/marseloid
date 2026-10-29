@@ -13,6 +13,12 @@ import {
   ListFilter,
   Wrench,
   ArrowDown,
+  Search,
+  Boxes,
+  FileText,
+  SlidersHorizontal,
+  ClipboardCheck,
+  FilePenLine,
 } from "lucide-react";
 const taskIcons = [Calculator, MessagesSquare, ListFilter, Wrench];
 import styles from "./home.module.css";
@@ -73,7 +79,9 @@ export default function Home() {
         aria-label="Знакомство с разработчиком"
       >
         <div className="hero-content">
-          <p className="eyebrow">Marseloid / цифровые инструменты для бизнеса</p>
+          <p className="eyebrow">
+            Marseloid / цифровые инструменты для бизнеса
+          </p>
           <Reveal as="h1" className={styles.title}>
             {home.hero.before} <span>{home.hero.accent}</span> {home.hero.after}
             <span className="brand-dot">.</span>
@@ -226,8 +234,21 @@ export default function Home() {
         />
         <div className={styles.comparison}>
           {[
-            { title: "Было", steps: home.comparison.before },
-            { title: "Стало", steps: home.comparison.after },
+            {
+              title: "Было",
+              steps: home.comparison.before,
+              icons: [Search, Boxes, Calculator, FileText],
+            },
+            {
+              title: "Стало",
+              steps: home.comparison.after,
+              icons: [
+                SlidersHorizontal,
+                Calculator,
+                ClipboardCheck,
+                FilePenLine,
+              ],
+            },
           ].map((column, i) => (
             <Reveal
               className={i ? styles.after : styles.before}
@@ -235,12 +256,30 @@ export default function Home() {
             >
               <h3>{column.title}</h3>
               <ol>
-                {column.steps.map((step) => (
-                  <li key={step}>
-                    <span>{step}</span>
-                    <ArrowDown size={18} strokeWidth={1.5} aria-hidden="true" />
-                  </li>
-                ))}
+                {column.steps.map((step, index) => {
+                  const Icon = column.icons[index];
+                  return (
+                    <li key={step}>
+                      <span>
+                        <Icon
+                          className={styles.stepIcon}
+                          size={22}
+                          strokeWidth={1.75}
+                          aria-hidden="true"
+                        />
+                        <span>{step}</span>
+                      </span>
+                      {index < column.steps.length - 1 && (
+                        <ArrowDown
+                          className={styles.flowArrow}
+                          size={18}
+                          strokeWidth={1.5}
+                          aria-hidden="true"
+                        />
+                      )}
+                    </li>
+                  );
+                })}
               </ol>
             </Reveal>
           ))}
