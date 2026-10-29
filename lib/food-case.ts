@@ -1,3 +1,4 @@
+import { telegramContactHref } from "@/lib/telegram-contact";
 import type { CaseImage, CaseStudy } from "@/lib/case-studies";
 import type { CaseDemo } from "@/lib/case-demo";
 import { foodAssets } from "@/lib/food-assets";
@@ -317,7 +318,7 @@ export const foodStudy: CaseStudy = {
     title: "Нужен сайт ресторана, онлайн-меню или система заказов?",
     description:
       "Разрабатываю сайты и веб-приложения для бизнеса: от небольших страниц и каталогов до систем заказов, CRM, административных панелей и автоматизации. Работаю напрямую с заказчиками и подключаюсь к проектам агентств как независимый разработчик.",
-    href: "https://t.me/marseloid",
+    href: telegramContactHref,
     label: "Написать @marseloid",
   },
 };

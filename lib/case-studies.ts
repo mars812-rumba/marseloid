@@ -1,3 +1,4 @@
+import { telegramContactHref } from "@/lib/telegram-contact";
 import { chimneyClientImages } from "@/lib/chimney-clients";
 import { sunnyStudy } from "@/lib/sunny-case";
 import { bookingStudy } from "@/lib/booking-case";
@@ -461,7 +462,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       title: "Нужна похожая система\nдля бизнеса или клиента?",
       description:
         "Разрабатываю коммерческие веб-системы под задачи бизнеса: каталоги, конфигураторы, CRM, административные интерфейсы и автоматизацию процессов. Работаю с заказчиками напрямую и подключаюсь к проектам агентств как независимый разработчик.",
-      href: "https://t.me/marseloid",
+      href: telegramContactHref,
       label: "Написать @marseloid",
     },
   },

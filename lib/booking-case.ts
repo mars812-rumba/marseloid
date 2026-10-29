@@ -1,3 +1,4 @@
+import { telegramContactHref } from "@/lib/telegram-contact";
 import type { CaseImage, CaseStudy } from "@/lib/case-studies";
 import type { CaseDemo } from "@/lib/case-demo";
 import { bookingAssets } from "@/lib/booking-assets";
@@ -337,7 +338,7 @@ export const bookingStudy: CaseStudy = {
     title: "Нужна собственная система бронирования или управления?",
     description:
       "Разрабатываю веб-платформы с индивидуальной бизнес-логикой: системы бронирования, календари, CRM, административные панели и мультипользовательские сервисы. Работаю напрямую с бизнесом и подключаюсь к проектам агентств как технический подрядчик.",
-    href: "https://t.me/marseloid",
+    href: telegramContactHref,
     label: "Написать @marseloid",
   },
 };

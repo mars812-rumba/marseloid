@@ -1,3 +1,4 @@
+import { telegramContactHref } from "@/lib/telegram-contact";
 import type { CaseImage, CaseImageSource, CaseStudy } from "@/lib/case-studies";
 import type { CaseDemo } from "@/lib/case-demo";
 import { sunnyAssets } from "@/lib/sunny-assets";
@@ -319,7 +320,7 @@ export const sunnyStudy: CaseStudy = {
     title: "Нужна система для аренды, бронирования или работы с клиентами?",
     description:
       "Разрабатываю коммерческие веб-системы под реальные процессы бизнеса. Работаю с заказчиками напрямую и подключаюсь к проектам агентств как независимый разработчик.",
-    href: "https://t.me/marseloid",
+    href: telegramContactHref,
     label: "Написать @marseloid",
   },
 };

@@ -1,3 +1,4 @@
+import { telegramContactHref } from "@/lib/telegram-contact";
 export const home = {
   metadata: {
     title: "Марсель — разработка сайтов, доработки и веб-системы",
@@ -158,7 +159,7 @@ export const home = {
     title: "Расскажите, что хотите сделать.",
     description:
       "Можно прийти с готовым техническим заданием или просто описать задачу. Посмотрю, как её можно решить, предложу разумный объём работы и предварительную оценку стоимости.",
-    href: "https://t.me/marseloid",
+    href: telegramContactHref,
   },
 };
 

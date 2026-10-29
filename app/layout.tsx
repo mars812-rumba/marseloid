@@ -1,3 +1,4 @@
+import { telegramContactHref } from "@/lib/telegram-contact";
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { MotionProvider } from "@/components/motion";
@@ -71,7 +72,7 @@ export default function RootLayout({
             </Link>
             <p>Работаю лично. Создаю под задачу.</p>
             <div>
-              <a href="https://t.me/marseloid">Telegram ↗</a>
+              <a href={telegramContactHref}>Telegram ↗</a>
               <Link href="/privacy/">Конфиденциальность</Link>
               <span>© {new Date().getFullYear()} Марсель</span>
             </div>

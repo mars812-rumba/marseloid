@@ -1,3 +1,4 @@
+import { telegramContactHref } from "@/lib/telegram-contact";
 import { PageIntro } from "@/components/shared";
 import { Brief } from "@/components/brief";
 export const metadata = {
@@ -18,7 +19,7 @@ export default function Page() {
         <div className="direct-contact">
           <span className="eyebrow">Напрямую, без менеджера</span>
           <br />
-          <a href="https://t.me/marseloid">@marseloid ↗</a>
+          <a href={telegramContactHref}>@marseloid ↗</a>
           <p>
             Можно сразу написать в Telegram или подготовить описание с помощью
             формы рядом.
