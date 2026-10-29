@@ -39,11 +39,13 @@ module uses the real mobile grill presentation, within the same product category
 The order-detail capture shows the selected composition and total in the constructor
 module. The advantages capture is prepared but not repeated in the case.
 
-The preview `public/projects/loft-fire-devices.webp` is rendered from the existing
-phone/laptop components with real home screenshots, rather than generated imagery.
-Recreate on an isolated local preview with `scripts/render-loft-cover.cjs`, supplying
-PLAYWRIGHT_MODULE and BROWSER_EXECUTABLE if Playwright is not installed locally.
-No new dependency is required at runtime.
+The active preview `public/projects/loft-fire-mockup.webp` is the owner's supplied
+Telegram mockup (2026-10-29), optimized to WebP at its original 1280×853 dimensions.
+The full composition, background and real interface content are preserved without
+cropping or redrawing. It is shared by the homepage, /cases and the websites service.
+The earlier rendered `loft-fire-devices.webp` remains available as a fallback;
+`scripts/render-loft-cover.cjs` only regenerates that earlier asset, not the active
+owner-supplied mockup. The interactive case gallery is unchanged.
 
 ## Service and calculator
 

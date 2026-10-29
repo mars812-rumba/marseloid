@@ -46,7 +46,7 @@ export function WebsitesService() {
             aria-label="Посмотреть кейс LoftFire"
           >
             <Image
-              src="/projects/loft-fire-devices.webp"
+              src="/projects/loft-fire-mockup.webp"
               alt="LoftFire: сайт и конструктор комплектов на ноутбуке и телефоне"
               width={1280}
               height={853}

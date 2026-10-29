@@ -70,7 +70,7 @@ export function ProjectArt({ tone }: { tone: string }) {
 
 const projectCovers: Record<string, string> = {
   chimneys: "/projects/chimneys-cutout.webp",
-  "loft-fire": "/projects/loft-fire-devices.webp",
+  "loft-fire": "/projects/loft-fire-mockup.webp",
   "sunny-rentals": "/projects/sunny-rentals-cutout.webp",
   "sunny-booking": "/projects/sunny-booking-cutout.webp",
   "food-market": "/projects/food-market-cutout.webp",
