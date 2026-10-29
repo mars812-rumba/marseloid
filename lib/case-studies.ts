@@ -1,5 +1,6 @@
 import { sunnyStudy } from "@/lib/sunny-case";
 import { bookingStudy } from "@/lib/booking-case";
+import { loftStudy } from "@/lib/loft-case";
 import { foodStudy } from "@/lib/food-case";
 
 export type CaseImageSource = {
@@ -26,9 +27,11 @@ export type CaseModule = {
   features: string[];
   images: CaseImage[];
   note?: string;
+  link?: { label: string; href: string };
 };
 
 export type CaseStudy = {
+  label?: string;
   title?: string;
   subtitle?: string;
   story?: { title: string; paragraphs: string[] };
@@ -103,6 +106,7 @@ const mobileScreen = (
 });
 
 export const caseStudies: Record<string, CaseStudy> = {
+  "loft-fire": loftStudy,
   "food-market": foodStudy,
   "sunny-booking": bookingStudy,
   "sunny-rentals": sunnyStudy,

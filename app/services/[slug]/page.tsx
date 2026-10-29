@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { services } from "@/lib/content";
 import { CTA, PageIntro } from "@/components/shared";
 import Link from "next/link";
+import { WebsitesService } from "@/components/websites-service";
+import { CanopyDemo } from "@/components/canopy-demo";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return services.map(({ slug }) => ({ slug }));
@@ -27,6 +29,7 @@ export default async function Page({
   const { slug } = await params;
   const s = services.find((s) => s.slug === slug);
   if (!s) notFound();
+  if (slug === "websites-and-improvements") return <WebsitesService />;
   return (
     <>
       <div className="wrap">
@@ -35,6 +38,7 @@ export default async function Page({
           title={s.title}
           description={s.short}
         />
+        {slug === "product-configurators" && <CanopyDemo />}
         <div className="detail-grid">
           <aside className="detail-aside">
             <span className="eyebrow">От ручной работы — к системе</span>

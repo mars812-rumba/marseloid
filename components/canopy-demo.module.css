@@ -1,0 +1,45 @@
+.compact {
+  max-width: 1000px;
+  margin: 16px auto 64px;
+  min-height: 480px;
+}
+.compact :global(.demo-workspace) {
+  padding: 24px 32px 16px;
+}
+.compact :global(.demo-grid) {
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.compact :global(.canopy-scene) {
+  min-height: 220px;
+}
+.compact :global(.canopy-scene svg) {
+  max-width: 340px;
+}
+@media (max-width: 767px) {
+  .compact :global(.demo-workspace) {
+    padding: 20px;
+  }
+  .compact :global(.demo-grid) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .compact :global(.canopy-scene) {
+    min-height: 160px;
+  }
+  .compact :global(.canopy-scene svg) {
+    max-width: 240px;
+  }
+  .compact :global(.demo-top) {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .compact :global(.demo-bar) {
+    padding-inline: 20px;
+    gap: 16px;
+  }
+  .compact :global(.demo-footer) {
+    flex-wrap: wrap;
+  }
+}

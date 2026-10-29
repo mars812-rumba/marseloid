@@ -39,7 +39,9 @@ export function CaseStudyPage({
           <Link className="breadcrumb" href="/cases/">
             Все проекты <span aria-hidden="true">/</span>
           </Link>
-          <p className="eyebrow">Коммерческая веб-система / {project.status}</p>
+          <p className="eyebrow">
+            {study.label ?? `Коммерческая веб-система / ${project.status}`}
+          </p>
           <h1>{study.title ?? project.title}</h1>
           {study.subtitle && (
             <p className={styles.heroSubtitle}>{study.subtitle}</p>

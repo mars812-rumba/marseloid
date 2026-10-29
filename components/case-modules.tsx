@@ -65,6 +65,7 @@ export function CaseModules({ modules }: { modules: CaseModule[] }) {
             aria-labelledby={`${id}-tab-${module.id}`}
             tabIndex={0}
           >
+            <CaseImageViewer images={module.images} title={module.label} />
             <p className="eyebrow">
               Модуль / {String(index + 1).padStart(2, "0")}
             </p>
@@ -78,7 +79,17 @@ export function CaseModules({ modules }: { modules: CaseModule[] }) {
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
-            <CaseImageViewer images={module.images} title={module.label} />
+            {module.link && (
+              <a
+                className="text-link"
+                href={module.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {module.link.label} ↗
+                <span className="sr-only"> (в новой вкладке)</span>
+              </a>
+            )}
             {module.note && <p className={styles.moduleNote}>{module.note}</p>}
           </section>
         ))}

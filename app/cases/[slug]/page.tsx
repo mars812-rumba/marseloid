@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 import { sunnyDemo } from "@/lib/sunny-case";
 import { bookingDemo } from "@/lib/booking-case";
+import { loftDemo } from "@/lib/loft-case";
 import { foodDemo } from "@/lib/food-case";
 import { caseStudies } from "@/lib/case-studies";
 import { CaseStudyPage } from "@/components/case-study";
 import { cases } from "@/lib/content";
+import { DeferredCaseGallery } from "@/components/deferred-case-gallery";
 import { CaseGallery } from "@/components/case-gallery";
 import {
   ArticleSections,
@@ -50,6 +52,8 @@ export default async function Page({
             <CaseGallery key={c.slug} demo={sunnyDemo} />
           ) : c.slug === "sunny-booking" ? (
             <CaseGallery key={c.slug} demo={bookingDemo} />
+          ) : c.slug === "loft-fire" ? (
+            <DeferredCaseGallery key={c.slug} demo={loftDemo} />
           ) : c.slug === "food-market" ? (
             <CaseGallery key={c.slug} demo={foodDemo} />
           ) : undefined

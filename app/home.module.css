@@ -1,0 +1,402 @@
+.home {
+  --home-gap: 88px;
+}
+.home .hero {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 112px);
+  padding-block: 40px 32px;
+}
+.home .title {
+  max-width: 850px;
+}
+.home .title > span:first-of-type {
+  padding-right: 0.12em;
+}
+.name {
+  color: var(--ink);
+  font-size: 26px;
+  font-weight: 550;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+.heroFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  width: 100%;
+  max-width: 900px;
+  margin-top: auto;
+  padding-top: 28px;
+  color: var(--muted);
+  font:
+    10px/1.6 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  letter-spacing: 0.04em;
+}
+.heroFooter a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+}
+.home .section {
+  margin-top: var(--home-gap);
+}
+.home .hero + .section {
+  margin-top: 72px;
+}
+.home .heading {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 0 64px;
+  margin-bottom: 32px;
+}
+.home .heading h2 {
+  max-width: 650px;
+}
+.home .heading > p:last-child:not(:first-child) {
+  max-width: 550px;
+  line-height: 1.7;
+}
+.taskGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.task {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 28px;
+  background: #fffdf8;
+}
+.task > svg {
+  color: var(--accent);
+  margin-top: 3px;
+}
+.task h3 {
+  font-size: 22px;
+  line-height: 1.3;
+  max-width: 400px;
+}
+.task p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 12px;
+  max-width: 47ch;
+}
+.projectGrid :global(.project-card) {
+  min-width: 0;
+}
+.projectGrid :global(.project-meta) {
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+.projectGrid :global(.project-meta .eyebrow) {
+  font-size: 11px;
+}
+.projectGrid :global(.project-card) h3 {
+  align-items: start;
+  gap: 12px;
+  font-size: clamp(24px, 2.1vw, 30px);
+  line-height: 1.25;
+}
+.projectGrid :global(.project-card) h3 > span {
+  flex-shrink: 0;
+}
+.projectGrid :global(.project-card) > p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.home .section > :global(.text-link) {
+  margin-top: 16px;
+}
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 64px;
+}
+.serviceRow {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 20px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+.serviceRow > span {
+  color: var(--accent);
+  padding-top: 6px;
+}
+.serviceRow h3 {
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.2;
+  max-width: 360px;
+}
+.serviceRow > div {
+  grid-column: 2;
+}
+.serviceRow p {
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 46ch;
+}
+.serviceRow :global(.text-link) {
+  margin-top: 16px;
+}
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  padding: 32px;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+.before,
+.after {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.after {
+  border-color: var(--accent);
+}
+.comparison h3 {
+  font-size: 24px;
+}
+.after h3 {
+  color: var(--accent);
+}
+.comparison ol {
+  display: grid;
+  gap: 0;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.comparison li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.comparison li > span {
+  display: block;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  width: 100%;
+  background: var(--paper);
+}
+.after li > span {
+  border-color: var(--accent);
+  background: #fffdf8;
+}
+.comparison li svg {
+  margin: 0 0 12px 20px;
+  color: var(--muted);
+}
+.comparison li:last-child svg {
+  display: none;
+}
+.comparisonNotes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  margin-top: 24px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.home .agencies {
+  background: var(--dark);
+  color: var(--on-dark);
+  padding: 48px;
+  border-radius: 6px;
+}
+.agencies p,
+.agencies :global(.eyebrow) {
+  color: var(--dark-muted);
+}
+.agencies h2 {
+  color: var(--on-dark);
+}
+.agencies .agencyList li {
+  border-color: #4b5549;
+}
+.agencies :global(.button) {
+  background: var(--on-dark);
+  color: var(--dark);
+}
+.agencyBody {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px;
+}
+.agencyBody p {
+  max-width: 500px;
+  line-height: 1.7;
+}
+.agencyBody :global(.button) {
+  margin-top: 24px;
+}
+.agencyList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.agencyList li {
+  padding-block: 12px;
+  border-top: 1px solid var(--line);
+}
+.home .processSection {
+  gap: 64px;
+}
+.home .processSection h2 {
+  max-width: 550px;
+}
+.home .section :global(.button) {
+  max-width: 100%;
+  gap: 24px;
+}
+.home .contact {
+  margin-top: var(--home-gap);
+  padding-inline: clamp(24px, 4vw, 56px);
+}
+.home .contact h2 {
+  max-width: 850px;
+}
+.home .contactBottom {
+  align-items: start;
+  gap: 48px;
+}
+.home .contactBottom > p {
+  max-width: 580px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.contactActions {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+.telegram,
+.contactPage {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.telegram {
+  color: var(--on-dark);
+  font-size: 14px;
+}
+.contactPage {
+  color: var(--dark-muted);
+  font-size: 13px;
+}
+@media (max-width: 1100px) {
+  .home .heading,
+  .agencyBody,
+  .home .processSection {
+    gap: 24px;
+  }
+  .home .contactBottom {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+}
+@media (max-width: 767px) {
+  .home {
+    --home-gap: 64px;
+  }
+  .home .hero {
+    min-height: calc(100svh - 88px);
+    padding-block: 28px 24px;
+  }
+  .home .hero + .section {
+    margin-top: 56px;
+  }
+  .heroFooter {
+    padding-top: 24px;
+  }
+  .home .heading {
+    display: block;
+    margin-bottom: 28px;
+  }
+  .home .heading > p:last-child:not(:first-child) {
+    margin-top: 20px;
+  }
+  .taskGrid,
+  .comparison,
+  .comparisonNotes,
+  .agencyBody,
+  .home .processSection {
+    grid-template-columns: 1fr;
+  }
+  .taskGrid {
+    gap: 16px;
+  }
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+  .home .agencies {
+    padding: 28px 24px;
+  }
+  .task {
+    gap: 12px;
+    padding: 24px 20px;
+  }
+  .task h3 {
+    font-size: 21px;
+  }
+  .serviceRow {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 12px;
+    padding-block: 24px;
+  }
+  .serviceRow > div {
+    grid-column: 2;
+  }
+  .comparison {
+    padding: 24px 20px;
+    gap: 28px;
+  }
+  .comparisonNotes {
+    gap: 16px;
+  }
+  .agencyBody {
+    gap: 28px;
+  }
+  .home .contact {
+    width: calc(100% - 48px);
+    padding-block: 32px;
+  }
+  .home .contact h2 {
+    font-size: 36px;
+  }
+  .home .contactBottom {
+    margin-top: 24px;
+  }
+  .contactActions {
+    width: 100%;
+  }
+  .contactActions :global(.button) {
+    width: 100%;
+    gap: 20px;
+  }
+}
+
+.home .heading > p:last-child:not(:first-child) {
+  font-size: 15px;
+}

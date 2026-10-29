@@ -1,134 +1,312 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { CTA, Projects, Services } from "@/components/shared";
+import { Projects } from "@/components/shared";
 import { MotionLink, Reveal } from "@/components/motion";
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+import { home, homeProjectSummaries } from "@/lib/home-content";
+import { PricingDetails, WorkProcess } from "@/components/commercial-details";
+import {
+  Calculator,
+  MessagesSquare,
+  ListFilter,
+  Wrench,
+  ArrowDown,
+} from "lucide-react";
+const taskIcons = [Calculator, MessagesSquare, ListFilter, Wrench];
+import styles from "./home.module.css";
+
+export const metadata: Metadata = {
+  title: { absolute: home.metadata.title },
+  description: home.metadata.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: home.metadata.title,
+    description: home.metadata.description,
+    url: "/",
+    type: "website",
+    locale: "ru_RU",
+    siteName: "Marseloid",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Marseloid — сайты и веб-системы для бизнеса",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: home.metadata.title,
+    description: home.metadata.description,
+    images: ["/og.png"],
+  },
+};
+
+function Heading({
+  id,
+  label,
+  title,
+  description,
+}: {
+  id: string;
+  label: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <Reveal className={`section-heading ${styles.heading}`}>
+      <p className="eyebrow">{label}</p>
+      <h2 id={id}>{title}</h2>
+      {description && <p>{description}</p>}
+    </Reveal>
+  );
+}
+
 export default function Home() {
   return (
-    <>
-      <section className="hero wrap">
+    <div className={styles.home}>
+      <section
+        className={`hero wrap ${styles.hero}`}
+        aria-label="Знакомство с разработчиком"
+      >
         <div className="hero-content">
-          <div className="hero-line">
-            <span className="eyebrow">
-              <i className="small-cross" /> Marseloid / цифровые инструменты для
-              бизнеса
-            </span>
-          </div>
-          <Reveal as="h1">
-            Конфигураторы продукции, каталоги и&nbsp;<span>автоматизация</span>{" "}
-            расчётов для бизнеса<span className="brand-dot">.</span>
+          <p className="eyebrow">
+            Marseloid / цифровые инструменты для бизнеса
+          </p>
+          <Reveal as="h1" className={styles.title}>
+            {home.hero.before} <span>{home.hero.accent}</span> {home.hero.after}
+            <span className="brand-dot">.</span>
           </Reveal>
           <Reveal className="developer-card" delay={0.12}>
             <div className="developer-identity">
               <Image
                 className="developer-photo"
                 src="/images/mars-profile.webp"
-                alt="Фотография Марса"
+                alt="Марсель, независимый веб-разработчик"
                 width={72}
                 height={72}
                 sizes="72px"
               />
               <div className="developer-details">
-                <h2>Марс</h2>
-                <p className="developer-role">Независимый веб-разработчик</p>
+                <p className={styles.name}>{home.hero.name}</p>
+                <p className="developer-role">{home.hero.role}</p>
                 <p className="developer-status">
                   <span aria-hidden="true" />
-                  Открыт к сотрудничеству
+                  {home.hero.status}
                 </p>
               </div>
             </div>
             <div className="developer-description">
-              <p>
-                Разрабатываю сайты и веб-приложения — от лендингов и небольших
-                доработок до CRM и автоматизации. Работаю с бизнесом и
-                веб-студиями.
-              </p>
+              <p>{home.hero.description}</p>
             </div>
-            <MotionLink className="button" href="/contact/">
+            <MotionLink className="button" href="#contact">
               Обсудить задачу <span aria-hidden="true">↗</span>
             </MotionLink>
           </Reveal>
         </div>
+        <nav
+          className={styles.heroFooter}
+          aria-label="Навигация первого экрана"
+        >
+          <span>01 / ЗНАКОМСТВО</span>
+          <a href="#tasks">
+            Листайте вниз <span aria-hidden="true">↓</span>
+          </a>
+        </nav>
       </section>
-      <section className="section wrap">
-        <Reveal className="section-heading">
-          <p className="eyebrow">/01 — Что делаю</p>
-          <h2>
-            Между вашим прайсом
-            <br />и готовым предложением.
-          </h2>
-          <p>
-            Убираю ручные переходы между таблицами, подбором и работой
-            менеджера.
-          </p>
-        </Reveal>
-        <Services />
+
+      <section
+        className={`section wrap ${styles.section}`}
+        id="tasks"
+        tabIndex={-1}
+        aria-labelledby="tasks-title"
+      >
+        <Heading
+          id="tasks-title"
+          label="/02 — Узнаёте свою задачу?"
+          {...home.tasks}
+        />
+        <div className={styles.taskGrid}>
+          {home.tasks.items.map((item, i) => {
+            const Icon = taskIcons[i];
+            return (
+              <Reveal className={styles.task} key={item.title} delay={i * 0.07}>
+                <Icon size={24} strokeWidth={1.5} aria-hidden="true" />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+        <Link className="text-link" href="#contact">
+          Расскажите, что сейчас не работает →
+        </Link>
       </section>
-      <section className="section wrap">
-        <Reveal className="section-heading">
-          <p className="eyebrow">/02 — Избранные проекты</p>
-          <h2>
-            Не только интерфейс.
-            <br />
-            Работающая логика.
-          </h2>
-          <Link className="text-link" href="/cases/">
-            Все проекты ↗
-          </Link>
-        </Reveal>
-        <Projects covers />
-        <p className="caption">
-          Дымоход Трейд, Sunny Rentals и Sunny Booking — реальные экраны
-          проектов.
-        </p>
+
+      <section
+        className={`section wrap ${styles.section}`}
+        aria-labelledby="projects-title"
+      >
+        <Heading
+          id="projects-title"
+          label="/03 — Реализованные проекты"
+          {...home.projects}
+        />
+        <div className={styles.projectGrid}>
+          <Projects covers summaries={homeProjectSummaries} />
+        </div>
+        <Link className="text-link" href="/cases/">
+          Все проекты ↗
+        </Link>
       </section>
-      <section className="section process-section wrap">
-        <Reveal>
-          <p className="eyebrow">/03 — Как работаем</p>
-          <h2>
-            Сначала разбираюсь.
-            <br />
-            Потом разрабатываю.
-          </h2>
-          <p className="section-description">
-            Без лишнего функционала «на всякий случай». С понятными границами
-            первой версии и проверкой на ваших примерах.
-          </p>
-          <Link className="text-link" href="/about/">
-            Подробнее о подходе ↗
-          </Link>
-        </Reveal>
-        <ol className="process">
-          {[
-            [
-              "Ваша задача",
-              "Разбираем, где теряется время и что нужно получить на выходе.",
-            ],
-            [
-              "Правила и прототип",
-              "Берём реальные примеры. Фиксируем формулы и границы первой версии.",
-            ],
-            [
-              "Разработка и проверка",
-              "Сверяем расчёты, собираем интерфейс и проверяем полный путь.",
-            ],
-            [
-              "Запуск и передача",
-              "Документируем систему и отдельно договариваемся о сопровождении.",
-            ],
-          ].map(([title, text], i) => (
-            <Reveal as="li" key={title} delay={i * 0.07}>
+
+      <section
+        className={`section wrap ${styles.section}`}
+        aria-labelledby="services-title"
+      >
+        <Heading
+          id="services-title"
+          label="/04 — Что я разрабатываю"
+          {...home.services}
+        />
+        <div className={styles.serviceGrid}>
+          {home.services.items.map((item, i) => (
+            <Reveal
+              className={styles.serviceRow}
+              key={item.title}
+              delay={i * 0.07}
+            >
               <span className="mono">0{i + 1}</span>
+              <h3>{item.title}</h3>
               <div>
-                <h3>{title}</h3>
-                <p>{text}</p>
+                <p>{item.description}</p>
+                <Link className="text-link" href={item.href}>
+                  {item.label} ↗
+                </Link>
               </div>
             </Reveal>
           ))}
-        </ol>
+        </div>
       </section>
-      <CTA />
-    </>
+
+      <section
+        className={`section wrap ${styles.section}`}
+        aria-labelledby="comparison-title"
+      >
+        <Heading
+          id="comparison-title"
+          label="/05 — Было / Стало · Дымоход-Трейд"
+          title={home.comparison.title}
+          description={home.comparison.description}
+        />
+        <div className={styles.comparison}>
+          {[
+            { title: "Было", steps: home.comparison.before },
+            { title: "Стало", steps: home.comparison.after },
+          ].map((column, i) => (
+            <Reveal
+              className={i ? styles.after : styles.before}
+              key={column.title}
+            >
+              <h3>{column.title}</h3>
+              <ol>
+                {column.steps.map((step) => (
+                  <li key={step}>
+                    <span>{step}</span>
+                    <ArrowDown size={18} strokeWidth={1.5} aria-hidden="true" />
+                  </li>
+                ))}
+              </ol>
+            </Reveal>
+          ))}
+        </div>
+        <div className={styles.comparisonNotes}>
+          <p>{home.comparison.note}</p>
+          <p>{home.comparison.result}</p>
+        </div>
+        <Link className="text-link" href="/cases/chimneys/">
+          Как устроена система «Дымоход-Трейд» ↗
+        </Link>
+      </section>
+
+      <section
+        className={`section wrap ${styles.section}`}
+        aria-labelledby="pricing-title"
+      >
+        <Heading
+          id="pricing-title"
+          label="/06 — Стоимость разработки"
+          {...home.pricing}
+        />
+        <PricingDetails href="#contact" />
+      </section>
+
+      <section
+        className={`section wrap ${styles.section} ${styles.agencies}`}
+        aria-labelledby="agencies-title"
+      >
+        <Heading
+          id="agencies-title"
+          label="/07 — Для веб-студий и агентств"
+          title={home.agencies.title}
+          description={home.agencies.description}
+        />
+        <div className={styles.agencyBody}>
+          <Reveal>
+            <p>{home.agencies.note}</p>
+            <MotionLink className="button" href="#contact">
+              Предложить сотрудничество <span aria-hidden="true">↗</span>
+            </MotionLink>
+          </Reveal>
+          <Reveal>
+            <ul className={styles.agencyList}>
+              {home.agencies.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      <section
+        className={`section wrap ${styles.section} ${styles.processSection}`}
+        aria-labelledby="process-title"
+      >
+        <Reveal>
+          <p className="eyebrow">/08 — Как я работаю</p>
+          <h2 id="process-title">{home.process.title}</h2>
+        </Reveal>
+        <WorkProcess />
+      </section>
+
+      <section
+        className={`contact-band wrap ${styles.contact}`}
+        id="contact"
+        tabIndex={-1}
+        aria-labelledby="contact-title"
+      >
+        <Reveal>
+          <p className="eyebrow">/09 — Напрямую с разработчиком</p>
+          <h2 id="contact-title">{home.contact.title}</h2>
+          <div className={`contact-bottom ${styles.contactBottom}`}>
+            <p>{home.contact.description}</p>
+            <div className={styles.contactActions}>
+              <MotionLink className="button light" href={home.contact.href}>
+                Обсудить проект <span aria-hidden="true">↗</span>
+              </MotionLink>
+              <a href={home.contact.href} className={styles.telegram}>
+                @marseloid · Telegram
+              </a>
+              <Link className={styles.contactPage} href="/contact/">
+                Другой способ описать задачу ↗
+              </Link>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    </div>
   );
 }

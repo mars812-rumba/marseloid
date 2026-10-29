@@ -70,12 +70,19 @@ export function ProjectArt({ tone }: { tone: string }) {
 
 const projectCovers: Record<string, string> = {
   chimneys: "/projects/chimneys-cutout.webp",
+  "loft-fire": "/projects/loft-fire-devices.webp",
   "sunny-rentals": "/projects/sunny-rentals-cutout.webp",
   "sunny-booking": "/projects/sunny-booking-cutout.webp",
   "food-market": "/projects/food-market-cutout.webp",
 };
 
-export function Projects({ covers = false }: { covers?: boolean }) {
+export function Projects({
+  covers = false,
+  summaries,
+}: {
+  covers?: boolean;
+  summaries?: Record<string, { title: string; description: string }>;
+}) {
   return (
     <div className="projects">
       {cases.map((c, i) => (
@@ -87,10 +94,17 @@ export function Projects({ covers = false }: { covers?: boolean }) {
           key={c.slug}
         >
           {covers && projectCovers[c.slug] ? (
-            <div className="project-art home-project-cover" aria-hidden="true">
+            <div
+              className="project-art home-project-cover"
+              aria-hidden={summaries ? undefined : true}
+            >
               <Image
                 src={projectCovers[c.slug]}
-                alt=""
+                alt={
+                  summaries
+                    ? `${c.title}: интерфейсы на ноутбуке и телефоне`
+                    : ""
+                }
                 fill
                 sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1408px) 50vw, 680px"
                 style={{ objectFit: "contain" }}
@@ -100,14 +114,16 @@ export function Projects({ covers = false }: { covers?: boolean }) {
             <ProjectArt tone={c.tone} />
           )}
           <div className="project-meta">
-            <span className="eyebrow">{c.category}</span>
+            <span className="eyebrow">
+              {summaries?.[c.slug] ? c.title : c.category}
+            </span>
             <span className="project-status">{c.status}</span>
           </div>
           <h3>
-            {c.title}
+            {summaries?.[c.slug]?.title ?? c.title}
             <span aria-hidden="true">↗</span>
           </h3>
-          <p>{c.description}</p>
+          <p>{summaries?.[c.slug]?.description ?? c.description}</p>
         </MotionLink>
       ))}
     </div>
