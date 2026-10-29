@@ -5,7 +5,7 @@ Existing routes are preserved:
   real Chimneys product/admin screenshots, and a short catalog-to-estimate flow.
 - `/services/product-configurators/`: manual-calculation scenario, the existing
   interactive canopy demo, Chimneys configuration/scheme/PDF, and LoftFire sets.
-- `/services/quote-automation/`: CRM/calendar/booking in Sunny Rentals, its reviewed
+- `/services/quote-automation/`: client CRM, estimate editing and PDF in Chimneys; CRM/calendar/booking in Sunny Rentals, its reviewed
   AI controls, Sunny Booking onboarding and Food Market menu/order operations.
 
 ## Editing and reuse
@@ -76,3 +76,37 @@ Twitter fields. No ratings or offer structured data were introduced.
 Browser checks used desktop Chromium with responsive viewports. Physical Safari/
 iPhone behavior and actual contact submission were not exercised. No messages,
 commits, pushes, deployments or production service restarts were performed.
+
+
+## Chimneys client workspace
+
+Client CRM is now the first proof example on the automation page, before Sunny
+Rentals. The same two mobile captures also extend the existing «Клиенты и сметы»
+case module, alongside the previous estimate-editor capture. The case demo devices
+and other case modules are unchanged. The old small estimate teaser is replaced
+by this substantive example, avoiding a duplicate closing description.
+
+Reviewed source read-only: apps/web/components/AdminCustomerManager.tsx and
+ManagerEstimateCard.tsx in /home/dimohod-trade. Confirmed customer/measurement
+search, saved/previous calculations, notes, estimate editing, discount fields and
+PDF preparation. Previous calculations are not described as a full edit-audit log.
+No invented sales stages, reminders, automatic PDF delivery or messenger pipeline.
+
+Public assets: clients-mobile-blurred.webp and client-estimates-mobile-blurred.webp
+in public/cases/dimohod-trade. Prepared by scripts/prepare-chimney-clients.cjs from
+the owner's two Telegram captures. Browser/status/navigation bars are cropped.
+Names and phones are downsampled to 2×1, enlarged and blurred with feathered edges
+before encoding; no unredacted public copy is created. Privacy is baked into the
+files used by the image viewer, original-size view and download. The two screenshots
+are real phone captures and are not falsely paired with desktop substitutes.
+
+Additional files: lib/chimney-clients.ts, scripts/prepare-chimney-clients.cjs,
+lib/case-studies.ts; service copy/composition/styles updated in the same existing
+service files. No source changes were made to the actual manufacturer website.
+
+Client-workspace validation: build/typecheck and four backend tests passed.
+Chromium at 360/390/430/1440 px: no overflow; new CRM appears before Sunny Rentals;
+all four service screenshots and all three case-module screenshots load and zoom.
+Both normal and full-size views use the same blurred public files. Escape closes
+image dialogs; case/contact link targets are preserved. Axe WCAG A/AA passed for
+both affected routes, with no JavaScript errors. No deployment was performed.

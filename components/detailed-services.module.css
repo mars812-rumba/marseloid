@@ -275,23 +275,39 @@
   padding-top: 24px;
   border-top: 1px solid var(--line);
 }
-.estimateLink {
-  display: flex;
+.crmSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 56px;
   align-items: start;
-  gap: 48px;
-  justify-content: space-between;
-  background: var(--surface);
-  padding: 28px;
-  margin-top: 32px;
-  border-radius: 4px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
 }
-.estimateLink p {
-  font-size: 15px;
-  line-height: 1.7;
-  max-width: 65ch;
+.crmSection > .evidence {
+  max-width: 480px;
+  width: 100%;
+  justify-self: center;
 }
-.estimateLink :global(.text-link) {
-  flex-shrink: 0;
+.crmFlow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 20px 0 0;
+  margin: 24px 0 8px;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+.crmFlow li {
+  font-size: 13px;
+  line-height: 1.6;
+  position: relative;
+  color: var(--dark);
+}
+.crmFlow li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -18px;
+  color: var(--accent);
 }
 .contact h2 {
   max-width: 900px;
@@ -324,10 +340,6 @@
   }
   .calculations {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .estimateLink {
-    flex-direction: column;
-    gap: 12px;
   }
 }
 @media (max-width: 767px) {
@@ -449,11 +461,10 @@
   .bookingSection > div:first-child {
     display: block;
   }
-  .estimateLink {
-    padding: 24px;
-  }
-  .estimateLink :global(.text-link) {
-    flex-shrink: 1;
+  .crmSection {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 32px;
   }
   .contact {
     padding-block: 32px;

@@ -1,4 +1,5 @@
 import type { CaseImage, CaseStudy } from "@/lib/case-studies";
+import { chimneyClientImages } from "@/lib/chimney-clients";
 import { caseStudies } from "@/lib/case-studies";
 
 /** Reuse reviewed case images, captions and baked-in privacy edits. Never raw uploads. */
@@ -157,6 +158,14 @@ export const servicePages = {
         "Я разрабатываю системы, которые собирают связанные процессы в одном рабочем интерфейсе.",
       ],
     },
+    chimneyCrm: {
+      title: "Дымоход-Трейд: клиенты, сметы и PDF в одном рабочем интерфейсе.",
+      paragraphs: [
+        "Для производителя дымоходов я разработал клиентскую админку «Клиенты и сметы». Контакты и сохранённые расчёты собраны в одном месте. Нужную запись можно найти по имени, телефону, почте или названию замера.",
+        "Менеджер открывает смету, редактирует состав и количество изделий и формирует PDF. В карточке клиента доступны предыдущие расчёты и заметки — например, о согласованной скидке и её отображении в документе.",
+      ],
+      steps: ["Клиент", "Сохранённый расчёт", "Редактирование сметы", "PDF"],
+    },
     sunny: {
       title: "Заявки, автопарк и календарь в одной системе.",
       paragraphs: [
@@ -235,6 +244,16 @@ export const serviceEvidence = {
     image(screens(loft, "sets")[0], "Готовые комплекты"),
     image(screens(loft, "constructor")[0], "Конструктор"),
     image(screens(loft, "constructor")[1], "Итоговая стоимость"),
+  ],
+  chimneyCrm: [
+    ...chimneyClientImages,
+    image(
+      screens(chimney, "manager").find((item) =>
+        item.src.includes("estimate-editor"),
+      )!,
+      "Редактор сметы",
+    ),
+    image(screens(chimney, "documents")[1], "PDF-смета"),
   ],
   sunny: [
     image(screens(sunny, "crm")[0], "CRM"),

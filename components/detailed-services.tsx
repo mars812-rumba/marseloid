@@ -276,6 +276,23 @@ function AutomationService() {
           </div>
         </section>
         <section
+          className={`${styles.section} ${styles.crmSection}`}
+          aria-labelledby="chimney-crm"
+        >
+          <Copy story={data.chimneyCrm} id="chimney-crm">
+            <ol className={styles.crmFlow} aria-label="От клиента к документу">
+              {data.chimneyCrm.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <CaseLink slug="chimneys" label="Посмотреть кейс «Дымоход-Трейд»" />
+          </Copy>
+          <Gallery
+            title="Дымоход-Трейд: клиентская CRM и сметы"
+            images={evidence.chimneyCrm}
+          />
+        </section>
+        <section
           className={`${styles.section} ${styles.wideExample}`}
           aria-labelledby="sunny-workspace"
         >
@@ -352,13 +369,6 @@ function AutomationService() {
               Sparkles,
             ]}
           />
-          <div className={styles.estimateLink}>
-            <p>
-              Пример расчётов и документов — сметы «Дымоход-Трейд»: каталог,
-              редактирование позиций и подготовка PDF в одной системе.
-            </p>
-            <CaseLink slug="chimneys" label="Посмотреть автоматизацию смет" />
-          </div>
         </section>
       </article>
       <Contact data={data.contact} />
