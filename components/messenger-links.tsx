@@ -26,9 +26,17 @@ function WaveIcon({
     const phase = (value * 3 - index + 3) % 3;
     return phase < 1 ? 1 + 0.28 * Math.sin(Math.PI * phase) ** 2 : 1;
   });
+  const accentOpacity = useTransform(scale, [1, 1.28], [0, 1]);
   return (
     <motion.span className={styles.glyph} style={{ scale }}>
       <MessengerIcon name={name} />
+      <motion.span
+        className={styles.accentGlyph}
+        style={{ opacity: accentOpacity }}
+        aria-hidden="true"
+      >
+        <MessengerIcon name={name} />
+      </motion.span>
     </motion.span>
   );
 }

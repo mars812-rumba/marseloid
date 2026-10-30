@@ -66,3 +66,10 @@ The database recommendations mixed dark-only style with a light palette. Resolve
   renting vehicles from Thai fleets, not an owner-operated fleet. Preserve real
   operational use, describe partner vehicles, and apply this distinction to the
   case, homepage/projects, automation service and Sunny Booking origin story.
+
+- Messenger wave color follows the existing pulse: at scale 1.28 each mark is
+  terracotta, then returns to dark green at scale 1. The accent-colored SVG layer
+  crossfades using opacity driven by the same scale MotionValue; both colors use
+  existing CSS tokens. No extra timer, layout animation or render loop is added.
+  The duplicate decorative layer is aria-hidden; existing contact targets, hover/
+  focus/offscreen pauses and reduced-motion behavior remain intact.
